@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Athlex — Sport, Fitness & Motivation</title>
+
+  <meta name="description" content="Athlex : programmes sportifs, nutrition, motivation et défis pour progresser chaque jour.">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #0b0f14;
+      color: white;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #10161f;
+      padding: 18px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid #202936;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: 900;
+      color: #19e6a2;
+      letter-spacing: 1px;
+    }
+
+    nav {
+      display: flex;
+      gap: 22px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 15px;
+    }
+
+    nav a:hover {
+      color: #19e6a2;
+    }
+
+    .hero {
+      min-height: 85vh;
+      display: flex;
+      align-items: center;
+      padding: 70px 7%;
+      background:
+        radial-gradient(circle at 80% 30%, #123d35 0%, transparent 35%),
+        #0b0f14;
+    }
+
+    .hero-content {
+      max-width: 700px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #14251f;
+      color: #19e6a2;
+      padding: 8px 15px;
+      border-radius: 30px;
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+
+    h1 {
+      font-size: clamp(42px, 7vw, 78px);
+      line-height: 1.05;
+      margin-bottom: 25px;
+    }
+
+    h1 span {
+      color: #19e6a2;
+    }
+
+    .hero p {
+      color: #b7c0ca;
+      font-size: 19px;
+      max-width: 600px;
+      margin-bottom: 30px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 24px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .btn-primary {
+      background: #19e6a2;
+      color: #07100d;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+    }
+
+    .btn-secondary {
+      border: 1px solid #35404d;
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      border-color: #19e6a2;
+      color: #19e6a2;
+    }
+
+    section {
+      padding: 75px 7%;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 45px;
+    }
+
+    .section-title h2 {
+      font-size: 38px;
+      margin-bottom: 10px;
+    }
+
+    .section-title p {
+      color: #9da8b4;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .card {
+      background: #111821;
+      border: 1px solid #202936;
+      padding: 30px;
+      border-radius: 18px;
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-7px);
+      border-color: #19e6a2;
+    }
+
+    .icon {
+      font-size: 38px;
+      margin-bottom: 15px;
+    }
+
+    .card h3 {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      color: #aeb8c3;
+    }
+
+    .cta {
+      text-align: center;
+      background: linear-gradient(135deg, #10251e, #10161f);
+      border-top: 1px solid #202936;
+      border-bottom: 1px solid #202936;
+    }
+
+    .cta h2 {
+      font-size: 40px;
+      margin-bottom: 15px;
+    }
+
+    .cta p {
+      color: #b7c0ca;
+      margin-bottom: 25px;
+    }
+
+    footer {
+      background: #070a0e;
+      padding: 35px 7%;
+      text-align: center;
+      color: #7f8a96;
+    }
+
+    footer strong {
+      color: #19e6a2;
+    }
+
+    @media (max-width: 800px) {
+      header {
+        padding: 15px 5%;
+      }
+
+      nav {
+        display: none;
+      }
+
+      .hero {
+        padding: 60px 5%;
+        min-height: 80vh;
+      }
+
+      section {
+        padding: 60px 5%;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .cta h2 {
+        font-size: 30px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">ATHLEX</div>
+
+    <nav>
+      <a href="#accueil">Accueil</a>
+      <a href="#programmes">Programmes</a>
+      <a href="#nutrition">Nutrition</a>
+      <a href="#suivi">Suivi</a>
+      <a href="#defis">Défis</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <section class="hero" id="accueil">
+      <div class="hero-content">
+
+        <div class="badge">💪 SPORT • FITNESS • MOTIVATION</div>
+
+        <h1>
+          Deviens une meilleure version de <span>toi-même.</span>
+        </h1>
+
+        <p>
+          Athlex t'accompagne dans ton parcours sportif avec des
+          programmes d'entraînement, des conseils nutritionnels,
+          du suivi et des défis pour rester motivé.
+        </p>
+
+        <div class="buttons">
+          <a href="#programmes" class="btn btn-primary">
+            Découvrir les programmes
+          </a>
+
+          <a href="#defis" class="btn btn-secondary">
+            Relever un défi
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="programmes">
+
+      <div class="section-title">
+        <h2>Nos programmes</h2>
+        <p>Des entraînements adaptés à différents objectifs.</p>
+      </div>
+
+      <div class="cards">
+
+        <div class="card">
+          <div class="icon">🏋️</div>
+          <h3>Musculation</h3>
+          <p>
+            Développe ta force et ta masse musculaire grâce à des
+            programmes structurés et progressifs.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="icon">🔥</div>
+          <h3>Perte de graisse</h3>
+          <p>
+            Combine entraînement et bonnes habitudes pour améliorer
+            ta condition physique et réduire la masse grasse.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="icon">🏀</div>
+          <h3>Performance sportive</h3>
+          <p>
+            Améliore ta vitesse, ton explosivité, ton endurance et
+            tes performances sur le terrain.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="nutrition">
+
+      <div class="section-title">
+        <h2>Nutrition</h2>
+        <p>Parce que les résultats ne se construisent pas seulement à la salle.</p>
+      </div>
+
+      <div class="cards">
+
+        <div class="card">
+          <div class="icon">🥗</div>
+          <h3>Alimentation</h3>
+          <p>
+            Découvre des conseils simples pour mieux organiser ton
+            alimentation selon ton objectif.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="icon">💧</div>
+          <h3>Hydratation</h3>
+          <p>
+            Apprends à mieux gérer ton hydratation avant, pendant
+            et après l'entraînement.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="icon">⚡</div>
+          <h3>Énergie</h3>
+          <p>
+            Comprends comment ton alimentation peut soutenir tes
+            performances et ta récupération.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="suivi">
+
+      <div class="section-title">
+        <h2>Ton suivi</h2>
+        <p>Mesure tes progrès et reste concentré sur ton objectif.</p>
+      </div>
+
+      <div class="cards">
+
+        <div class="card">
+          <div class="icon">📊</div>
+          <h3>Progression</h3>
+          <p>
+            Suis ton évolution au fil des semaines et visualise
+            tes progrès.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="icon">🎯</div>
+          <h3>Objectifs</h3>
+          <p>
+            Définis des objectifs sportifs clairs et travaille
+            progressivement pour les atteindre.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="icon">🔥</div>
+          <h3>Motivation</h3>
+          <p>
+            Garde une routine et transforme tes efforts en habitudes.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="defis" class="cta">
+
+      <h2>Prêt à relever ton prochain défi ?</h2>
+
+      <p>
+        Commence aujourd'hui. Chaque entraînement compte.
+      </p>
+
+      <a href="#programmes" class="btn btn-primary">
+        Commencer maintenant
+      </a>
+
+    </section>
+
+  </main>
+
+  <footer>
+    <p>
+      © 2026 <strong>Athlex</strong> — Sport, Fitness & Motivation
+    </p>
+  </footer>
+
+</body>
+</html>
