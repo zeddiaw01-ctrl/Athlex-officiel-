@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Programmes — Athlex</title>
+
+  <meta name="description" content="Découvrez les programmes sportifs Athlex adaptés à vos objectifs.">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #0b0f14;
+      color: white;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #10161f;
+      padding: 18px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #202936;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: 900;
+      color: #19e6a2;
+      text-decoration: none;
+    }
+
+    .back {
+      color: white;
+      text-decoration: none;
+      border: 1px solid #35404d;
+      padding: 9px 15px;
+      border-radius: 8px;
+    }
+
+    .back:hover {
+      color: #19e6a2;
+      border-color: #19e6a2;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 70px 7% 45px;
+      background:
+        radial-gradient(circle at 50% 20%, #123d35 0%, transparent 40%),
+        #0b0f14;
+    }
+
+    .hero h1 {
+      font-size: clamp(40px, 7vw, 64px);
+      margin-bottom: 15px;
+    }
+
+    .hero h1 span {
+      color: #19e6a2;
+    }
+
+    .hero p {
+      color: #aeb8c3;
+      max-width: 650px;
+      margin: auto;
+      font-size: 18px;
+    }
+
+    .programmes {
+      padding: 40px 7% 80px;
+    }
+
+    .filters {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 35px;
+    }
+
+    .filter {
+      background: #111821;
+      color: white;
+      border: 1px solid #2b3542;
+      padding: 10px 18px;
+      border-radius: 30px;
+      cursor: pointer;
+    }
+
+    .filter:hover {
+      border-color: #19e6a2;
+      color: #19e6a2;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .card {
+      background: #111821;
+      border: 1px solid #202936;
+      border-radius: 18px;
+      padding: 28px;
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: #19e6a2;
+    }
+
+    .emoji {
+      font-size: 42px;
+      margin-bottom: 12px;
+    }
+
+    .card h2 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      color: #aeb8c3;
+      margin-bottom: 20px;
+    }
+
+    .info {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 22px;
+    }
+
+    .tag {
+      background: #17231f;
+      color: #19e6a2;
+      padding: 5px 10px;
+      border-radius: 6px;
+      font-size: 13px;
+    }
+
+    .button {
+      display: block;
+      text-align: center;
+      background: #19e6a2;
+      color: #07100d;
+      padding: 12px;
+      border-radius: 9px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .button:hover {
+      opacity: 0.85;
+    }
+
+    footer {
+      background: #070a0e;
+      text-align: center;
+      padding: 30px;
+      color: #7f8a96;
+    }
+
+    footer strong {
+      color: #19e6a2;
+    }
+
+    @media (max-width: 850px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      header {
+        padding: 15px 5%;
+      }
+
+      .programmes {
+        padding-left: 5%;
+        padding-right: 5%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <a href="index.html" class="logo">ATHLEX</a>
+  <a href="index.html" class="back">← Accueil</a>
+</header>
+
+<section class="hero">
+  <h1>Nos <span>programmes</span></h1>
+
+  <p>
+    Choisis ton objectif et commence ton parcours.
+    Des programmes pensés pour progresser, devenir plus fort
+    et améliorer ta condition physique.
+  </p>
+</section>
+
+<section class="programmes">
+
+  <div class="filters">
+    <button class="filter">Tous</button>
+    <button class="filter">Musculation</button>
+    <button class="filter">Perte de graisse</button>
+    <button class="filter">Sport</button>
+    <button class="filter">Maison</button>
+  </div>
+
+  <div class="grid">
+
+    <article class="card">
+      <div class="emoji">🏠</div>
+
+      <h2>Débutant à la maison</h2>
+
+      <p>
+        Un programme simple pour commencer le sport chez soi,
+        sans matériel.
+      </p>
+
+      <div class="info">
+        <span class="tag">Débutant</span>
+        <span class="tag">Maison</span>
+        <span class="tag">5 jours</span>
+      </div>
+
+      <a href="#" class="button">Voir le programme</a>
+    </article>
+
+    <article class="card">
+      <div class="emoji">🔥</div>
+
+      <h2>Perte de graisse</h2>
+
+      <p>
+        Entraînement et cardio pour améliorer ta condition physique
+        et favoriser la perte de masse grasse.
+      </p>
+
+      <div class="info">
+        <span class="tag">Tous niveaux</span>
+        <span class="tag">Cardio</span>
+        <span class="tag">6 jours</span>
+      </div>
+
+      <a href="#" class="button">Voir le programme</a>
+    </article>
+
+    <article class="card">
+      <div class="emoji">🏋️</div>
+
+      <h2>Musculation</h2>
+
+      <p>
+        Développe ta force et ta masse musculaire avec un programme
+        progressif en salle.
+      </p>
+
+      <div class="info">
+        <span class="tag">Intermédiaire</span>
+        <span class="tag">Salle</span>
+        <span class="tag">5 jours</span>
+      </div>
+
+      <a href="#" class="button">Voir le programme</a>
+    </article>
+
+    <article class="card">
+      <div class="emoji">🏀</div>
+
+      <h2>Performance Basket</h2>
+
+      <p>
+        Travaille ton explosivité, ta vitesse, ton endurance
+        et tes déplacements sur le terrain.
+      </p>
+
+      <div class="info">
+        <span class="tag">Sport</span>
+        <span class="tag">Explosivité</span>
+        <span class="tag">5 jours</span>
+      </div>
+
+      <a href="#" class="button">Voir le programme</a>
+    </article>
+
+    <article class="card">
+      <div class="emoji">⚡</div>
+
+      <h2>Athlétique</h2>
+
+      <p>
+        Un programme complet combinant force, cardio, mobilité
+        et explosivité.
+      </p>
+
+      <div class="info">
+        <span class="tag">Intermédiaire</span>
+        <span class="tag">Full Body</span>
+        <span class="tag">6 jours</span>
+      </div>
+
+      <a href="#" class="button">Voir le programme</a>
+    </article>
+
+    <article class="card">
+      <div class="emoji">💪</div>
+
+      <h2>Prise de muscle</h2>
+
+      <p>
+        Construis progressivement du muscle avec une organisation
+        adaptée à la prise de masse.
+      </p>
+
+      <div class="info">
+        <span class="tag">Intermédiaire</span>
+        <span class="tag">Musculation</span>
+        <span class="tag">5 jours</span>
+      </div>
+
+      <a href="#" class="button">Voir le programme</a>
+    </article>
+
+  </div>
+
+</section>
+
+<footer>
+  <p>© 2026 <strong>Athlex</strong> — Sport, Fitness & Motivation</p>
+</footer>
+
+</body>
+  </html>
