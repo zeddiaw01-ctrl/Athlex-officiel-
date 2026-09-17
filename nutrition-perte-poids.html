@@ -25,56 +25,140 @@
       font-size: 28px;
     }
 
-    header p {
-      margin-top: 10px;
-    }
-
     .container {
       max-width: 900px;
       margin: auto;
       padding: 20px;
     }
 
-    .intro {
+    .intro, .jour, .conseil {
       background: white;
       padding: 20px;
-      border-radius: 15px;
-      margin-bottom: 20px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    }
-
-    .regles {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 15px;
-      margin-bottom: 25px;
-    }
-
-    .regle {
-      background: white;
-      padding: 18px;
-      border-radius: 15px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    }
-
-    .jour {
-      background: white;
       margin-bottom: 18px;
-      padding: 20px;
       border-radius: 15px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      box-shadow: 0 2px 8px rgba(0,0,0,.08);
     }
 
     .jour h2 {
-      margin-top: 0;
       color: #16834a;
     }
 
     .repas {
-      margin: 12px 0;
-      padding: 12px;
       background: #f1f6f3;
+      padding: 12px;
+      margin: 10px 0;
       border-radius: 10px;
     }
 
-    .rep
+    .repas strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .conseil {
+      background: #fff3cd;
+    }
+
+    .retour {
+      display: block;
+      text-align: center;
+      background: #111;
+      color: white;
+      padding: 14px;
+      border-radius: 10px;
+      text-decoration: none;
+      margin: 30px 0;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>🥗 Nutrition Perte de Poids</h1>
+  <p>Programme alimentaire adapté au Sénégal 🇸🇳</p>
+</header>
+
+<div class="container">
+
+  <div class="intro">
+    <h2>🎯 Objectif</h2>
+    <p>
+      Une alimentation simple et équilibrée pour accompagner une perte de
+      poids progressive avec des aliments couramment consommés au Sénégal.
+    </p>
+    <p>
+      Le riz et les plats sénégalais ne sont pas interdits : l'objectif est
+      surtout de mieux gérer les portions, les légumes, les protéines et l'huile.
+    </p>
+  </div>
+
+  <div class="jour">
+    <h2>📅 Jour 1</h2>
+    <div class="repas"><strong>🌅 Petit-déjeuner</strong>Bouillie de mil peu sucrée + 1 œuf + 1 fruit.</div>
+    <div class="repas"><strong>☀️ Déjeuner</strong>Ceebu jën : portion modérée de riz + beaucoup de légumes + poisson.</div>
+    <div class="repas"><strong>🍎 Collation</strong>1 fruit + petite poignée d'arachides non salées.</div>
+    <div class="repas"><strong>🌙 Dîner</strong>Poisson ou poulet grillé + légumes + petite portion de patate douce.</div>
+  </div>
+
+  <div class="jour">
+    <h2>📅 Jour 2</h2>
+    <div class="repas"><strong>🌅 Petit-déjeuner</strong>2 œufs + pain complet + 1 fruit.</div>
+    <div class="repas"><strong>☀️ Déjeuner</strong>Yassa poisson ou poulet + légumes + portion modérée de riz.</div>
+    <div class="repas"><strong>🍎 Collation</strong>Yaourt nature peu sucré + fruit.</div>
+    <div class="repas"><strong>🌙 Dîner</strong>Niébé + légumes + œuf ou poisson.</div>
+  </div>
+
+  <div class="jour">
+    <h2>📅 Jour 3</h2>
+    <div class="repas"><strong>🌅 Petit-déjeuner</strong>Thiakry en petite portion, peu sucré + fruit.</div>
+    <div class="repas"><strong>☀️ Déjeuner</strong>Mafé avec viande maigre ou poulet + légumes + petite portion de riz.</div>
+    <div class="repas"><strong>🍎 Collation</strong>Orange, pastèque ou autre fruit disponible.</div>
+    <div class="repas"><strong>🌙 Dîner</strong>Omelette aux légumes + petite portion de couscous de mil.</div>
+  </div>
+
+  <div class="jour">
+    <h2>📅 Jour 4</h2>
+    <div class="repas"><strong>🌅 Petit-déjeuner</strong>Pain complet + œuf + fruit + eau.</div>
+    <div class="repas"><strong>☀️ Déjeuner</strong>Riz au poisson + beaucoup de légumes + poisson.</div>
+    <div class="repas"><strong>🍎 Collation</strong>1 fruit + petite poignée d'arachides.</div>
+    <div class="repas"><strong>🌙 Dîner</strong>Poulet grillé + légumes + petite portion de patate douce.</div>
+  </div>
+
+  <div class="jour">
+    <h2>📅 Jour 5</h2>
+    <div class="repas"><strong>🌅 Petit-déjeuner</strong>Bouillie de mil peu sucrée + 1 œuf + fruit.</div>
+    <div class="repas"><strong>☀️ Déjeuner</strong>Niébé + légumes + poisson ou œufs.</div>
+    <div class="repas"><strong>🍎 Collation</strong>Yaourt nature + fruit.</div>
+    <div class="repas"><strong>🌙 Dîner</strong>Poisson grillé + légumes + petite portion de riz ou de mil.</div>
+  </div>
+
+  <div class="jour">
+    <h2>📅 Jour 6</h2>
+    <div class="repas"><strong>🌅 Petit-déjeuner</strong>2 œufs + pain complet + fruit.</div>
+    <div class="repas"><strong>☀️ Déjeuner</strong>Yassa poulet + légumes + portion modérée de riz.</div>
+    <div class="repas"><strong>🍎 Collation</strong>Pastèque, orange ou mangue en portion raisonnable.</div>
+    <div class="repas"><strong>🌙 Dîner</strong>Salade de légumes + poisson ou œufs + petite portion de patate douce.</div>
+  </div>
+
+  <div class="jour">
+    <h2>📅 Jour 7</h2>
+    <div class="repas"><strong>🌅 Petit-déjeuner</strong>Bouillie de mil peu sucrée + œuf + fruit.</div>
+    <div class="repas"><strong>☀️ Déjeuner</strong>Ceebu jën : portion modérée de riz + beaucoup de légumes + poisson.</div>
+    <div class="repas"><strong>🍎 Collation</strong>1 fruit + quelques arachides non salées.</div>
+    <div class="repas"><strong>🌙 Dîner</strong>Poulet ou poisson + légumes + petite portion de couscous de mil.</div>
+  </div>
+
+  <div class="conseil">
+    <h2>💧 Conseils Athlex</h2>
+    <p>Privilégie l'eau comme boisson principale.</p>
+    <p>Limite les boissons sucrées, les fritures fréquentes et les grandes quantités d'huile.</p>
+    <p>Garde une alimentation variée et pratique une activité physique régulière.</p>
+  </div>
+
+  <a class="retour" href="nutrition.html">⬅️ Retour à Nutrition</a>
+
+</div>
+
+</body>
+</html>
