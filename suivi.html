@@ -3,9 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Athlex - Suivi</title>
+
+  <title>Athlex - Mon Suivi</title>
 
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       font-family: Arial, sans-serif;
@@ -22,26 +27,30 @@
 
     header h1 {
       margin: 0;
-      font-size: 30px;
+      font-size: 32px;
+    }
+
+    header p {
+      margin-bottom: 0;
     }
 
     .container {
-      max-width: 900px;
+      max-width: 950px;
       margin: auto;
       padding: 20px;
     }
 
     .card {
       background: white;
-      padding: 20px;
-      margin-bottom: 18px;
-      border-radius: 15px;
-      box-shadow: 0 2px 8px rgba(0,0,0,.08);
+      padding: 22px;
+      margin-bottom: 20px;
+      border-radius: 16px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
     }
 
     .card h2 {
-      color: #16834a;
       margin-top: 0;
+      color: #16834a;
     }
 
     label {
@@ -50,13 +59,13 @@
       font-weight: bold;
     }
 
-    input, select {
+    input,
+    select {
       width: 100%;
-      box-sizing: border-box;
       padding: 12px;
       margin-top: 6px;
       border: 1px solid #ccc;
-      border-radius: 8px;
+      border-radius: 9px;
       font-size: 16px;
     }
 
@@ -73,11 +82,74 @@
       cursor: pointer;
     }
 
+    button:hover {
+      opacity: 0.9;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+
+    .stat {
+      background: #f1f6f3;
+      padding: 18px;
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 24px;
+      color: #16834a;
+      margin-top: 7px;
+    }
+
+    .objectif {
+      background: #16834a;
+      color: white;
+      padding: 20px;
+      border-radius: 14px;
+    }
+
+    .objectif h2 {
+      color: white;
+    }
+
+    .progress-container {
+      background: #ddd;
+      border-radius: 20px;
+      overflow: hidden;
+      height: 22px;
+      margin-top: 15px;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: #111;
+      transition: width 0.5s;
+    }
+
+    .seance {
+      background: #f8f8f8;
+      border-left: 5px solid #16834a;
+      padding: 15px;
+      margin-top: 12px;
+      border-radius: 8px;
+    }
+
     .resultat {
       background: #f1f6f3;
-      padding: 15px;
+      padding: 16px;
       margin-top: 15px;
       border-radius: 10px;
+    }
+
+    .historique {
+      padding: 12px;
+      border-bottom: 1px solid #ddd;
     }
 
     .retour {
@@ -85,15 +157,21 @@
       text-align: center;
       background: #111;
       color: white;
-      padding: 14px;
+      padding: 15px;
       border-radius: 10px;
       text-decoration: none;
       margin: 30px 0;
     }
 
-    .note {
+    .petit {
       font-size: 14px;
       color: #666;
+    }
+
+    @media (max-width: 600px) {
+      .stats {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -102,129 +180,485 @@
 
 <header>
   <h1>📊 Mon Suivi Athlex</h1>
-  <p>Mesure tes progrès et garde le cap 💪</p>
+  <p>Mesure tes progrès et reste concentré sur ton objectif 💪</p>
 </header>
 
 <div class="container">
 
+  <!-- INFORMATIONS -->
   <div class="card">
-    <h2>⚖️ Mon poids</h2>
+    <h2>👤 Mes informations</h2>
 
-    <label for="poids">Poids actuel (kg)</label>
-    <input type="number" id="poids" placeholder="Exemple : 80">
+    <label>Âge</label>
+    <input type="number" id="age" placeholder="Exemple : 25">
 
-    <button onclick="enregistrerPoids()">Enregistrer mon poids</button>
+    <label>Taille (cm)</label>
+    <input type="number" id="taille" placeholder="Exemple : 180">
 
-    <div class="resultat" id="resultatPoids">
-      Aucun poids enregistré pour le moment.
+    <label>Poids de départ (kg)</label>
+    <input type="number" id="poidsDepart" step="0.1" placeholder="Exemple : 85">
+
+    <label>Poids actuel (kg)</label>
+    <input type="number" id="poidsActuel" step="0.1" placeholder="Exemple : 82">
+
+    <label>Poids objectif (kg)</label>
+    <input type="number" id="poidsObjectif" step="0.1" placeholder="Exemple : 78">
+
+    <label>Mon objectif</label>
+    <select id="objectif">
+      <option>Perte de poids</option>
+      <option>Prise de muscle</option>
+      <option>Performance sportive</option>
+      <option>Remise en forme</option>
+      <option>Maintien</option>
+    </select>
+
+    <button onclick="enregistrerProfil()">
+      💾 Enregistrer mon profil
+    </button>
+
+    <div class="resultat" id="profilResultat">
+      Aucun profil enregistré pour le moment.
     </div>
   </div>
 
-  <div class="card">
-    <h2>🏋️ Mon entraînement</h2>
 
-    <label for="sport">Activité</label>
+  <!-- OBJECTIF -->
+  <div class="card objectif">
+    <h2>🎯 Mon objectif</h2>
+
+    <p id="objectifTexte">
+      Configure ton profil pour voir ta progression.
+    </p>
+
+    <div class="progress-container">
+      <div class="progress-bar" id="barreProgression"></div>
+    </div>
+
+    <p id="pourcentage">Progression : 0 %</p>
+  </div>
+
+
+  <!-- STATISTIQUES -->
+  <div class="card">
+    <h2>📈 Mes statistiques</h2>
+
+    <div class="stats">
+
+      <div class="stat">
+        ⚖️ Poids actuel
+        <strong id="statPoids">-</strong>
+      </div>
+
+      <div class="stat">
+        🎯 Poids objectif
+        <strong id="statObjectif">-</strong>
+      </div>
+
+      <div class="stat">
+        📉 À perdre/gagner
+        <strong id="statDifference">-</strong>
+      </div>
+
+      <div class="stat">
+        🏋️ Séances
+        <strong id="statSeances">0</strong>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- SEANCE DU JOUR -->
+  <div class="card">
+    <h2>🏋️ Ma séance</h2>
+
+    <label>Activité</label>
     <select id="sport">
       <option>Musculation</option>
       <option>Basketball</option>
       <option>Football</option>
       <option>Course</option>
-      <option>Maison</option>
+      <option>Cardio</option>
+      <option>Entraînement maison</option>
       <option>Autre</option>
     </select>
 
-    <label for="duree">Durée (minutes)</label>
+    <label>Durée (minutes)</label>
     <input type="number" id="duree" placeholder="Exemple : 60">
 
-    <button onclick="enregistrerEntrainement()">
-      Enregistrer l'entraînement
+    <label>Nombre d'exercices</label>
+    <input type="number" id="exercices" placeholder="Exemple : 6">
+
+    <button onclick="enregistrerSeance()">
+      ✅ Enregistrer ma séance
     </button>
 
-    <div class="resultat" id="resultatSport">
-      Aucun entraînement enregistré pour le moment.
+    <div class="resultat" id="seanceResultat">
+      Aucune séance enregistrée aujourd'hui.
     </div>
   </div>
 
+
+  <!-- PROGRAMME -->
   <div class="card">
-    <h2>📈 Ma progression</h2>
+    <h2>📅 Mes séances à faire</h2>
+
+    <div class="seance">
+      <strong>🟢 Lundi</strong>
+      <p>Musculation / Renforcement</p>
+    </div>
+
+    <div class="seance">
+      <strong>🔵 Mardi</strong>
+      <p>Cardio / Sport</p>
+    </div>
+
+    <div class="seance">
+      <strong>🟢 Mercredi</strong>
+      <p>Musculation / Renforcement</p>
+    </div>
+
+    <div class="seance">
+      <strong>⚪ Jeudi</strong>
+      <p>Repos ou récupération active</p>
+    </div>
+
+    <div class="seance">
+      <strong>🟢 Vendredi</strong>
+      <p>Musculation / Renforcement</p>
+    </div>
+
+    <div class="seance">
+      <strong>🔵 Samedi</strong>
+      <p>Cardio / Sport</p>
+    </div>
+
+    <div class="seance">
+      <strong>⚪ Dimanche</strong>
+      <p>Repos</p>
+    </div>
+
+    <p class="petit">
+      Ton programme pourra être personnalisé selon ton objectif.
+    </p>
+  </div>
+
+
+  <!-- HISTORIQUE -->
+  <div class="card">
+    <h2>📝 Mon historique</h2>
+
+    <div id="historique">
+      Aucun historique pour le moment.
+    </div>
+  </div>
+
+
+  <!-- CONSEILS -->
+  <div class="card">
+    <h2>🔥 Reste régulier</h2>
 
     <p>
-      Utilise cette page régulièrement pour suivre ton évolution.
+      La progression vient de la régularité. Enregistre ton poids
+      régulièrement et note tes séances pour voir ton évolution.
     </p>
 
-    <div class="resultat" id="progression">
-      <strong>Poids :</strong> Pas encore enregistré.<br><br>
-      <strong>Dernière activité :</strong> Pas encore enregistrée.
-    </div>
-
-    <p class="note">
-      Les informations sont enregistrées dans le navigateur de cet appareil.
+    <p>
+      💧 Bois suffisamment d'eau<br>
+      🥗 Garde une alimentation adaptée à ton objectif<br>
+      🏋️ Respecte tes séances<br>
+      😴 Accorde-toi du repos
     </p>
   </div>
 
-  <a class="retour" href="index.html">⬅️ Retour à l'accueil</a>
+
+  <a class="retour" href="index.html">
+    ⬅️ Retour à l'accueil
+  </a>
 
 </div>
 
+
 <script>
-  function enregistrerPoids() {
-    const poids = document.getElementById("poids").value;
 
-    if (poids === "") {
-      alert("Entre ton poids.");
-      return;
-    }
+function enregistrerProfil() {
 
-    localStorage.setItem("athlexPoids", poids);
+  const age = document.getElementById("age").value;
+  const taille = document.getElementById("taille").value;
+  const poidsDepart = parseFloat(document.getElementById("poidsDepart").value);
+  const poidsActuel = parseFloat(document.getElementById("poidsActuel").value);
+  const poidsObjectif = parseFloat(document.getElementById("poidsObjectif").value);
+  const objectif = document.getElementById("objectif").value;
 
-    document.getElementById("resultatPoids").innerHTML =
-      "✅ Poids enregistré : <strong>" + poids + " kg</strong>";
-
-    afficherProgression();
+  if (!age || !taille || !poidsDepart || !poidsActuel || !poidsObjectif) {
+    alert("Remplis toutes les informations.");
+    return;
   }
 
-  function enregistrerEntrainement() {
-    const sport = document.getElementById("sport").value;
-    const duree = document.getElementById("duree").value;
+  localStorage.setItem("athlexAge", age);
+  localStorage.setItem("athlexTaille", taille);
+  localStorage.setItem("athlexPoidsDepart", poidsDepart);
+  localStorage.setItem("athlexPoidsActuel", poidsActuel);
+  localStorage.setItem("athlexPoidsObjectif", poidsObjectif);
+  localStorage.setItem("athlexObjectif", objectif);
 
-    if (duree === "") {
-      alert("Entre la durée de ton entraînement.");
-      return;
-    }
+  afficherSuivi();
 
-    localStorage.setItem("athlexSport", sport);
-    localStorage.setItem("athlexDuree", duree);
+  document.getElementById("profilResultat").innerHTML =
+    "✅ Ton profil a été enregistré.";
+}
 
-    document.getElementById("resultatSport").innerHTML =
-      "✅ " + sport + " — <strong>" + duree + " minutes</strong>";
 
-    afficherProgression();
+function enregistrerSeance() {
+
+  const sport = document.getElementById("sport").value;
+  const duree = document.getElementById("duree").value;
+  const exercices = document.getElementById("exercices").value;
+
+  if (!duree || !exercices) {
+    alert("Entre la durée et le nombre d'exercices.");
+    return;
   }
 
-  function afficherProgression() {
-    const poids = localStorage.getItem("athlexPoids");
-    const sport = localStorage.getItem("athlexSport");
-    const duree = localStorage.getItem("athlexDuree");
+  let nombreSeances =
+    parseInt(localStorage.getItem("athlexSeances") || "0");
 
-    let texte = "";
+  nombreSeances++;
 
-    if (poids) {
-      texte += "<strong>Poids :</strong> " + poids + " kg<br><br>";
+  localStorage.setItem("athlexSeances", nombreSeances);
+  localStorage.setItem("athlexSport", sport);
+  localStorage.setItem("athlexDuree", duree);
+  localStorage.setItem("athlexExercices", exercices);
+
+  const date = new Date().toLocaleDateString("fr-FR");
+
+  let historique =
+    JSON.parse(localStorage.getItem("athlexHistorique") || "[]");
+
+  historique.unshift({
+    date: date,
+    sport: sport,
+    duree: duree,
+    exercices: exercices
+  });
+
+  localStorage.setItem(
+    "athlexHistorique",
+    JSON.stringify(historique)
+  );
+
+  document.getElementById("seanceResultat").innerHTML =
+    "✅ " + sport +
+    " — " + duree +
+    " minutes — " +
+    exercices + " exercices.";
+
+  afficherSuivi();
+}
+
+
+function afficherSuivi() {
+
+  const age = localStorage.getItem("athlexAge");
+  const taille = localStorage.getItem("athlexTaille");
+  const poidsDepart =
+    parseFloat(localStorage.getItem("athlexPoidsDepart"));
+
+  const poidsActuel =
+    parseFloat(localStorage.getItem("athlexPoidsActuel"));
+
+  const poidsObjectif =
+    parseFloat(localStorage.getItem("athlexPoidsObjectif"));
+
+  const objectif =
+    localStorage.getItem("athlexObjectif");
+
+  const seances =
+    localStorage.getItem("athlexSeances") || "0";
+
+
+  if (age && taille && poidsDepart && poidsActuel && poidsObjectif) {
+
+    document.getElementById("profilResultat").innerHTML =
+      "👤 Âge : <strong>" + age + " ans</strong><br><br>" +
+      "📏 Taille : <strong>" + taille + " cm</strong><br><br>" +
+      "🎯 Objectif : <strong>" + objectif + "</strong>";
+
+    document.getElementById("statPoids").textContent =
+      poidsActuel + " kg";
+
+    document.getElementById("statObjectif").textContent =
+      poidsObjectif + " kg";
+
+    document.getElementById("statSeances").textContent =
+      seances;
+
+
+    let difference = Math.abs(
+      poidsActuel - poidsObjectif
+    );
+
+    document.getElementById("statDifference").textContent =
+      difference.toFixed(1) + " kg";
+
+
+    let progression = 0;
+
+    if (objectif === "Perte de poids") {
+
+      if (poidsDepart > poidsObjectif) {
+
+        progression =
+          ((poidsDepart - poidsActuel) /
+          (poidsDepart - poidsObjectif)) * 100;
+
+      }
+
+      document.getElementById("objectifTexte").innerHTML =
+        "🔥 Objectif : perdre du poids.<br><br>" +
+        "Tu as actuellement <strong>" +
+        difference.toFixed(1) +
+        " kg</strong> à perdre pour atteindre ton objectif.";
+
+    } else if (objectif === "Prise de muscle") {
+
+      if (poidsObjectif > poidsDepart) {
+
+        progression =
+          ((poidsActuel - poidsDepart) /
+          (poidsObjectif - poidsDepart)) * 100;
+
+      }
+
+      document.getElementById("objectifTexte").innerHTML =
+        "💪 Objectif : prise de muscle.<br><br>" +
+        "Il te reste environ <strong>" +
+        difference.toFixed(1) +
+        " kg</strong> pour atteindre ton objectif de poids.";
+
     } else {
-      texte += "<strong>Poids :</strong> Pas encore enregistré.<br><br>";
+
+      progression = 50;
+
+      document.getElementById("objectifTexte").innerHTML =
+        "🎯 Objectif : <strong>" +
+        objectif +
+        "</strong><br><br>" +
+        "Continue à être régulier dans tes entraînements.";
+
     }
 
-    if (sport && duree) {
-      texte += "<strong>Dernière activité :</strong> " +
-        sport + " — " + duree + " minutes.";
-    } else {
-      texte += "<strong>Dernière activité :</strong> Pas encore enregistrée.";
-    }
 
-    document.getElementById("progression").innerHTML = texte;
+    progression =
+      Math.max(0, Math.min(100, progression));
+
+    document.getElementById("barreProgression").style.width =
+      progression + "%";
+
+    document.getElementById("pourcentage").textContent =
+      "Progression : " +
+      Math.round(progression) +
+      " %";
   }
 
-  window.onload = afficherProgression;
+
+  afficherHistorique();
+
+
+  const sport = localStorage.getItem("athlexSport");
+  const duree = localStorage.getItem("athlexDuree");
+  const exercices = localStorage.getItem("athlexExercices");
+
+  if (sport && duree && exercices) {
+
+    document.getElementById("seanceResultat").innerHTML =
+      "Dernière séance : <strong>" +
+      sport + "</strong> — " +
+      duree + " minutes — " +
+      exercices + " exercices.";
+  }
+}
+
+
+function afficherHistorique() {
+
+  const historique =
+    JSON.parse(
+      localStorage.getItem("athlexHistorique") || "[]"
+    );
+
+  const zone =
+    document.getElementById("historique");
+
+  if (historique.length === 0) {
+
+    zone.innerHTML =
+      "Aucune séance enregistrée pour le moment.";
+
+    return;
+  }
+
+  zone.innerHTML = "";
+
+  historique.slice(0, 10).forEach(function(seance) {
+
+    zone.innerHTML +=
+      '<div class="historique">' +
+      "📅 <strong>" + seance.date + "</strong><br>" +
+      "🏋️ " + seance.sport + "<br>" +
+      "⏱️ " + seance.duree + " minutes<br>" +
+      "💪 " + seance.exercices + " exercices" +
+      "</div>";
+
+  });
+}
+
+
+window.onload = function() {
+
+  const age = localStorage.getItem("athlexAge");
+  const taille = localStorage.getItem("athlexTaille");
+  const poidsDepart =
+    localStorage.getItem("athlexPoidsDepart");
+
+  const poidsActuel =
+    localStorage.getItem("athlexPoidsActuel");
+
+  const poidsObjectif =
+    localStorage.getItem("athlexPoidsObjectif");
+
+  const objectif =
+    localStorage.getItem("athlexObjectif");
+
+
+  if (age) {
+    document.getElementById("age").value = age;
+  }
+
+  if (taille) {
+    document.getElementById("taille").value = taille;
+  }
+
+  if (poidsDepart) {
+    document.getElementById("poidsDepart").value = poidsDepart;
+  }
+
+  if (poidsActuel) {
+    document.getElementById("poidsActuel").value = poidsActuel;
+  }
+
+  if (poidsObjectif) {
+    document.getElementById("poidsObjectif").value = poidsObjectif;
+  }
+
+  if (objectif) {
+    document.getElementById("objectif").value = objectif;
+  }
+
+  afficherSuivi();
+};
+
 </script>
 
 </body>
