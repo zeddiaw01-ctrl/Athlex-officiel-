@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Athlex - Suivi</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f7f5;
+      color: #222;
+    }
+
+    header {
+      background: #111;
+      color: white;
+      text-align: center;
+      padding: 30px 15px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 30px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      margin-bottom: 18px;
+      border-radius: 15px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.08);
+    }
+
+    .card h2 {
+      color: #16834a;
+      margin-top: 0;
+    }
+
+    label {
+      display: block;
+      margin-top: 12px;
+      font-weight: bold;
+    }
+
+    input, select {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 12px;
+      margin-top: 6px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      margin-top: 18px;
+      border: none;
+      border-radius: 10px;
+      background: #16834a;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .resultat {
+      background: #f1f6f3;
+      padding: 15px;
+      margin-top: 15px;
+      border-radius: 10px;
+    }
+
+    .retour {
+      display: block;
+      text-align: center;
+      background: #111;
+      color: white;
+      padding: 14px;
+      border-radius: 10px;
+      text-decoration: none;
+      margin: 30px 0;
+    }
+
+    .note {
+      font-size: 14px;
+      color: #666;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>📊 Mon Suivi Athlex</h1>
+  <p>Mesure tes progrès et garde le cap 💪</p>
+</header>
+
+<div class="container">
+
+  <div class="card">
+    <h2>⚖️ Mon poids</h2>
+
+    <label for="poids">Poids actuel (kg)</label>
+    <input type="number" id="poids" placeholder="Exemple : 80">
+
+    <button onclick="enregistrerPoids()">Enregistrer mon poids</button>
+
+    <div class="resultat" id="resultatPoids">
+      Aucun poids enregistré pour le moment.
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>🏋️ Mon entraînement</h2>
+
+    <label for="sport">Activité</label>
+    <select id="sport">
+      <option>Musculation</option>
+      <option>Basketball</option>
+      <option>Football</option>
+      <option>Course</option>
+      <option>Maison</option>
+      <option>Autre</option>
+    </select>
+
+    <label for="duree">Durée (minutes)</label>
+    <input type="number" id="duree" placeholder="Exemple : 60">
+
+    <button onclick="enregistrerEntrainement()">
+      Enregistrer l'entraînement
+    </button>
+
+    <div class="resultat" id="resultatSport">
+      Aucun entraînement enregistré pour le moment.
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>📈 Ma progression</h2>
+
+    <p>
+      Utilise cette page régulièrement pour suivre ton évolution.
+    </p>
+
+    <div class="resultat" id="progression">
+      <strong>Poids :</strong> Pas encore enregistré.<br><br>
+      <strong>Dernière activité :</strong> Pas encore enregistrée.
+    </div>
+
+    <p class="note">
+      Les informations sont enregistrées dans le navigateur de cet appareil.
+    </p>
+  </div>
+
+  <a class="retour" href="index.html">⬅️ Retour à l'accueil</a>
+
+</div>
+
+<script>
+  function enregistrerPoids() {
+    const poids = document.getElementById("poids").value;
+
+    if (poids === "") {
+      alert("Entre ton poids.");
+      return;
+    }
+
+    localStorage.setItem("athlexPoids", poids);
+
+    document.getElementById("resultatPoids").innerHTML =
+      "✅ Poids enregistré : <strong>" + poids + " kg</strong>";
+
+    afficherProgression();
+  }
+
+  function enregistrerEntrainement() {
+    const sport = document.getElementById("sport").value;
+    const duree = document.getElementById("duree").value;
+
+    if (duree === "") {
+      alert("Entre la durée de ton entraînement.");
+      return;
+    }
+
+    localStorage.setItem("athlexSport", sport);
+    localStorage.setItem("athlexDuree", duree);
+
+    document.getElementById("resultatSport").innerHTML =
+      "✅ " + sport + " — <strong>" + duree + " minutes</strong>";
+
+    afficherProgression();
+  }
+
+  function afficherProgression() {
+    const poids = localStorage.getItem("athlexPoids");
+    const sport = localStorage.getItem("athlexSport");
+    const duree = localStorage.getItem("athlexDuree");
+
+    let texte = "";
+
+    if (poids) {
+      texte += "<strong>Poids :</strong> " + poids + " kg<br><br>";
+    } else {
+      texte += "<strong>Poids :</strong> Pas encore enregistré.<br><br>";
+    }
+
+    if (sport && duree) {
+      texte += "<strong>Dernière activité :</strong> " +
+        sport + " — " + duree + " minutes.";
+    } else {
+      texte += "<strong>Dernière activité :</strong> Pas encore enregistrée.";
+    }
+
+    document.getElementById("progression").innerHTML = texte;
+  }
+
+  window.onload = afficherProgression;
+</script>
+
+</body>
+</html>
