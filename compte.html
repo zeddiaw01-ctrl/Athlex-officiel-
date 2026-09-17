@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Athlex - Mon compte</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f4f6f8;
+      color: #222;
+    }
+
+    header {
+      background: #111;
+      color: white;
+      text-align: center;
+      padding: 30px 15px;
+    }
+
+    header h1 {
+      font-size: 32px;
+      margin-bottom: 8px;
+    }
+
+    header p {
+      color: #ccc;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: auto;
+      padding: 30px 15px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      margin-bottom: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .card h2 {
+      margin-bottom: 15px;
+    }
+
+    .card p {
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 7px;
+      font-weight: bold;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background: #111;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .info {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .info div {
+      background: #f4f6f8;
+      padding: 15px;
+      border-radius: 10px;
+    }
+
+    .retour {
+      text-align: center;
+      margin-top: 25px;
+    }
+
+    .retour a {
+      color: #111;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    @media (max-width: 600px) {
+      .info {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>👤 Mon compte</h1>
+    <p>Bienvenue dans ton espace personnel Athlex.</p>
+  </header>
+
+  <main class="container">
+
+    <section class="card">
+      <h2>Mes informations</h2>
+
+      <label for="nom">Nom</label>
+      <input type="text" id="nom" placeholder="Ton nom">
+
+      <label for="prenom">Prénom</label>
+      <input type="text" id="prenom" placeholder="Ton prénom">
+
+      <label for="age">Âge</label>
+      <input type="number" id="age" placeholder="Ton âge">
+
+      <label for="objectif">Mon objectif</label>
+      <select id="objectif">
+        <option value="">Choisir un objectif</option>
+        <option>Perte de poids</option>
+        <option>Prise de muscle</option>
+        <option>Performance sportive</option>
+        <option>Remise en forme</option>
+        <option>Maintien</option>
+      </select>
+
+      <button onclick="enregistrer()">💾 Enregistrer</button>
+    </section>
+
+    <section class="card">
+      <h2>📊 Mon espace Athlex</h2>
+
+      <div class="info">
+        <div>
+          <strong>👤 Nom</strong>
+          <p id="affNom">Non renseigné</p>
+        </div>
+
+        <div>
+          <strong>🎯 Objectif</strong>
+          <p id="affObjectif">Non renseigné</p>
+        </div>
+
+        <div>
+          <strong>🎂 Âge</strong>
+          <p id="affAge">Non renseigné</p>
+        </div>
+
+        <div>
+          <strong>🏋️ Programme</strong>
+          <p>Voir mes programmes</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>🚀 Bienvenue sur Athlex</h2>
+      <p>
+        Ton espace personnel te permettra de retrouver progressivement
+        tes informations, tes objectifs et ta progression sportive.
+      </p>
+    </section>
+
+    <div class="retour">
+      <a href="index.html">← Retour à l'accueil</a>
+    </div>
+
+  </main>
+
+  <script>
+    function enregistrer() {
+      const nom = document.getElementById("prenom").value + " " +
+                  document.getElementById("nom").value;
+      const age = document.getElementById("age").value;
+      const objectif = document.getElementById("objectif").value;
+
+      localStorage.setItem("athlexNom", nom);
+      localStorage.setItem("athlexAgeCompte", age);
+      localStorage.setItem("athlexObjectifCompte", objectif);
+
+      afficher();
+
+      alert("Informations enregistrées !");
+    }
+
+    function afficher() {
+      const nom = localStorage.getItem("athlexNom");
+      const age = localStorage.getItem("athlexAgeCompte");
+      const objectif = localStorage.getItem("athlexObjectifCompte");
+
+      if (nom) document.getElementById("affNom").textContent = nom;
+      if (age) document.getElementById("affAge").textContent = age + " ans";
+      if (objectif) document.getElementById("affObjectif").textContent = objectif;
+    }
+
+    afficher();
+  </script>
+
+</body>
+</html>
