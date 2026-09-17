@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Athlex - Blog</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f4f6f8;
+      color: #222;
+    }
+
+    header {
+      background: #111;
+      color: white;
+      text-align: center;
+      padding: 30px 15px;
+    }
+
+    header h1 {
+      font-size: 32px;
+      margin-bottom: 8px;
+    }
+
+    header p {
+      color: #ccc;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 30px 15px;
+    }
+
+    .intro {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .intro h2 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .intro p {
+      color: #666;
+    }
+
+    .articles {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .article {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .emoji {
+      font-size: 40px;
+      margin-bottom: 15px;
+    }
+
+    .article h3 {
+      font-size: 21px;
+      margin-bottom: 12px;
+    }
+
+    .article p {
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+
+    .tag {
+      display: inline-block;
+      background: #eee;
+      padding: 6px 10px;
+      border-radius: 20px;
+      font-size: 13px;
+    }
+
+    .button {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 10px 16px;
+      background: #111;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+
+    .retour {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .retour a {
+      color: #111;
+      font-weight: bold;
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>📝 Athlex Blog</h1>
+    <p>Conseils, motivation et sport pour progresser.</p>
+  </header>
+
+  <main class="container">
+
+    <section class="intro">
+      <h2>Nos articles</h2>
+      <p>Découvre nos conseils pour améliorer ton entraînement et ton alimentation.</p>
+    </section>
+
+    <section class="articles">
+
+      <article class="article">
+        <div class="emoji">🔥</div>
+        <h3>Comment rester motivé au sport ?</h3>
+        <p>
+          Découvre des méthodes simples pour garder ta motivation,
+          même lorsque tu débutes.
+        </p>
+        <span class="tag">Motivation</span>
+        <br>
+        <a href="#" class="button">Lire l'article</a>
+      </article>
+
+      <article class="article">
+        <div class="emoji">💪</div>
+        <h3>Bien débuter la musculation</h3>
+        <p>
+          Les bases à connaître pour commencer la musculation
+          progressivement et correctement.
+        </p>
+        <span class="tag">Musculation</span>
+        <br>
+        <a href="#" class="button">Lire l'article</a>
+      </article>
+
+      <article class="article">
+        <div class="emoji">🥗</div>
+        <h3>Que manger avant le sport ?</h3>
+        <p>
+          Quelques idées de repas et collations pour avoir de l'énergie
+          avant ton entraînement.
+        </p>
+        <span class="tag">Nutrition</span>
+        <br>
+        <a href="#" class="button">Lire l'article</a>
+      </article>
+
+      <article class="article">
+        <div class="emoji">🏃</div>
+        <h3>Améliorer son endurance</h3>
+        <p>
+          Des conseils simples pour développer progressivement ton cardio
+          et ton endurance.
+        </p>
+        <span class="tag">Cardio</span>
+        <br>
+        <a href="#" class="button">Lire l'article</a>
+      </article>
+
+      <article class="article">
+        <div class="emoji">🏠</div>
+        <h3>S'entraîner à la maison</h3>
+        <p>
+          Comment organiser une séance efficace chez soi,
+          même sans matériel.
+        </p>
+        <span class="tag">Maison</span>
+        <br>
+        <a href="#" class="button">Lire l'article</a>
+      </article>
+
+      <article class="article">
+        <div class="emoji">😴</div>
+        <h3>Pourquoi le repos est important ?</h3>
+        <p>
+          Comprends pourquoi la récupération fait partie intégrante
+          de ta progression sportive.
+        </p>
+        <span class="tag">Récupération</span>
+        <br>
+        <a href="#" class="button">Lire l'article</a>
+      </article>
+
+    </section>
+
+    <div class="retour">
+      <a href="index.html">← Retour à l'accueil</a>
+    </div>
+
+  </main>
+
+</body>
+</html>
