@@ -139,7 +139,21 @@
         return;
       }
 
-      message.textContent = "Connexion enregistrée !";
+     const emailEnregistre = localStorage.getItem("athlexEmail");
+const passwordEnregistre = localStorage.getItem("athlexPassword");
+
+if (email === emailEnregistre && password === passwordEnregistre) {
+  message.style.color = "green";
+  message.textContent = "Connexion réussie !";
+
+  setTimeout(function() {
+    window.location.href = "compte.html";
+  }, 1000);
+
+} else {
+  message.style.color = "red";
+  message.textContent = "Adresse e-mail ou mot de passe incorrect.";
+}
     }
   </script>
 
