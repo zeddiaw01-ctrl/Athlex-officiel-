@@ -4,97 +4,144 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Athlex — Sport, Fitness & Motivation</title>
-
-  <meta name="description" content="Athlex : programmes sportifs, nutrition, motivation et défis pour progresser chaque jour.">
+  <title>Athlex - Ton objectif, notre mission</title>
 
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      scroll-behavior: smooth;
     }
 
     body {
       font-family: Arial, Helvetica, sans-serif;
-      background: #0b0f14;
+      background: #070b12;
       color: white;
       line-height: 1.6;
     }
 
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* =========================
+       MENU
+    ========================= */
+
     header {
-      background: #10161f;
-      padding: 18px 7%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: sticky;
+      position: absolute;
       top: 0;
-      z-index: 1000;
-      border-bottom: 1px solid #202936;
+      left: 0;
+      width: 100%;
+      padding: 22px 6%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 10;
     }
 
     .logo {
-      font-size: 28px;
+      font-size: 30px;
       font-weight: 900;
-      color: #19e6a2;
-      letter-spacing: 1px;
+      letter-spacing: 2px;
+      color: white;
+    }
+
+    .logo span {
+      color: #00aaff;
     }
 
     nav {
       display: flex;
-      gap: 22px;
+      align-items: center;
+      gap: 28px;
     }
 
     nav a {
       color: white;
-      text-decoration: none;
       font-size: 15px;
+      font-weight: 600;
+      transition: 0.3s;
     }
 
     nav a:hover {
-      color: #19e6a2;
+      color: #00aaff;
     }
 
+    .connexion {
+      padding: 11px 20px;
+      border: 1px solid #00aaff;
+      border-radius: 25px;
+      color: white;
+      transition: 0.3s;
+    }
+
+    .connexion:hover {
+      background: #00aaff;
+      color: white;
+    }
+
+    /* =========================
+       ACCUEIL
+    ========================= */
+
     .hero {
-      min-height: 85vh;
+      min-height: 100vh;
       display: flex;
       align-items: center;
-      padding: 70px 7%;
-      background:
-        radial-gradient(circle at 80% 30%, #123d35 0%, transparent 35%),
-        #0b0f14;
+      position: relative;
+      overflow: hidden;
+
+      background-image:
+        linear-gradient(
+          90deg,
+          rgba(0,0,0,0.90) 0%,
+          rgba(0,0,0,0.68) 40%,
+          rgba(0,0,0,0.25) 100%
+        ),
+        url("athlex-accueil.png");
+
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
     }
 
     .hero-content {
-      max-width: 700px;
+      width: 100%;
+      max-width: 1250px;
+      margin: auto;
+      padding: 120px 6% 70px;
     }
 
-    .badge {
-      display: inline-block;
-      background: #14251f;
-      color: #19e6a2;
-      padding: 8px 15px;
-      border-radius: 30px;
-      margin-bottom: 20px;
-      font-weight: bold;
+    .small-title {
+      color: #00aaff;
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 3px;
+      margin-bottom: 18px;
+      text-transform: uppercase;
     }
 
-    h1 {
-      font-size: clamp(42px, 7vw, 78px);
-      line-height: 1.05;
+    .hero h1 {
+      font-size: clamp(45px, 7vw, 85px);
+      line-height: 0.98;
+      max-width: 800px;
+      font-weight: 900;
+      text-transform: uppercase;
       margin-bottom: 25px;
     }
 
-    h1 span {
-      color: #19e6a2;
+    .hero h1 span {
+      color: #00aaff;
     }
 
     .hero p {
-      color: #b7c0ca;
-      font-size: 19px;
-      max-width: 600px;
-      margin-bottom: 30px;
+      max-width: 650px;
+      font-size: 18px;
+      color: #e0e0e0;
+      margin-bottom: 35px;
     }
 
     .buttons {
@@ -105,134 +152,299 @@
 
     .btn {
       display: inline-block;
-      padding: 14px 24px;
-      border-radius: 10px;
-      text-decoration: none;
-      font-weight: bold;
+      padding: 15px 27px;
+      border-radius: 30px;
+      font-weight: 800;
       transition: 0.3s;
+      cursor: pointer;
     }
 
     .btn-primary {
-      background: #19e6a2;
-      color: #07100d;
+      background: #00aaff;
+      color: white;
+      box-shadow: 0 8px 30px rgba(0,170,255,0.25);
     }
 
     .btn-primary:hover {
       transform: translateY(-3px);
+      background: #008ed6;
     }
 
     .btn-secondary {
-      border: 1px solid #35404d;
-      color: white;
+      border: 1px solid rgba(255,255,255,0.5);
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(8px);
     }
 
     .btn-secondary:hover {
-      border-color: #19e6a2;
-      color: #19e6a2;
+      transform: translateY(-3px);
+      border-color: #00aaff;
     }
 
-    section {
-      padding: 75px 7%;
+    /* =========================
+       SECTIONS
+    ========================= */
+
+    section:not(.hero) {
+      padding: 90px 6%;
     }
 
     .section-title {
       text-align: center;
-      margin-bottom: 45px;
+      margin-bottom: 50px;
+    }
+
+    .section-title small {
+      color: #00aaff;
+      font-weight: 800;
+      letter-spacing: 2px;
     }
 
     .section-title h2 {
-      font-size: 38px;
-      margin-bottom: 10px;
+      font-size: 42px;
+      margin-top: 8px;
     }
 
     .section-title p {
-      color: #9da8b4;
+      max-width: 650px;
+      margin: 15px auto 0;
+      color: #aeb5c0;
+    }
+
+    /* =========================
+       PROGRAMMES
+    ========================= */
+
+    .programmes {
+      background: #0b111b;
     }
 
     .cards {
+      max-width: 1200px;
+      margin: auto;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 22px;
+      gap: 25px;
     }
 
     .card {
-      background: #111821;
-      border: 1px solid #202936;
+      background: #111925;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
       padding: 30px;
-      border-radius: 18px;
       transition: 0.3s;
     }
 
     .card:hover {
-      transform: translateY(-7px);
-      border-color: #19e6a2;
+      transform: translateY(-8px);
+      border-color: #00aaff;
     }
 
-    .icon {
-      font-size: 38px;
-      margin-bottom: 15px;
+    .card-icon {
+      font-size: 40px;
+      margin-bottom: 18px;
     }
 
     .card h3 {
-      font-size: 22px;
-      margin-bottom: 10px;
+      font-size: 23px;
+      margin-bottom: 12px;
     }
 
     .card p {
-      color: #aeb8c3;
+      color: #aeb5c0;
+      margin-bottom: 22px;
     }
 
-    .cta {
+    .card-link {
+      color: #00aaff;
+      font-weight: 800;
+    }
+
+    /* =========================
+       NUTRITION
+    ========================= */
+
+    .nutrition {
+      background:
+        linear-gradient(rgba(5,10,16,0.93), rgba(5,10,16,0.93)),
+        url("athlex-accueil.png");
+      background-size: cover;
+      background-position: center;
+    }
+
+    .nutrition-content {
+      max-width: 1100px;
+      margin: auto;
       text-align: center;
-      background: linear-gradient(135deg, #10251e, #10161f);
-      border-top: 1px solid #202936;
-      border-bottom: 1px solid #202936;
     }
 
-    .cta h2 {
+    .nutrition-box {
+      margin-top: 35px;
+      padding: 40px;
+      border-radius: 25px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+    }
+
+    /* =========================
+       SUIVI
+    ========================= */
+
+    .suivi {
+      background: #070b12;
+    }
+
+    .stats {
+      max-width: 1000px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .stat {
+      text-align: center;
+      padding: 35px 20px;
+      background: #101722;
+      border-radius: 20px;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 40px;
+      color: #00aaff;
+      margin-bottom: 8px;
+    }
+
+    .stat span {
+      color: #c2c8d0;
+    }
+
+    /* =========================
+       DEFIS
+    ========================= */
+
+    .defis {
+      background: #0b111b;
+      text-align: center;
+    }
+
+    .defi-box {
+      max-width: 900px;
+      margin: auto;
+      padding: 55px 30px;
+      border-radius: 25px;
+      background:
+        linear-gradient(
+          135deg,
+          rgba(0,170,255,0.18),
+          rgba(255,255,255,0.03)
+        );
+      border: 1px solid rgba(0,170,255,0.25);
+    }
+
+    .defi-box h2 {
       font-size: 40px;
       margin-bottom: 15px;
     }
 
-    .cta p {
-      color: #b7c0ca;
-      margin-bottom: 25px;
+    .defi-box p {
+      color: #c3c9d1;
+      max-width: 650px;
+      margin: 0 auto 25px;
     }
+
+    /* =========================
+       COMMUNAUTE
+    ========================= */
+
+    .communaute {
+      text-align: center;
+      background: #070b12;
+    }
+
+    .communaute p {
+      max-width: 700px;
+      margin: 0 auto 30px;
+      color: #b7bec8;
+      font-size: 18px;
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
 
     footer {
-      background: #070a0e;
-      padding: 35px 7%;
+      background: #04070b;
+      padding: 45px 6%;
       text-align: center;
-      color: #7f8a96;
+      border-top: 1px solid rgba(255,255,255,0.08);
     }
 
-    footer strong {
-      color: #19e6a2;
+    footer .logo {
+      margin-bottom: 12px;
     }
 
-    @media (max-width: 800px) {
+    footer p {
+      color: #7f8996;
+      font-size: 14px;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media (max-width: 900px) {
+
       header {
-        padding: 15px 5%;
+        padding: 18px 5%;
       }
 
       nav {
+        gap: 12px;
+      }
+
+      nav a:not(.connexion) {
         display: none;
       }
 
-      .hero {
-        padding: 60px 5%;
-        min-height: 80vh;
+      .hero-content {
+        padding: 130px 7% 70px;
       }
 
-      section {
-        padding: 60px 5%;
+      .hero h1 {
+        font-size: 55px;
       }
 
       .cards {
         grid-template-columns: 1fr;
       }
 
-      .cta h2 {
+      .stats {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 500px) {
+
+      .logo {
+        font-size: 25px;
+      }
+
+      .hero h1 {
+        font-size: 45px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      .section-title h2 {
+        font-size: 32px;
+      }
+
+      .defi-box h2 {
         font-size: 30px;
       }
     }
@@ -241,187 +453,262 @@
 
 <body>
 
-  <header>
-    <div class="logo">ATHLEX</div>
+  <!-- =========================
+       ACCUEIL
+  ========================= -->
 
-    <nav>
-      <a href="#accueil">Accueil</a>
-      <a href="#programmes">Programmes</a>
-      <a href="nutrition.html">Nutrition</a>
-      <a href="suivi.html">Suivi</a>
-      <a href="defis.html">Défis</a> 
-      <a href="blog.html">blog</a>  
-      <a href="compte.html">Mon compte</a>
-      <a href="connexion.html">Connexion</a>
-    </nav>
-  </header>
+  <section class="hero" id="accueil">
 
-  <main>
+    <header>
 
-    <section class="hero" id="accueil">
-      <div class="hero-content">
-
-        <div class="badge">💪 SPORT • FITNESS • MOTIVATION</div>
-
-        <h1>
-          Deviens une meilleure version de <span>toi-même.</span>
-        </h1>
-
-        <p>
-          Athlex t'accompagne dans ton parcours sportif avec des
-          programmes d'entraînement, des conseils nutritionnels,
-          du suivi et des défis pour rester motivé.
-        </p>
-
-        <div class="buttons">
-          <a href="programmes.html" class="btn btn-primary">
-            Découvrir les programmes
-          </a>
-
-          <a href="#defis" class="btn btn-secondary">
-            Relever un défi
-          </a>
-        </div>
-
-      </div>
-    </section>
-
-    <section id="programmes">
-
-      <div class="section-title">
-        <h2>Nos programmes</h2>
-        <p>Des entraînements adaptés à différents objectifs.</p>
-      </div>
-
-      <div class="cards">
-
-        <div class="card">
-          <div class="icon">🏋️</div>
-          <h3>Musculation</h3>
-          <p>
-            Développe ta force et ta masse musculaire grâce à des
-            programmes structurés et progressifs.
-          </p>
-        </div>
-
-        <div class="card">
-          <div class="icon">🔥</div>
-          <h3>Perte de poids</h3>
-          <p>
-            Combine entraînement et bonnes habitudes pour améliorer
-            ta condition physique et réduire la masse grasse.
-          </p>
-        </div>
-
-        <div class="card">
-          <div class="icon">🏀</div>
-          <h3>Performance sportive</h3>
-          <p>
-            Améliore ta vitesse, ton explosivité, ton endurance et
-            tes performances sur le terrain.
-          </p>
-        </div>
-
-      </div>
-    </section>
-
-    <section id="nutrition">
-
-      <div class="section-title">
-        <h2>Nutrition</h2>
-        <p>Parce que les résultats ne se construisent pas seulement à la salle.</p>
-      </div>
-
-      <div class="cards">
-
-        <div class="card">
-          <div class="icon">🥗</div>
-          <h3>Alimentation</h3>
-          <p>
-            Découvre des conseils simples pour mieux organiser ton
-            alimentation selon ton objectif.
-          </p>
-        </div>
-
-        <div class="card">
-          <div class="icon">💧</div>
-          <h3>Hydratation</h3>
-          <p>
-            Apprends à mieux gérer ton hydratation avant, pendant
-            et après l'entraînement.
-          </p>
-        </div>
-
-        <div class="card">
-          <div class="icon">⚡</div>
-          <h3>Énergie</h3>
-          <p>
-            Comprends comment ton alimentation peut soutenir tes
-            performances et ta récupération.
-          </p>
-        </div>
-
-      </div>
-    </section>
-
-    <section id="suivi">
-
-      <div class="section-title">
-        <h2>Ton suivi</h2>
-        <p>Mesure tes progrès et reste concentré sur ton objectif.</p>
-      </div>
-
-      <div class="cards">
-
-        <div class="card">
-          <div class="icon">📊</div>
-          <h3>Progression</h3>
-          <p>
-            Suis ton évolution au fil des semaines et visualise
-            tes progrès.
-          </p>
-        </div>
-
-        <div class="card">
-          <div class="icon">🎯</div>
-          <h3>Objectifs</h3>
-          <p>
-            Définis des objectifs sportifs clairs et travaille
-            progressivement pour les atteindre.
-          </p>
-        </div>
-
-        <div class="card">
-          <div class="icon">🔥</div>
-          <h3>Motivation</h3>
-          <p>
-            Garde une routine et transforme tes efforts en habitudes.
-          </p>
-        </div>
-
-      </div>
-    </section>
-
-    <section id="defis" class="cta">
-
-      <h2>Prêt à relever ton prochain défi ?</h2>
-
-      <p>
-        Commence aujourd'hui. Chaque entraînement compte.
-      </p>
-
-      <a href="#programmes" class="btn btn-primary">
-        Commencer maintenant
+      <a href="index.html" class="logo">
+        ATHLEX<span>.</span>
       </a>
 
-    </section>
+      <nav>
+        <a href="#accueil">Accueil</a>
+        <a href="programme.html">Programmes</a>
+        <a href="#nutrition">Nutrition</a>
+        <a href="#suivi">Suivi</a>
+        <a href="#defis">Défis</a>
+        <a href="#blog">Blog</a>
+        <a href="#" class="connexion">Connexion</a>
+      </nav>
 
-  </main>
+    </header>
+
+    <div class="hero-content">
+
+      <div class="small-title">
+        ATHLEX • SPORT • MOTIVATION
+      </div>
+
+      <h1>
+        TON OBJECTIF<br>
+        <span>NOTRE MISSION.</span>
+      </h1>
+
+      <p>
+        Athlex t'accompagne dans ton parcours sportif avec
+        des programmes adaptés, une bonne alimentation,
+        un suivi de ta progression et une communauté motivante.
+      </p>
+
+      <div class="buttons">
+
+        <a href="programme.html" class="btn btn-primary">
+          Découvrir les programmes
+        </a>
+
+        <a href="#defis" class="btn btn-secondary">
+          Relever un défi
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       PROGRAMMES
+  ========================= -->
+
+  <section class="programmes" id="programmes">
+
+    <div class="section-title">
+      <small>ENTRAÎNEMENT</small>
+      <h2>Nos programmes</h2>
+      <p>
+        Choisis ton objectif et commence à progresser
+        à ton propre rythme.
+      </p>
+    </div>
+
+    <div class="cards">
+
+      <div class="card">
+        <div class="card-icon">🏋️</div>
+        <h3>Musculation</h3>
+        <p>
+          Développe ta force et construis ton physique
+          avec des entraînements adaptés.
+        </p>
+        <a href="programme.html" class="card-link">
+          Voir le programme →
+        </a>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">🔥</div>
+        <h3>Perte de graisse</h3>
+        <p>
+          Combine entraînement et bonnes habitudes
+          pour progresser vers ton objectif.
+        </p>
+        <a href="programme.html" class="card-link">
+          Voir le programme →
+        </a>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">🏠</div>
+        <h3>À la maison</h3>
+        <p>
+          Commence le sport chez toi avec des séances
+          simples et accessibles.
+        </p>
+        <a href="maison.html" class="card-link">
+          Voir le programme →
+        </a>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       NUTRITION
+  ========================= -->
+
+  <section class="nutrition" id="nutrition">
+
+    <div class="nutrition-content">
+
+      <div class="section-title">
+        <small>ALIMENTATION</small>
+        <h2>Une bonne nutrition</h2>
+        <p>
+          L'entraînement représente une partie du chemin.
+          Ton alimentation compte aussi.
+        </p>
+      </div>
+
+      <div class="nutrition-box">
+
+        <h3>🥗 Mange mieux. Bouge mieux. Vis mieux.</h3>
+
+        <p>
+          Découvre bientôt des conseils alimentaires,
+          des idées de repas et des recommandations
+          adaptées à tes objectifs sportifs.
+        </p>
+
+        <a href="#" class="btn btn-primary">
+          Découvrir la nutrition
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       SUIVI
+  ========================= -->
+
+  <section class="suivi" id="suivi">
+
+    <div class="section-title">
+      <small>PROGRESSION</small>
+      <h2>Ton suivi</h2>
+      <p>
+        Chaque entraînement compte. Suis ta progression
+        et garde ta motivation.
+      </p>
+    </div>
+
+    <div class="stats">
+
+      <div class="stat">
+        <strong>01</strong>
+        <span>Ton objectif</span>
+      </div>
+
+      <div class="stat">
+        <strong>02</strong>
+        <span>Ta progression</span>
+      </div>
+
+      <div class="stat">
+        <strong>03</strong>
+        <span>Ta réussite</span>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       DEFIS
+  ========================= -->
+
+  <section class="defis" id="defis">
+
+    <div class="defi-box">
+
+      <div class="section-title">
+        <small>CHALLENGE</small>
+        <h2>Prêt à relever le défi ?</h2>
+      </div>
+
+      <p>
+        Lance-toi un défi, reste régulier et montre
+        ce dont tu es capable.
+      </p>
+
+      <a href="#" class="btn btn-primary">
+        Relever le défi 🔥
+      </a>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       BLOG
+  ========================= -->
+
+  <section class="communaute" id="blog">
+
+    <div class="section-title">
+      <small>ATHLEX COMMUNITY</small>
+      <h2>Plus qu'un entraînement</h2>
+    </div>
+
+    <p>
+      Conseils, motivation, sport et partage :
+      Athlex veut créer une communauté de personnes
+      qui avancent ensemble.
+    </p>
+
+    <a href="#" class="btn btn-secondary">
+      Découvrir le blog
+    </a>
+
+  </section>
+
+
+  <!-- =========================
+       FOOTER
+  ========================= -->
 
   <footer>
+
+    <div class="logo">
+      ATHLEX<span>.</span>
+    </div>
+
     <p>
-      © 2026 <strong>Athlex</strong> — Sport, Fitness & Motivation
+      © 2026 Athlex — Ton objectif, notre mission.
     </p>
+
   </footer>
 
 </body>
