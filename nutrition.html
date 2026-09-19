@@ -3,124 +3,418 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Athlex - Nutrition</title>
 
   <style>
-    body {
+    * {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f4f6f8;
-      color: #222;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #070b12;
+      color: white;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
     }
 
     header {
-      background: #111;
-      color: white;
+      padding: 22px 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #070b12;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .logo {
+      font-size: 30px;
+      font-weight: 900;
+      letter-spacing: 2px;
+    }
+
+    .logo span {
+      color: #00aaff;
+    }
+
+    .back {
+      padding: 10px 18px;
+      border: 1px solid #00aaff;
+      border-radius: 25px;
+      transition: 0.3s;
+    }
+
+    .back:hover {
+      background: #00aaff;
+    }
+
+    /* HERO */
+
+    .hero {
       text-align: center;
-      padding: 35px 20px;
+      padding: 85px 6% 60px;
+      background:
+        linear-gradient(rgba(5,10,16,0.88), rgba(5,10,16,0.96)),
+        url("athlex-accueil.png");
+      background-size: cover;
+      background-position: center;
     }
 
-    header h1 {
-      margin: 0;
-      font-size: 34px;
+    .hero small {
+      color: #00aaff;
+      font-weight: 800;
+      letter-spacing: 3px;
     }
 
-    .container {
-      max-width: 1100px;
-      margin: 30px auto;
-      padding: 20px;
+    .hero h1 {
+      font-size: clamp(40px, 6vw, 65px);
+      margin: 15px 0;
+      text-transform: uppercase;
     }
+
+    .hero h1 span {
+      color: #00aaff;
+    }
+
+    .hero p {
+      max-width: 720px;
+      margin: auto;
+      color: #c5ccd5;
+      font-size: 18px;
+    }
+
+    /* NUTRITION */
 
     .nutrition {
+      max-width: 1200px;
+      margin: auto;
+      padding: 70px 6%;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px;
     }
 
     .card {
-      background: white;
-      padding: 25px;
-      border-radius: 15px;
-      text-align: center;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      background: #111925;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 22px;
+      padding: 35px;
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      border-color: #00aaff;
+      box-shadow: 0 15px 35px rgba(0,170,255,0.12);
+    }
+
+    .icon {
+      font-size: 50px;
+      margin-bottom: 15px;
     }
 
     .card h2 {
-      margin-top: 0;
+      font-size: 27px;
+      margin-bottom: 12px;
     }
 
     .card p {
-      line-height: 1.5;
+      color: #aeb5c0;
+      margin-bottom: 22px;
     }
 
-    .card a,
-    .retour {
+    .card ul {
+      padding-left: 20px;
+      color: #c5ccd5;
+      margin-bottom: 25px;
+    }
+
+    .card li {
+      margin-bottom: 7px;
+    }
+
+    .btn {
       display: inline-block;
-      margin-top: 15px;
-      padding: 12px 18px;
-      background: #111;
+      padding: 12px 23px;
+      border-radius: 30px;
+      background: #00aaff;
       color: white;
-      text-decoration: none;
-      border-radius: 8px;
+      font-weight: 800;
+      transition: 0.3s;
     }
 
-    .retour {
-      display: block;
-      width: fit-content;
-      margin: 30px auto 0;
+    .btn:hover {
+      background: #008ed6;
+      transform: translateY(-3px);
     }
+
+    /* CONSEILS */
+
+    .conseils {
+      max-width: 950px;
+      margin: 0 auto 70px;
+      padding: 45px;
+      background: #0b111b;
+      border-radius: 25px;
+      border: 1px solid rgba(0,170,255,0.20);
+      text-align: center;
+    }
+
+    .conseils h2 {
+      color: #00aaff;
+      margin-bottom: 15px;
+    }
+
+    .conseils p {
+      color: #c5ccd5;
+    }
+
+    /* FOOTER */
 
     footer {
       text-align: center;
-      padding: 30px;
-      color: #666;
+      padding: 40px 6%;
+      background: #04070b;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    footer p {
+      color: #7f8996;
+      margin-top: 10px;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 700px) {
+
+      header {
+        padding: 18px 5%;
+      }
+
+      .logo {
+        font-size: 25px;
+      }
+
+      .hero {
+        padding: 65px 6% 45px;
+      }
+
+      .nutrition {
+        grid-template-columns: 1fr;
+        padding-top: 50px;
+      }
+
+      .card {
+        padding: 28px;
+      }
+
+      .conseils {
+        margin: 0 6% 50px;
+        padding: 30px 22px;
+      }
     }
   </style>
 </head>
 
 <body>
 
+  <!-- HEADER -->
+
   <header>
-    <h1>🥗 Nutrition Athlex</h1>
-    <p>Une alimentation adaptée à ton objectif sportif.</p>
+
+    <a href="index.html" class="logo">
+      ATHLEX<span>.</span>
+    </a>
+
+    <a href="index.html" class="back">
+      ← Accueil
+    </a>
+
   </header>
 
-  <div class="container">
 
-    <div class="nutrition">
+  <!-- HERO -->
 
-      <div class="card">
-        <h2>🔥 Perte de poids</h2>
-        <p>Des conseils alimentaires pour réduire progressivement les calories tout en gardant une bonne alimentation.</p>
-        <a href="nutrition-perte-poids.html">Découvrir</a>
-      </div>
+  <section class="hero">
 
-      <div class="card">
-        <h2>💪 Prise de muscle</h2>
-        <p>Apprends à mieux organiser tes repas et tes apports en protéines pour accompagner tes entraînements.</p>
-        <a href="nutrition-prise-muscle.html">Découvrir</a>
-      </div>
+    <small>ATHLEX NUTRITION</small>
 
-      <div class="card">
-        <h2>⚡ Performance sportive</h2>
-        <p>Alimente ton corps avant et après l'entraînement pour soutenir l'énergie et la récupération.</p>
-        <a href="nutrition-performance.html">Découvrir</a>
-      </div>
+    <h1>
+      Nourris ta <span>performance</span>
+    </h1>
 
-      <div class="card">
-        <h2>🥗 Alimentation équilibrée</h2>
-        <p>Les bases d'une alimentation variée avec protéines, glucides, légumes, fruits et bonnes graisses.</p>
-        <a href="nutrition-equilibree.html">Découvrir</a>
-      </div>
+    <p>
+      Une bonne alimentation accompagne tes entraînements,
+      améliore ta récupération et t'aide à atteindre tes objectifs.
+    </p>
+
+  </section>
+
+
+  <!-- 4 CATÉGORIES -->
+
+  <section class="nutrition">
+
+
+    <!-- PERTE DE POIDS -->
+
+    <div class="card">
+
+      <div class="icon">🔥</div>
+
+      <h2>
+        Perte de poids
+      </h2>
+
+      <p>
+        Découvre une alimentation adaptée pour
+        réduire progressivement la masse grasse
+        tout en conservant ton énergie.
+      </p>
+
+      <ul>
+        <li>Repas équilibrés</li>
+        <li>Aliments riches en protéines</li>
+        <li>Plus de légumes et fruits</li>
+        <li>Réduction des boissons sucrées</li>
+      </ul>
+
+      <a href="nutrition-perte-poids.html" class="btn">
+        Découvrir
+      </a>
 
     </div>
 
-    <a class="retour" href="index.html">← Retour à l'accueil</a>
 
-  </div>
+    <!-- PRISE DE MUSCLE -->
+
+    <div class="card">
+
+      <div class="icon">💪</div>
+
+      <h2>
+        Prise de muscle
+      </h2>
+
+      <p>
+        Une alimentation adaptée à la prise de
+        muscle avec suffisamment de protéines,
+        glucides et calories.
+      </p>
+
+      <ul>
+        <li>Protéines de qualité</li>
+        <li>Glucides pour l'énergie</li>
+        <li>Repas réguliers</li>
+        <li>Bonne hydratation</li>
+      </ul>
+
+      <a href="nutrition-prise-muscle.html" class="btn">
+        Découvrir
+      </a>
+
+    </div>
+
+
+    <!-- PERFORMANCE -->
+
+    <div class="card">
+
+      <div class="icon">⚡</div>
+
+      <h2>
+        Performance sportive
+      </h2>
+
+      <p>
+        Optimise ton alimentation pour avoir
+        suffisamment d'énergie avant, pendant
+        et après tes entraînements.
+      </p>
+
+      <ul>
+        <li>Énergie avant l'effort</li>
+        <li>Hydratation</li>
+        <li>Récupération après l'effort</li>
+        <li>Repas adaptés au sport</li>
+      </ul>
+
+      <a href="nutrition-performance.html" class="btn">
+        Découvrir
+      </a>
+
+    </div>
+
+
+    <!-- ALIMENTATION ÉQUILIBRÉE -->
+
+    <div class="card">
+
+      <div class="icon">🥗</div>
+
+      <h2>
+        Alimentation équilibrée
+      </h2>
+
+      <p>
+        Apprends à construire une alimentation
+        variée et équilibrée avec des aliments
+        simples du quotidien.
+      </p>
+
+      <ul>
+        <li>Fruits et légumes</li>
+        <li>Protéines</li>
+        <li>Céréales et féculents</li>
+        <li>Bonnes graisses</li>
+      </ul>
+
+      <a href="nutrition-equilibree.html" class="btn">
+        Découvrir
+      </a>
+
+    </div>
+
+  </section>
+
+
+  <!-- CONSEILS -->
+
+  <section class="conseils">
+
+    <h2>
+      🥗 Le conseil Athlex
+    </h2>
+
+    <p>
+      Il n'existe pas une seule alimentation parfaite.
+      L'objectif est de construire une alimentation
+      adaptée à ton objectif, à ton activité physique
+      et à ton quotidien.
+    </p>
+
+  </section>
+
+
+  <!-- FOOTER -->
 
   <footer>
-    <p>© 2026 Athlex - Sport, Motivation & Performance</p>
+
+    <div class="logo">
+      ATHLEX<span>.</span>
+    </div>
+
+    <p>
+      © 2026 Athlex — Ton objectif, notre mission.
+    </p>
+
   </footer>
 
 </body>
