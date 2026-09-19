@@ -3,164 +3,576 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Athlex - Programmes</title>
 
   <style>
-    body {
+    * {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f4f6f8;
-      color: #222;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #070b12;
+      color: white;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
     }
 
     header {
-      background: #111;
-      color: white;
+      padding: 22px 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #070b12;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .logo {
+      font-size: 30px;
+      font-weight: 900;
+      letter-spacing: 2px;
+    }
+
+    .logo span {
+      color: #00aaff;
+    }
+
+    .back {
+      padding: 10px 18px;
+      border: 1px solid #00aaff;
+      border-radius: 25px;
+      transition: 0.3s;
+    }
+
+    .back:hover {
+      background: #00aaff;
+    }
+
+    /* HERO */
+
+    .hero {
       text-align: center;
-      padding: 30px 20px;
+      padding: 85px 6% 60px;
+      background:
+        linear-gradient(rgba(5,10,16,0.88), rgba(5,10,16,0.96)),
+        url("athlex-accueil.png");
+      background-size: cover;
+      background-position: center;
     }
 
-    header h1 {
-      margin: 0;
-      font-size: 34px;
+    .hero small {
+      color: #00aaff;
+      font-weight: 800;
+      letter-spacing: 3px;
     }
 
-    .container {
-      max-width: 1100px;
-      margin: 30px auto;
-      padding: 20px;
+    .hero h1 {
+      font-size: clamp(40px, 6vw, 65px);
+      margin: 15px 0;
+      text-transform: uppercase;
     }
+
+    .hero h1 span {
+      color: #00aaff;
+    }
+
+    .hero p {
+      max-width: 720px;
+      margin: auto;
+      color: #c5ccd5;
+      font-size: 18px;
+    }
+
+    /* PROGRAMMES */
 
     .programmes {
+      max-width: 1200px;
+      margin: auto;
+      padding: 70px 6%;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
     }
 
     .card {
-      background: white;
-      padding: 25px;
-      border-radius: 15px;
-      text-align: center;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      background: #111925;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 22px;
+      padding: 30px;
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      border-color: #00aaff;
+      box-shadow: 0 15px 35px rgba(0,170,255,0.12);
+    }
+
+    .icon {
+      font-size: 50px;
+      margin-bottom: 15px;
+    }
+
+    .category {
+      color: #00aaff;
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
 
     .card h2 {
-      margin-top: 0;
+      font-size: 25px;
+      margin: 8px 0 12px;
     }
 
     .card p {
-      line-height: 1.5;
+      color: #aeb5c0;
+      margin-bottom: 20px;
     }
 
-    .card a {
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 22px;
+    }
+
+    .tag {
+      padding: 6px 12px;
+      border-radius: 20px;
+      background: rgba(0,170,255,0.10);
+      border: 1px solid rgba(0,170,255,0.25);
+      color: #c5ccd5;
+      font-size: 12px;
+    }
+
+    .btn {
       display: inline-block;
-      margin-top: 15px;
-      padding: 12px 18px;
-      background: #111;
+      padding: 12px 22px;
+      border-radius: 30px;
+      background: #00aaff;
       color: white;
-      text-decoration: none;
-      border-radius: 8px;
+      font-weight: 800;
+      transition: 0.3s;
     }
 
-    .card a:hover {
-      opacity: 0.8;
+    .btn:hover {
+      background: #008ed6;
+      transform: translateY(-3px);
     }
 
-    .retour {
-      display: block;
-      width: fit-content;
-      margin: 30px auto 0;
-      padding: 12px 20px;
-      background: #111;
-      color: white;
-      text-decoration: none;
-      border-radius: 8px;
+    /* CONSEILS */
+
+    .conseils {
+      max-width: 950px;
+      margin: 0 auto 70px;
+      padding: 45px;
+      background: #0b111b;
+      border-radius: 25px;
+      border: 1px solid rgba(0,170,255,0.20);
+      text-align: center;
     }
+
+    .conseils h2 {
+      color: #00aaff;
+      margin-bottom: 15px;
+    }
+
+    .conseils p {
+      color: #c5ccd5;
+    }
+
+    /* FOOTER */
 
     footer {
       text-align: center;
-      padding: 30px;
-      color: #666;
+      padding: 40px 6%;
+      background: #04070b;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    footer p {
+      color: #7f8996;
+      margin-top: 10px;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 900px) {
+      .programmes {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      header {
+        padding: 18px 5%;
+      }
+
+      .logo {
+        font-size: 25px;
+      }
+
+      .hero {
+        padding: 65px 6% 45px;
+      }
+
+      .programmes {
+        grid-template-columns: 1fr;
+        padding-top: 50px;
+      }
+
+      .card {
+        padding: 26px;
+      }
+
+      .conseils {
+        margin: 0 6% 50px;
+        padding: 30px 22px;
+      }
     }
   </style>
 </head>
 
 <body>
 
+  <!-- HEADER -->
+
   <header>
-    <h1>Nos Programmes</h1>
-    <p>Choisis ton objectif et commence ton évolution avec Athlex.</p>
+
+    <a href="index.html" class="logo">
+      ATHLEX<span>.</span>
+    </a>
+
+    <a href="index.html" class="back">
+      ← Accueil
+    </a>
+
   </header>
 
-  <div class="container">
 
-    <div class="programmes">
+  <!-- HERO -->
 
-      <!-- ANCIENS PROGRAMMES -->
+  <section class="hero">
 
-      <div class="card">
-        <h2>🏠 Maison</h2>
-        <p>Un programme simple pour t'entraîner chez toi.</p>
-        <a href="maison.html">Voir le programme</a>
+    <small>ATHLEX PROGRAMMES</small>
+
+    <h1>
+      Choisis ton <span>objectif</span>
+    </h1>
+
+    <p>
+      Des programmes adaptés à différents objectifs
+      pour t'aider à progresser, devenir plus fort
+      et améliorer tes performances.
+    </p>
+
+  </section>
+
+
+  <!-- PROGRAMMES -->
+
+  <section class="programmes">
+
+
+    <!-- MUSCULATION -->
+
+    <div class="card">
+
+      <div class="icon">💪</div>
+
+      <div class="category">
+        Musculation
       </div>
 
-      <div class="card">
-        <h2>💪 Musculation</h2>
-        <p>Développe ta force et construis progressivement ta masse musculaire.</p>
-        <a href="musculation.html">Voir le programme</a>
+      <h2>
+        Musculation
+      </h2>
+
+      <p>
+        Développe ta force et ta masse musculaire
+        avec un programme structuré et progressif.
+      </p>
+
+      <div class="tags">
+        <span class="tag">Intermédiaire</span>
+        <span class="tag">Salle</span>
+        <span class="tag">Force</span>
       </div>
 
-      <div class="card">
-        <h2>🔥 Perte de poids</h2>
-        <p>Un programme orienté vers la remise en forme et la dépense énergétique.</p>
-        <a href="perte-poids.html">Voir le programme</a>
-      </div>
-
-      <!-- NOUVEAUX PROGRAMMES -->
-
-      
-
-      <div class="card">
-        <h2>💪 hyrox</h2>
-        <p>Passe au niveau supérieur avec des entraînements plus complets.</p>
-        <a href="hyrox.html">Voir le programme</a>
-      </div>
-
-      <div class="card">
-        <h2>🏋️ Prise de muscle</h2>
-        <p>Développe progressivement ta force et ta masse musculaire.</p>
-        <a href="prise-muscle.html">Voir le programme</a>
-      </div>
-
-      <div class="card">
-        <h2>⚡ Athlétique & Performance</h2>
-        <p>Travaille ta vitesse, ton explosivité, ton agilité et ton endurance.</p>
-        <a href="athletique.html">Voir le programme</a>
-      </div>
-
-      <div class="card">
-        <h2>👩 Programme Féminin</h2>
-        <p>Un programme équilibré pour renforcer et améliorer la condition physique.</p>
-        <a href="programme-feminin.html">Voir le programme</a>
-      </div>
-
-      <div class="card">
-        <h2>🏠 Sans matériel</h2>
-        <p>Entraîne-toi chez toi avec uniquement le poids de ton corps.</p>
-        <a href="sans-materiel.html">Voir le programme</a>
-      </div>
-
-     
+      <a href="musculation.html" class="btn">
+        Voir le programme
+      </a>
 
     </div>
 
-    <a class="retour" href="index.html">← Retour à l'accueil</a>
 
-  </div>
+    <!-- PERTE DE POIDS -->
+
+    <div class="card">
+
+      <div class="icon">🔥</div>
+
+      <div class="category">
+        Perte de poids
+      </div>
+
+      <h2>
+        Perte de poids
+      </h2>
+
+      <p>
+        Programme combinant exercices de renforcement
+        et cardio pour accompagner ton objectif de
+        perte de masse grasse.
+      </p>
+
+      <div class="tags">
+        <span class="tag">Débutant</span>
+        <span class="tag">Cardio</span>
+        <span class="tag">Fitness</span>
+      </div>
+
+      <a href="perte-poids.html" class="btn">
+        Voir le programme
+      </a>
+
+    </div>
+
+
+    <!-- MAISON -->
+
+    <div class="card">
+
+      <div class="icon">🏠</div>
+
+      <div class="category">
+        Maison
+      </div>
+
+      <h2>
+        Débutant à la maison
+      </h2>
+
+      <p>
+        Programme simple pour commencer le sport
+        chez soi avec peu ou pas de matériel.
+      </p>
+
+      <div class="tags">
+        <span class="tag">Débutant</span>
+        <span class="tag">Maison</span>
+        <span class="tag">Sans matériel</span>
+      </div>
+
+      <a href="maison.html" class="btn">
+        Voir le programme
+      </a>
+
+    </div>
+
+
+    <!-- HYROX -->
+
+    <div class="card">
+
+      <div class="icon">🏃</div>
+
+      <div class="category">
+        Performance
+      </div>
+
+      <h2>
+        HYROX
+      </h2>
+
+      <p>
+        Programme orienté endurance, force et
+        condition physique pour améliorer tes
+        performances sportives.
+      </p>
+
+      <div class="tags">
+        <span class="tag">Intermédiaire</span>
+        <span class="tag">Cardio</span>
+        <span class="tag">Force</span>
+      </div>
+
+      <a href="hyrox.html" class="btn">
+        Voir le programme
+      </a>
+
+    </div>
+
+
+    <!-- PRISE DE MUSCLE -->
+
+    <div class="card">
+
+      <div class="icon">🏋️</div>
+
+      <div class="category">
+        Développement musculaire
+      </div>
+
+      <h2>
+        Prise de muscle
+      </h2>
+
+      <p>
+        Programme destiné à développer progressivement
+        la masse musculaire avec un entraînement structuré.
+      </p>
+
+      <div class="tags">
+        <span class="tag">Muscle</span>
+        <span class="tag">Salle</span>
+        <span class="tag">Progression</span>
+      </div>
+
+      <a href="prise-muscle.html" class="btn">
+        Voir le programme
+      </a>
+
+    </div>
+
+
+    <!-- ATHLÉTIQUE -->
+
+    <div class="card">
+
+      <div class="icon">⚡</div>
+
+      <div class="category">
+        Sport
+      </div>
+
+      <h2>
+        Athlétique
+      </h2>
+
+      <p>
+        Développe ta vitesse, ton explosivité,
+        ton endurance et ta condition physique générale.
+      </p>
+
+      <div class="tags">
+        <span class="tag">Athlétique</span>
+        <span class="tag">Cardio</span>
+        <span class="tag">Explosivité</span>
+      </div>
+
+      <a href="athletique.html" class="btn">
+        Voir le programme
+      </a>
+
+    </div>
+
+
+    <!-- PROGRAMME FÉMININ -->
+
+    <div class="card">
+
+      <div class="icon">👩‍🦰</div>
+
+      <div class="category">
+        Programme féminin
+      </div>
+
+      <h2>
+        Programme féminin
+      </h2>
+
+      <p>
+        Programme adapté pour renforcer le corps,
+        développer les jambes et les fessiers
+        et améliorer la condition physique.
+      </p>
+
+      <div class="tags">
+        <span class="tag">Femme</span>
+        <span class="tag">Renforcement</span>
+        <span class="tag">Fitness</span>
+      </div>
+
+      <a href="programme-feminin.html" class="btn">
+        Voir le programme
+      </a>
+
+    </div>
+
+
+    <!-- SANS MATÉRIEL -->
+
+    <div class="card">
+
+      <div class="icon">🔥</div>
+
+      <div class="category">
+        Entraînement maison
+      </div>
+
+      <h2>
+        Sans matériel
+      </h2>
+
+      <p>
+        Entraîne-toi n'importe où avec des exercices
+        utilisant principalement le poids du corps.
+      </p>
+
+      <div class="tags">
+        <span class="tag">Maison</span>
+        <span class="tag">Sans matériel</span>
+        <span class="tag">Débutant</span>
+      </div>
+
+      <a href="sans-materiel.html" class="btn">
+        Voir le programme
+      </a>
+
+    </div>
+
+  </section>
+
+
+  <!-- CONSEILS -->
+
+  <section class="conseils">
+
+    <h2>
+      🎯 Choisis ton objectif
+    </h2>
+
+    <p>
+      Commence par un programme adapté à ton niveau
+      et à ton objectif. La régularité, la progression
+      et la récupération sont les clés pour avancer.
+    </p>
+
+  </section>
+
+
+  <!-- FOOTER -->
 
   <footer>
-    <p>© 2026 Athlex - Sport, Motivation & Performance</p>
+
+    <div class="logo">
+      ATHLEX<span>.</span>
+    </div>
+
+    <p>
+      © 2026 Athlex — Ton objectif, notre mission.
+    </p>
+
   </footer>
 
 </body>
