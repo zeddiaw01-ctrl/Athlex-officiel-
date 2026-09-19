@@ -3,218 +3,525 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Athlex - Défis</title>
 
   <style>
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: Arial, sans-serif;
+      box-sizing: border-box;
     }
 
     body {
-      background: #f4f6f8;
-      color: #222;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #070b12;
+      color: white;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
     }
 
     header {
-      background: #111;
+      padding: 22px 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #070b12;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .logo {
+      font-size: 30px;
+      font-weight: 900;
+      letter-spacing: 2px;
+    }
+
+    .logo span {
+      color: #00aaff;
+    }
+
+    .back {
+      padding: 10px 18px;
+      border: 1px solid #00aaff;
+      border-radius: 25px;
       color: white;
-      padding: 25px 15px;
+      transition: 0.3s;
+    }
+
+    .back:hover {
+      background: #00aaff;
+    }
+
+    .hero {
       text-align: center;
+      padding: 80px 6% 50px;
+      background:
+        linear-gradient(rgba(5,10,16,0.88), rgba(5,10,16,0.95)),
+        url("athlex-accueil.png");
+      background-size: cover;
+      background-position: center;
     }
 
-    header h1 {
-      font-size: 32px;
-      margin-bottom: 8px;
+    .hero small {
+      color: #00aaff;
+      font-weight: 800;
+      letter-spacing: 3px;
     }
 
-    header p {
-      color: #ccc;
+    .hero h1 {
+      font-size: clamp(40px, 6vw, 65px);
+      margin: 15px 0;
+      text-transform: uppercase;
     }
 
-    .container {
-      max-width: 1100px;
+    .hero h1 span {
+      color: #00aaff;
+    }
+
+    .hero p {
+      max-width: 700px;
       margin: auto;
-      padding: 30px 15px;
-    }
-
-    .intro {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-
-    .intro h2 {
-      font-size: 28px;
-      margin-bottom: 10px;
-    }
-
-    .intro p {
-      color: #666;
+      color: #c5ccd5;
+      font-size: 18px;
     }
 
     .defis {
+      max-width: 1200px;
+      margin: auto;
+      padding: 70px 6%;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
     }
 
     .card {
-      background: white;
-      padding: 25px;
-      border-radius: 15px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      background: #111925;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 22px;
+      padding: 30px;
+      transition: 0.3s;
     }
 
-    .card .emoji {
-      font-size: 40px;
+    .card:hover {
+      transform: translateY(-8px);
+      border-color: #00aaff;
+    }
+
+    .icon {
+      font-size: 45px;
       margin-bottom: 15px;
     }
 
-    .card h3 {
-      font-size: 21px;
-      margin-bottom: 10px;
+    .card h2 {
+      font-size: 24px;
+      margin-bottom: 12px;
     }
 
     .card p {
-      color: #666;
-      line-height: 1.5;
-      margin-bottom: 15px;
+      color: #aeb5c0;
+      margin-bottom: 18px;
     }
 
-    .tag {
-      display: inline-block;
-      background: #eee;
-      padding: 6px 10px;
-      border-radius: 20px;
-      font-size: 13px;
-      margin-right: 5px;
-    }
-
-    .button {
-      display: inline-block;
-      margin-top: 18px;
-      padding: 11px 18px;
-      background: #111;
-      color: white;
-      text-decoration: none;
+    .info {
+      background: rgba(0,170,255,0.08);
+      border-left: 3px solid #00aaff;
+      padding: 12px;
+      margin-bottom: 20px;
       border-radius: 8px;
     }
 
-    .conseil {
-      background: white;
-      margin-top: 30px;
-      padding: 25px;
-      border-radius: 15px;
-      line-height: 1.7;
+    .info strong {
+      color: #00aaff;
     }
 
-    .retour {
+    .exercices {
+      margin-bottom: 22px;
+    }
+
+    .exercices h3 {
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
+    .exercices ul {
+      padding-left: 20px;
+      color: #c5ccd5;
+    }
+
+    .exercices li {
+      margin-bottom: 5px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 22px;
+      border-radius: 30px;
+      background: #00aaff;
+      color: white;
+      font-weight: 800;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #008ed6;
+      transform: translateY(-3px);
+    }
+
+    .conseils {
+      max-width: 900px;
+      margin: 0 auto 70px;
+      padding: 40px;
       text-align: center;
-      margin-top: 30px;
+      background: #0b111b;
+      border-radius: 25px;
+      border: 1px solid rgba(0,170,255,0.2);
     }
 
-    .retour a {
-      color: #111;
-      font-weight: bold;
-      text-decoration: none;
+    .conseils h2 {
+      margin-bottom: 15px;
+      color: #00aaff;
+    }
+
+    .conseils p {
+      color: #c5ccd5;
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 6%;
+      background: #04070b;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    footer p {
+      color: #7f8996;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 900px) {
+      .defis {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      header {
+        padding: 18px 5%;
+      }
+
+      .logo {
+        font-size: 25px;
+      }
+
+      .hero {
+        padding: 60px 6% 40px;
+      }
+
+      .defis {
+        grid-template-columns: 1fr;
+        padding-top: 50px;
+      }
+
+      .card {
+        padding: 25px;
+      }
     }
   </style>
 </head>
 
 <body>
 
+  <!-- =========================
+       HEADER
+  ========================= -->
+
   <header>
-    <h1>🔥 Athlex Défis</h1>
-    <p>Relève le défi et dépasse tes limites.</p>
+
+    <a href="index.html" class="logo">
+      ATHLEX<span>.</span>
+    </a>
+
+    <a href="index.html" class="back">
+      ← Accueil
+    </a>
+
   </header>
 
-  <main class="container">
 
-    <section class="intro">
-      <h2>Nos défis</h2>
-      <p>Choisis un défi adapté à ton objectif et progresse à ton rythme.</p>
-    </section>
+  <!-- =========================
+       INTRODUCTION
+  ========================= -->
 
-    <section class="defis">
+  <section class="hero">
 
-      <div class="card">
-        <div class="emoji">🔥</div>
-        <h3>Défi 7 jours</h3>
-        <p>7 jours pour reprendre une bonne routine sportive et rester motivé.</p>
-        <span class="tag">Débutant</span>
-        <span class="tag">7 jours</span>
-        <br>
-        <a href="#" class="button">Relever le défi</a>
-      </div>
+    <small>ATHLEX CHALLENGE</small>
 
-      <div class="card">
-        <div class="emoji">💪</div>
-        <h3>Défi Force</h3>
-        <p>Améliore progressivement ta force avec des exercices simples et efficaces.</p>
-        <span class="tag">Force</span>
-        <span class="tag">Musculation</span>
-        <br>
-        <a href="#" class="button">Relever le défi</a>
-      </div>
+    <h1>
+      Relève le <span>défi</span>
+    </h1>
 
-      <div class="card">
-        <div class="emoji">🏃</div>
-        <h3>Défi Cardio</h3>
-        <p>Travaille ton endurance avec de la course, du cardio et des exercices dynamiques.</p>
-        <span class="tag">Cardio</span>
-        <span class="tag">Endurance</span>
-        <br>
-        <a href="#" class="button">Relever le défi</a>
-      </div>
+    <p>
+      Choisis un défi, reste régulier et progresse
+      étape par étape. Chaque séance compte.
+    </p>
 
-      <div class="card">
-        <div class="emoji">🏠</div>
-        <h3>Défi Maison</h3>
-        <p>Un défi réalisable chez soi sans matériel pour rester actif chaque jour.</p>
-        <span class="tag">Maison</span>
-        <span class="tag">Sans matériel</span>
-        <br>
-        <a href="#" class="button">Relever le défi</a>
-      </div>
+  </section>
 
-      <div class="card">
-        <div class="emoji">🥗</div>
-        <h3>Défi Alimentation</h3>
-        <p>Adopte pendant 7 jours de meilleures habitudes alimentaires et hydrate-toi correctement.</p>
-        <span class="tag">Nutrition</span>
-        <span class="tag">7 jours</span>
-        <br>
-        <a href="#" class="button">Relever le défi</a>
-      </div>
 
-      <div class="card">
-        <div class="emoji">🏆</div>
-        <h3>Défi 30 jours</h3>
-        <p>Un challenge complet pour construire une routine sportive et rester régulier pendant 30 jours.</p>
-        <span class="tag">30 jours</span>
-        <span class="tag">Challenge</span>
-        <br>
-        <a href="#" class="button">Relever le défi</a>
-      </div>
+  <!-- =========================
+       LES DÉFIS
+  ========================= -->
 
-    </section>
+  <section class="defis">
 
-    <section class="conseil">
-      <h3>💡 Conseil Athlex</h3>
+    <!-- DÉFI 7 JOURS -->
+
+    <div class="card">
+
+      <div class="icon">🔥</div>
+
+      <h2>Défi 7 jours</h2>
+
       <p>
-        Commence par un défi adapté à ton niveau. La régularité est plus importante
-        que de vouloir aller trop vite. Note tes séances et essaie de progresser
-        petit à petit.
+        Pendant 7 jours, reste actif et construis
+        une nouvelle habitude sportive.
       </p>
-    </section>
 
-    <div class="retour">
-      <a href="index.html">← Retour à l'accueil</a>
+      <div class="info">
+        <strong>Durée :</strong> 7 jours
+      </div>
+
+      <div class="exercices">
+        <h3>Programme :</h3>
+
+        <ul>
+          <li>20 squats</li>
+          <li>10 pompes</li>
+          <li>20 abdominaux</li>
+          <li>10 minutes de marche</li>
+        </ul>
+      </div>
+
+      <a href="suivi.html" class="btn">
+        Commencer
+      </a>
+
     </div>
 
-  </main>
+
+    <!-- DÉFI FORCE -->
+
+    <div class="card">
+
+      <div class="icon">💪</div>
+
+      <h2>Défi Force</h2>
+
+      <p>
+        Travaille progressivement ta force avec
+        des exercices simples et efficaces.
+      </p>
+
+      <div class="info">
+        <strong>Durée :</strong> 14 jours
+      </div>
+
+      <div class="exercices">
+        <h3>Programme :</h3>
+
+        <ul>
+          <li>Squats</li>
+          <li>Pompes</li>
+          <li>Fentes</li>
+          <li>Gainage</li>
+        </ul>
+      </div>
+
+      <a href="suivi.html" class="btn">
+        Commencer
+      </a>
+
+    </div>
+
+
+    <!-- DÉFI CARDIO -->
+
+    <div class="card">
+
+      <div class="icon">🏃</div>
+
+      <h2>Défi Cardio</h2>
+
+      <p>
+        Améliore ton endurance et habitue ton corps
+        à rester actif plus longtemps.
+      </p>
+
+      <div class="info">
+        <strong>Durée :</strong> 14 jours
+      </div>
+
+      <div class="exercices">
+        <h3>Programme :</h3>
+
+        <ul>
+          <li>Marche rapide</li>
+          <li>Course légère</li>
+          <li>Jumping jacks</li>
+          <li>Montées de genoux</li>
+        </ul>
+      </div>
+
+      <a href="suivi.html" class="btn">
+        Commencer
+      </a>
+
+    </div>
+
+
+    <!-- DÉFI MAISON -->
+
+    <div class="card">
+
+      <div class="icon">🏠</div>
+
+      <h2>Défi Maison</h2>
+
+      <p>
+        Entraîne-toi chez toi sans matériel et
+        développe progressivement ta condition physique.
+      </p>
+
+      <div class="info">
+        <strong>Durée :</strong> 7 jours
+      </div>
+
+      <div class="exercices">
+        <h3>Programme :</h3>
+
+        <ul>
+          <li>Squats</li>
+          <li>Pompes adaptées</li>
+          <li>Fentes</li>
+          <li>Gainage</li>
+        </ul>
+      </div>
+
+      <a href="maison.html" class="btn">
+        Voir le programme
+      </a>
+
+    </div>
+
+
+    <!-- DÉFI ALIMENTATION -->
+
+    <div class="card">
+
+      <div class="icon">🥗</div>
+
+      <h2>Défi Alimentation</h2>
+
+      <p>
+        Améliore tes habitudes alimentaires pendant
+        une semaine.
+      </p>
+
+      <div class="info">
+        <strong>Durée :</strong> 7 jours
+      </div>
+
+      <div class="exercices">
+        <h3>Objectifs :</h3>
+
+        <ul>
+          <li>Boire suffisamment d'eau</li>
+          <li>Manger plus de légumes</li>
+          <li>Limiter les boissons sucrées</li>
+          <li>Favoriser les protéines</li>
+        </ul>
+      </div>
+
+      <a href="nutrition.html" class="btn">
+        Voir la nutrition
+      </a>
+
+    </div>
+
+
+    <!-- DÉFI 30 JOURS -->
+
+    <div class="card">
+
+      <div class="icon">🏆</div>
+
+      <h2>Défi 30 jours</h2>
+
+      <p>
+        Un challenge complet pour construire une
+        vraie régularité sportive.
+      </p>
+
+      <div class="info">
+        <strong>Durée :</strong> 30 jours
+      </div>
+
+      <div class="exercices">
+        <h3>Objectifs :</h3>
+
+        <ul>
+          <li>3 à 5 séances par semaine</li>
+          <li>Une bonne alimentation</li>
+          <li>Hydratation quotidienne</li>
+          <li>Repos et récupération</li>
+        </ul>
+      </div>
+
+      <a href="suivi.html" class="btn">
+        Commencer
+      </a>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       CONSEILS
+  ========================= -->
+
+  <section class="conseils">
+
+    <h2>🔥 La régularité avant tout</h2>
+
+    <p>
+      Ne cherche pas à être parfait dès le premier jour.
+      Commence progressivement, respecte ton rythme et
+      essaie simplement de faire mieux chaque semaine.
+    </p>
+
+  </section>
+
+
+  <!-- =========================
+       FOOTER
+  ========================= -->
+
+  <footer>
+
+    <div class="logo">
+      ATHLEX<span>.</span>
+    </div>
+
+    <p>
+      © 2026 Athlex — Ton objectif, notre mission.
+    </p>
+
+  </footer>
 
 </body>
 </html>
