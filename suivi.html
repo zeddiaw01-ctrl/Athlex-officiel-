@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -411,7 +412,6 @@
 
   <main class="container">
 
-
     <!-- INFORMATIONS -->
 
     <section class="section">
@@ -450,9 +450,7 @@
 
           <select id="objectif">
 
-            <option value="">
-              Choisir un objectif
-            </option>
+            <option value="">Choisir un objectif</option>
 
             <option value="Perte de poids">
               Perte de poids
@@ -543,6 +541,16 @@
         <div class="stat">
           <strong id="statSeances">0</strong>
           <span>Séances</span>
+        </div>
+
+        <div class="stat">
+          <strong id="statMinutes">0</strong>
+          <span>Minutes</span>
+        </div>
+
+        <div class="stat">
+          <strong id="statExercices">0</strong>
+          <span>Exercices</span>
         </div>
 
       </div>
@@ -703,11 +711,14 @@
 
   <script>
 
-    let historique =
-      JSON.parse(
-        localStorage.getItem("athlexHistorique") || "[]"
-      );
+    let historique = JSON.parse(
+      localStorage.getItem("athlexHistorique") || "[]"
+    );
 
+
+    /* =========================
+       SAUVEGARDE INFORMATIONS
+    ========================= */
 
     function sauvegarderInformations() {
 
@@ -731,28 +742,11 @@
 
 
       localStorage.setItem("athlexAge", age);
-
       localStorage.setItem("athlexTaille", taille);
-
-      localStorage.setItem(
-        "athlexPoidsDepart",
-        poidsDepart
-      );
-
-      localStorage.setItem(
-        "athlexPoidsActuel",
-        poidsActuel
-      );
-
-      localStorage.setItem(
-        "athlexPoidsObjectif",
-        poidsObjectif
-      );
-
-      localStorage.setItem(
-        "athlexObjectif",
-        objectif
-      );
+      localStorage.setItem("athlexPoidsDepart", poidsDepart);
+      localStorage.setItem("athlexPoidsActuel", poidsActuel);
+      localStorage.setItem("athlexPoidsObjectif", poidsObjectif);
+      localStorage.setItem("athlexObjectif", objectif);
 
 
       afficherSuivi();
@@ -761,26 +755,30 @@
     }
 
 
+    /* =========================
+       AJOUTER UNE SÉANCE
+    ========================= */
+
     function ajouterSeance() {
 
       const sport =
-        document.getElementById("sport").value;
+        document.getElementById("sport").value.trim();
 
       const duree =
-        document.getElementById("duree").value;
+        parseInt(document.getElementById("duree").value) || 0;
 
       const exercices =
-        document.getElementById("exercices").value;
+        parseInt(document.getElementById("exercices").value) || 0;
 
 
       if (
         sport === "" ||
-        duree === "" ||
-        exercices === ""
+        duree <= 0 ||
+        exercices <= 0
       ) {
 
         alert(
-          "Veuillez remplir tous les champs de la séance."
+          "Veuillez remplir correctement tous les champs de la séance."
         );
 
         return;
@@ -794,22 +792,11 @@
       historique.unshift({
 
         sport: sport,
-
         duree: duree,
-
         exercices: exercices,
-
         date: date
 
       });
-
-
-      if (historique.length > 10) {
-
-        historique =
-          historique.slice(0, 10);
-
-      }
 
 
       localStorage.setItem(
@@ -819,19 +806,20 @@
 
 
       document.getElementById("sport").value = "";
-
       document.getElementById("duree").value = "";
-
       document.getElementById("exercices").value = "";
 
 
       afficherHistorique();
-
       afficherSuivi();
 
-      alert("Séance ajoutée !");
+      alert("Séance ajoutée avec succès !");
     }
 
+
+    /* =========================
+       HISTORIQUE
+    ========================= */
 
     function afficherHistorique() {
 
@@ -861,17 +849,13 @@
 
 
         div.innerHTML =
-
           "<strong>" +
           seance.date +
           "</strong> — " +
-
           seance.sport +
-
           " • " +
           seance.duree +
           " min • " +
-
           seance.exercices +
           " exercices";
 
@@ -882,6 +866,10 @@
 
     }
 
+
+    /* =========================
+       AFFICHER LE SUIVI
+    ========================= */
 
     function afficherSuivi() {
 
@@ -910,11 +898,8 @@
         localStorage.getItem("athlexObjectif") || "";
 
 
-      document.getElementById("age").value =
-        age;
-
-      document.getElementById("taille").value =
-        taille;
+      document.getElementById("age").value = age;
+      document.getElementById("taille").value = taille;
 
       document.getElementById("poidsDepart").value =
         poidsDepart || "";
@@ -929,6 +914,8 @@
         objectif;
 
 
+      /* STATISTIQUES */
+
       document.getElementById("statPoids").textContent =
         poidsActuel || 0;
 
@@ -936,12 +923,42 @@
         poidsObjectif || 0;
 
 
+      /* TOTAL MINUTES */
+
+      const totalMinutes =
+        historique.reduce(function(total, seance) {
+
+          return total + (parseInt(seance.duree) || 0);
+
+        }, 0);
+
+
+      /* TOTAL EXERCICES */
+
+      const totalExercices =
+        historique.reduce(function(total, seance) {
+
+          return total + (parseInt(seance.exercices) || 0);
+
+        }, 0);
+
+
+      document.getElementById("statMinutes").textContent =
+        totalMinutes;
+
+      document.getElementById("statExercices").textContent =
+        totalExercices;
+
+      document.getElementById("statSeances").textContent =
+        historique.length;
+
+
+      /* PROGRESSION */
+
       if (poidsActuel && poidsObjectif) {
 
         const difference =
-          Math.abs(
-            poidsActuel - poidsObjectif
-          );
+          Math.abs(poidsActuel - poidsObjectif);
 
 
         document.getElementById("difference").textContent =
@@ -1008,25 +1025,22 @@
       document.getElementById(
         "objectifTexte"
       ).textContent =
-
         objectif
         ? "Objectif : " + objectif
         : "Aucun objectif enregistré.";
 
-
-      document.getElementById(
-        "statSeances"
-      ).textContent =
-        historique.length;
-
     }
 
 
-    afficherHistorique();
+    /* =========================
+       CHARGEMENT AUTOMATIQUE
+    ========================= */
 
+    afficherHistorique();
     afficherSuivi();
 
   </script>
 
 </body>
 </html>
+```
