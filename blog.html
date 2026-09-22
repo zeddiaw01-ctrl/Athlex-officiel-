@@ -191,11 +191,89 @@
       display: inline-block;
       color: #00aaff;
       font-weight: 800;
+      border: none;
+      background: none;
+      cursor: pointer;
+      font-size: 15px;
+      padding: 0;
       transition: 0.3s;
     }
 
     .read:hover {
       color: white;
+    }
+
+    /* =========================
+       ARTICLE COMPLET
+    ========================= */
+
+    .article-full {
+      display: none;
+      margin-top: 25px;
+      padding: 30px;
+      background: #0b111b;
+      border: 1px solid rgba(0,170,255,0.25);
+      border-radius: 20px;
+      animation: apparition 0.3s ease;
+    }
+
+    .article-full.active {
+      display: block;
+    }
+
+    .article-full h2 {
+      color: #00aaff;
+      margin-bottom: 18px;
+      font-size: 28px;
+    }
+
+    .article-full h3 {
+      margin-top: 20px;
+      margin-bottom: 8px;
+      color: white;
+    }
+
+    .article-full p {
+      color: #c5ccd5;
+      margin-bottom: 12px;
+    }
+
+    .article-full ul {
+      padding-left: 22px;
+      color: #c5ccd5;
+      margin-bottom: 20px;
+    }
+
+    .article-full li {
+      margin-bottom: 7px;
+    }
+
+    .close-btn {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 20px;
+      border-radius: 25px;
+      background: #00aaff;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: 800;
+    }
+
+    .close-btn:hover {
+      background: #008ed6;
+    }
+
+    @keyframes apparition {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     /* =========================
@@ -242,11 +320,9 @@
     ========================= */
 
     @media (max-width: 900px) {
-
       .articles {
         grid-template-columns: 1fr 1fr;
       }
-
     }
 
     @media (max-width: 600px) {
@@ -275,11 +351,14 @@
         padding: 22px;
       }
 
+      .article-full {
+        padding: 22px;
+      }
+
       .conseils {
         margin: 0 5% 50px;
         padding: 30px 20px;
       }
-
     }
 
   </style>
@@ -325,14 +404,14 @@
 
 
   <!-- =========================
-       ARTICLES
+       BLOG
   ========================= -->
 
   <section class="blog">
 
     <div class="blog-intro">
 
-      <h2>Nos derniers conseils</h2>
+      <h2>Nos conseils</h2>
 
       <p>
         Des conseils simples et pratiques pour progresser
@@ -345,7 +424,9 @@
     <div class="articles">
 
 
-      <!-- ARTICLE 1 -->
+      <!-- =========================
+           ARTICLE 1
+      ========================= -->
 
       <article class="article">
 
@@ -364,21 +445,22 @@
           </h3>
 
           <p>
-            Découvre les principes essentiels pour
-            progresser régulièrement et construire
-            une meilleure condition physique.
+            Les principes essentiels pour progresser
+            régulièrement et améliorer sa condition physique.
           </p>
 
-          <a href="#" class="read">
-            Lire l'article →
-          </a>
+          <button class="read" onclick="ouvrirArticle('article1')">
+            Lire le conseil →
+          </button>
 
         </div>
 
       </article>
 
 
-      <!-- ARTICLE 2 -->
+      <!-- =========================
+           ARTICLE 2
+      ========================= -->
 
       <article class="article">
 
@@ -397,21 +479,22 @@
           </h3>
 
           <p>
-            La motivation peut varier. Voici quelques
-            méthodes simples pour rester régulier
-            même lorsque l'envie diminue.
+            Quelques méthodes simples pour rester régulier
+            même lorsque la motivation diminue.
           </p>
 
-          <a href="#" class="read">
-            Lire l'article →
-          </a>
+          <button class="read" onclick="ouvrirArticle('article2')">
+            Lire le conseil →
+          </button>
 
         </div>
 
       </article>
 
 
-      <!-- ARTICLE 3 -->
+      <!-- =========================
+           ARTICLE 3
+      ========================= -->
 
       <article class="article">
 
@@ -430,21 +513,22 @@
           </h3>
 
           <p>
-            Découvrez les bases d'une alimentation
-            adaptée au sport et les aliments à privilégier
-            au quotidien.
+            Les bases d'une alimentation adaptée au sport
+            et les habitudes à privilégier.
           </p>
 
-          <a href="nutrition.html" class="read">
-            Voir la nutrition →
-          </a>
+          <button class="read" onclick="ouvrirArticle('article3')">
+            Lire le conseil →
+          </button>
 
         </div>
 
       </article>
 
 
-      <!-- ARTICLE 4 -->
+      <!-- =========================
+           ARTICLE 4
+      ========================= -->
 
       <article class="article">
 
@@ -463,21 +547,22 @@
           </h3>
 
           <p>
-            Marche, course, vélo ou exercices cardio :
-            découvre comment améliorer progressivement
-            ton endurance.
+            Marche, course ou exercices cardio :
+            améliore progressivement ton endurance.
           </p>
 
-          <a href="#" class="read">
-            Lire l'article →
-          </a>
+          <button class="read" onclick="ouvrirArticle('article4')">
+            Lire le conseil →
+          </button>
 
         </div>
 
       </article>
 
 
-      <!-- ARTICLE 5 -->
+      <!-- =========================
+           ARTICLE 5
+      ========================= -->
 
       <article class="article">
 
@@ -500,16 +585,18 @@
             et suis régulièrement tes progrès.
           </p>
 
-          <a href="suivi.html" class="read">
-            Suivre ma progression →
-          </a>
+          <button class="read" onclick="ouvrirArticle('article5')">
+            Lire le conseil →
+          </button>
 
         </div>
 
       </article>
 
 
-      <!-- ARTICLE 6 -->
+      <!-- =========================
+           ARTICLE 6
+      ========================= -->
 
       <article class="article">
 
@@ -529,18 +616,240 @@
 
           <p>
             Quelques minutes chaque jour peuvent devenir
-            une véritable habitude. Découvre nos défis
-            Athlex.
+            une véritable habitude.
           </p>
 
-          <a href="defis.html" class="read">
-            Voir les défis →
-          </a>
+          <button class="read" onclick="ouvrirArticle('article6')">
+            Lire le conseil →
+          </button>
 
         </div>
 
       </article>
 
+    </div>
+
+
+    <!-- =========================
+         ARTICLES COMPLETS
+    ========================= -->
+
+
+    <div id="article1" class="article-full">
+
+      <h2>💪 Comment progresser en musculation ?</h2>
+
+      <p>
+        La progression en musculation ne dépend pas uniquement
+        de la quantité de poids soulevée. La régularité,
+        la technique et la récupération sont également
+        importantes.
+      </p>
+
+      <h3>1. Sois régulier</h3>
+
+      <p>
+        Essaie de suivre un programme adapté et garde un rythme
+        d'entraînement régulier.
+      </p>
+
+      <h3>2. Améliore progressivement tes charges</h3>
+
+      <p>
+        Lorsque tu maîtrises correctement un exercice,
+        tu peux augmenter progressivement la charge,
+        le nombre de répétitions ou la qualité d'exécution.
+      </p>
+
+      <h3>3. Pense à la récupération</h3>
+
+      <p>
+        Le repos permet au corps de récupérer après
+        l'entraînement. Le sommeil et les jours de récupération
+        font partie de la progression.
+      </p>
+
+      <button class="close-btn" onclick="fermerArticles()">
+        Fermer
+      </button>
+
+    </div>
+
+
+    <div id="article2" class="article-full">
+
+      <h2>🔥 Comment rester motivé au sport ?</h2>
+
+      <p>
+        La motivation n'est pas toujours présente. Le plus
+        important est de construire une routine que tu peux
+        maintenir dans le temps.
+      </p>
+
+      <h3>1. Fixe de petits objectifs</h3>
+
+      <p>
+        Commence par des objectifs simples et réalisables.
+        Chaque petite progression peut renforcer ta motivation.
+      </p>
+
+      <h3>2. Note tes progrès</h3>
+
+      <p>
+        Note tes séances, tes performances ou ton évolution.
+        Voir les progrès réalisés peut aider à rester régulier.
+      </p>
+
+      <h3>3. Évite de chercher la perfection</h3>
+
+      <p>
+        Une séance moins bonne ne signifie pas que tu as échoué.
+        L'important est de reprendre et de continuer.
+      </p>
+
+      <button class="close-btn" onclick="fermerArticles()">
+        Fermer
+      </button>
+
+    </div>
+
+
+    <div id="article3" class="article-full">
+
+      <h2>🥗 Bien manger pour mieux progresser</h2>
+
+      <p>
+        Une alimentation équilibrée apporte au corps l'énergie
+        et les nutriments nécessaires pour accompagner
+        l'entraînement.
+      </p>
+
+      <h3>Les bases</h3>
+
+      <ul>
+        <li>Boire suffisamment d'eau.</li>
+        <li>Manger régulièrement des légumes et des fruits.</li>
+        <li>Inclure des sources de protéines.</li>
+        <li>Privilégier des aliments peu transformés.</li>
+        <li>Adapter les quantités à son objectif.</li>
+      </ul>
+
+      <p>
+        L'alimentation doit également rester adaptée à tes
+        habitudes, ton budget et ton niveau d'activité.
+      </p>
+
+      <button class="close-btn" onclick="fermerArticles()">
+        Fermer
+      </button>
+
+    </div>
+
+
+    <div id="article4" class="article-full">
+
+      <h2>🏃 Pourquoi intégrer le cardio ?</h2>
+
+      <p>
+        Le cardio peut améliorer l'endurance et aider à
+        développer une meilleure condition physique générale.
+      </p>
+
+      <h3>Quelques possibilités</h3>
+
+      <ul>
+        <li>Marche rapide</li>
+        <li>Course légère</li>
+        <li>Vélo</li>
+        <li>Basketball</li>
+        <li>Jumping jacks</li>
+        <li>Montées de genoux</li>
+      </ul>
+
+      <p>
+        Commence progressivement et adapte l'intensité
+        à ton niveau.
+      </p>
+
+      <button class="close-btn" onclick="fermerArticles()">
+        Fermer
+      </button>
+
+    </div>
+
+
+    <div id="article5" class="article-full">
+
+      <h2>🎯 Comment atteindre son objectif sportif ?</h2>
+
+      <p>
+        Un objectif devient plus facile à suivre lorsqu'il est
+        clair et accompagné d'un plan simple.
+      </p>
+
+      <h3>Étape 1 : définir ton objectif</h3>
+
+      <p>
+        Détermine ce que tu souhaites améliorer :
+        perte de poids, force, endurance, muscle ou performance.
+      </p>
+
+      <h3>Étape 2 : construire une routine</h3>
+
+      <p>
+        Planifie tes séances et choisis un rythme que tu peux
+        réellement maintenir.
+      </p>
+
+      <h3>Étape 3 : suivre tes progrès</h3>
+
+      <p>
+        Utilise la page <strong>Suivi</strong> d'Athlex pour
+        enregistrer tes séances et observer ton évolution.
+      </p>
+
+      <button class="close-btn" onclick="fermerArticles()">
+        Fermer
+      </button>
+
+    </div>
+
+
+    <div id="article6" class="article-full">
+
+      <h2>🏆 Le pouvoir de la régularité</h2>
+
+      <p>
+        Les résultats sportifs se construisent généralement
+        sur la durée. Une petite action répétée régulièrement
+        peut devenir une véritable habitude.
+      </p>
+
+      <h3>Commence simplement</h3>
+
+      <p>
+        Si tu débutes, quelques minutes d'activité peuvent
+        déjà être un point de départ.
+      </p>
+
+      <h3>Reste constant</h3>
+
+      <p>
+        Il vaut mieux construire une routine réaliste que
+        commencer avec un programme trop difficile et
+        abandonner rapidement.
+      </p>
+
+      <h3>Relève un défi</h3>
+
+      <p>
+        Les défis Athlex peuvent t'aider à créer une routine
+        et à suivre ta progression jour après jour.
+      </p>
+
+      <button class="close-btn" onclick="fermerArticles()">
+        Fermer
+      </button>
 
     </div>
 
@@ -548,7 +857,7 @@
 
 
   <!-- =========================
-       CONSEIL
+       CONSEIL FINAL
   ========================= -->
 
   <section class="conseils">
@@ -581,6 +890,44 @@
     </p>
 
   </footer>
+
+
+  <!-- =========================
+       JAVASCRIPT
+  ========================= -->
+
+  <script>
+
+    function ouvrirArticle(id) {
+
+      fermerArticles();
+
+      const article = document.getElementById(id);
+
+      article.classList.add("active");
+
+      setTimeout(function() {
+        article.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      }, 100);
+
+    }
+
+
+    function fermerArticles() {
+
+      const articles =
+        document.querySelectorAll(".article-full");
+
+      articles.forEach(function(article) {
+        article.classList.remove("active");
+      });
+
+    }
+
+  </script>
 
 </body>
 </html>
