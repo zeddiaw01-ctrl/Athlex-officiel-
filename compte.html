@@ -1,221 +1,824 @@
+```html
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Athlex - Mon compte</title>
 
   <style>
+
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: Arial, sans-serif;
+      box-sizing: border-box;
     }
 
     body {
-      background: #f4f6f8;
-      color: #222;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #070b12;
+      color: white;
+      line-height: 1.6;
     }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* =========================
+       HEADER
+    ========================= */
 
     header {
-      background: #111;
-      color: white;
-      text-align: center;
-      padding: 30px 15px;
+      padding: 22px 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #070b12;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
     }
 
-    header h1 {
-      font-size: 32px;
+    .logo {
+      font-size: 30px;
+      font-weight: 900;
+      letter-spacing: 2px;
+    }
+
+    .logo span {
+      color: #00aaff;
+    }
+
+    .back {
+      padding: 10px 18px;
+      border: 1px solid #00aaff;
+      border-radius: 25px;
+      transition: 0.3s;
+    }
+
+    .back:hover {
+      background: #00aaff;
+    }
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      text-align: center;
+      padding: 75px 6% 55px;
+
+      background:
+        linear-gradient(
+          rgba(5,10,16,0.88),
+          rgba(5,10,16,0.95)
+        ),
+        url("athlex-accueil.png");
+
+      background-size: cover;
+      background-position: center;
+    }
+
+    .hero small {
+      color: #00aaff;
+      font-weight: 800;
+      letter-spacing: 3px;
+    }
+
+    .hero h1 {
+      font-size: clamp(40px, 6vw, 60px);
+      margin: 15px 0;
+      text-transform: uppercase;
+    }
+
+    .hero h1 span {
+      color: #00aaff;
+    }
+
+    .hero p {
+      max-width: 700px;
+      margin: auto;
+      color: #c5ccd5;
+      font-size: 18px;
+    }
+
+    /* =========================
+       COMPTE
+    ========================= */
+
+    .compte {
+      max-width: 1100px;
+      margin: auto;
+      padding: 65px 6%;
+    }
+
+    .profil {
+      background: #111925;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 25px;
+      padding: 35px;
+      margin-bottom: 30px;
+    }
+
+    .profil-top {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      margin-bottom: 30px;
+    }
+
+    .avatar {
+      width: 85px;
+      height: 85px;
+      border-radius: 50%;
+      background: #00aaff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 38px;
+      font-weight: 900;
+    }
+
+    .profil h2 {
+      font-size: 28px;
+    }
+
+    .email {
+      color: #9da7b5;
+      margin-top: 4px;
+    }
+
+    /* =========================
+       INFORMATIONS
+    ========================= */
+
+    .infos {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .info-box {
+      background: #0b111b;
+      border-radius: 15px;
+      padding: 20px;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .info-box span {
+      display: block;
+      color: #8e99a8;
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+
+    .info-box strong {
+      color: #00aaff;
+      font-size: 21px;
+    }
+
+    /* =========================
+       OBJECTIF
+    ========================= */
+
+    .objectif {
+      background: #111925;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 25px;
+      padding: 35px;
+      margin-bottom: 30px;
+    }
+
+    .objectif h2 {
+      margin-bottom: 15px;
+      color: #00aaff;
+    }
+
+    .objectif p {
+      color: #c5ccd5;
+      margin-bottom: 20px;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 13px;
+      background: #070b12;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: #00aaff;
+      border-radius: 20px;
+      transition: width 0.5s ease;
+    }
+
+    .progress-text {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+      color: #aeb5c0;
+      font-size: 14px;
+    }
+
+    /* =========================
+       ACTIONS
+    ========================= */
+
+    .actions {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .action {
+      background: #111925;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 28px;
+      text-align: center;
+      transition: 0.3s;
+    }
+
+    .action:hover {
+      transform: translateY(-6px);
+      border-color: #00aaff;
+    }
+
+    .action-icon {
+      font-size: 40px;
+      margin-bottom: 10px;
+    }
+
+    .action h3 {
       margin-bottom: 8px;
     }
 
-    header p {
-      color: #ccc;
+    .action p {
+      color: #9da7b5;
+      font-size: 14px;
+      margin-bottom: 18px;
     }
 
-    .container {
-      max-width: 700px;
-      margin: auto;
-      padding: 30px 15px;
-    }
-
-    .card {
-      background: white;
-      padding: 25px;
-      margin-bottom: 20px;
-      border-radius: 15px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    }
-
-    .card h2 {
-      margin-bottom: 15px;
-    }
-
-    .card p {
-      color: #666;
-      line-height: 1.6;
-      margin-bottom: 15px;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 7px;
-      font-weight: bold;
-    }
-
-    input, select {
-      width: 100%;
-      padding: 12px;
-      margin-bottom: 15px;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-    }
-
-    button {
-      width: 100%;
-      padding: 12px;
-      border: none;
-      border-radius: 8px;
-      background: #111;
+    .btn {
+      display: inline-block;
+      padding: 11px 20px;
+      border-radius: 25px;
+      background: #00aaff;
       color: white;
-      font-size: 16px;
+      font-weight: 800;
+      border: none;
       cursor: pointer;
+      transition: 0.3s;
     }
 
-    .info {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 15px;
+    .btn:hover {
+      background: #008ed6;
+      transform: translateY(-2px);
     }
 
-    .info div {
-      background: #f4f6f8;
-      padding: 15px;
-      border-radius: 10px;
-    }
+    /* =========================
+       DECONNEXION
+    ========================= */
 
-    .retour {
+    .logout {
       text-align: center;
-      margin-top: 25px;
+      margin-top: 10px;
     }
 
-    .retour a {
-      color: #111;
-      font-weight: bold;
-      text-decoration: none;
+    .logout button {
+      padding: 12px 25px;
+      border-radius: 25px;
+      border: 1px solid #555f6d;
+      background: transparent;
+      color: #c5ccd5;
+      cursor: pointer;
+      font-weight: 700;
+      transition: 0.3s;
+    }
+
+    .logout button:hover {
+      border-color: #00aaff;
+      color: white;
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+      text-align: center;
+      padding: 40px 6%;
+      background: #04070b;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    footer p {
+      color: #7f8996;
+      margin-top: 10px;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media (max-width: 800px) {
+
+      .infos {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .actions {
+        grid-template-columns: 1fr;
+      }
+
     }
 
     @media (max-width: 600px) {
-      .info {
+
+      header {
+        padding: 18px 5%;
+      }
+
+      .logo {
+        font-size: 25px;
+      }
+
+      .hero {
+        padding: 60px 6% 45px;
+      }
+
+      .compte {
+        padding-top: 45px;
+      }
+
+      .profil,
+      .objectif {
+        padding: 25px;
+      }
+
+      .profil-top {
+        align-items: flex-start;
+      }
+
+      .avatar {
+        width: 65px;
+        height: 65px;
+        font-size: 28px;
+      }
+
+      .profil h2 {
+        font-size: 22px;
+      }
+
+      .infos {
         grid-template-columns: 1fr;
       }
+
     }
+
   </style>
 </head>
 
 <body>
 
+
+  <!-- =========================
+       HEADER
+  ========================= -->
+
   <header>
-    <h1>👤 Mon compte</h1>
-    <p>Bienvenue dans ton espace personnel Athlex.</p>
+
+    <a href="index.html" class="logo">
+      ATHLEX<span>.</span>
+    </a>
+
+    <a href="index.html" class="back">
+      ← Accueil
+    </a>
+
   </header>
 
-  <main class="container">
 
-    <section class="card">
-      <h2>Mes informations</h2>
+  <!-- =========================
+       HERO
+  ========================= -->
 
-      <label for="nom">Nom</label>
-      <input type="text" id="nom" placeholder="Ton nom">
+  <section class="hero">
 
-      <label for="prenom">Prénom</label>
-      <input type="text" id="prenom" placeholder="Ton prénom">
+    <small>ATHLEX</small>
 
-      <label for="age">Âge</label>
-      <input type="number" id="age" placeholder="Ton âge">
+    <h1>
+      Mon <span>compte</span>
+    </h1>
 
-      <label for="objectif">Mon objectif</label>
-      <select id="objectif">
-        <option value="">Choisir un objectif</option>
-        <option>Perte de poids</option>
-        <option>Prise de muscle</option>
-        <option>Performance sportive</option>
-        <option>Remise en forme</option>
-        <option>Maintien</option>
-      </select>
+    <p>
+      Retrouve tes informations, ton objectif
+      et les principales fonctionnalités d'Athlex.
+    </p>
 
-      <button onclick="enregistrer()">💾 Enregistrer</button>
-    </section>
+  </section>
 
-    <section class="card">
-      <h2>📊 Mon espace Athlex</h2>
 
-      <div class="info">
-        <div>
-          <strong>👤 Nom</strong>
-          <p id="affNom">Non renseigné</p>
+  <!-- =========================
+       COMPTE
+  ========================= -->
+
+  <main class="compte">
+
+
+    <!-- PROFIL -->
+
+    <section class="profil">
+
+      <div class="profil-top">
+
+        <div class="avatar" id="avatar">
+          A
         </div>
 
         <div>
-          <strong>🎯 Objectif</strong>
-          <p id="affObjectif">Non renseigné</p>
+
+          <h2 id="nomUtilisateur">
+            Athlète Athlex
+          </h2>
+
+          <div class="email" id="emailUtilisateur">
+            Ton compte Athlex
+          </div>
+
         </div>
 
-        <div>
-          <strong>🎂 Âge</strong>
-          <p id="affAge">Non renseigné</p>
-        </div>
-
-        <div>
-          <strong>🏋️ Programme</strong>
-          <p>Voir mes programmes</p>
-        </div>
       </div>
+
+
+      <div class="infos">
+
+        <div class="info-box">
+
+          <span>
+            Âge
+          </span>
+
+          <strong id="age">
+            —
+          </strong>
+
+        </div>
+
+
+        <div class="info-box">
+
+          <span>
+            Taille
+          </span>
+
+          <strong id="taille">
+            —
+          </strong>
+
+        </div>
+
+
+        <div class="info-box">
+
+          <span>
+            Poids actuel
+          </span>
+
+          <strong id="poids">
+            —
+          </strong>
+
+        </div>
+
+      </div>
+
     </section>
 
-    <section class="card">
-      <h2>🚀 Bienvenue sur Athlex</h2>
-      <p>
-        Ton espace personnel te permettra de retrouver progressivement
-        tes informations, tes objectifs et ta progression sportive.
+
+    <!-- OBJECTIF -->
+
+    <section class="objectif">
+
+      <h2>
+        🎯 Mon objectif
+      </h2>
+
+      <p id="objectifTexte">
+        Aucun objectif enregistré pour le moment.
       </p>
+
+      <div class="progress-bar">
+
+        <div
+          class="progress-fill"
+          id="progressFill">
+        </div>
+
+      </div>
+
+      <div class="progress-text">
+
+        <span id="progressDepart">
+          Départ : —
+        </span>
+
+        <span id="progressActuel">
+          Actuel : —
+        </span>
+
+        <span id="progressObjectif">
+          Objectif : —
+        </span>
+
+      </div>
+
     </section>
 
-    <div class="retour">
-      <a href="index.html">← Retour à l'accueil</a>
+
+    <!-- ACTIONS -->
+
+    <section class="actions">
+
+
+      <div class="action">
+
+        <div class="action-icon">
+          📊
+        </div>
+
+        <h3>
+          Mon suivi
+        </h3>
+
+        <p>
+          Consulte tes séances, ton poids
+          et ta progression.
+        </p>
+
+        <a href="suivi.html" class="btn">
+          Voir mon suivi
+        </a>
+
+      </div>
+
+
+      <div class="action">
+
+        <div class="action-icon">
+          🏆
+        </div>
+
+        <h3>
+          Mes défis
+        </h3>
+
+        <p>
+          Relève un défi et progresse
+          jour après jour.
+        </p>
+
+        <a href="defis.html" class="btn">
+          Voir les défis
+        </a>
+
+      </div>
+
+
+      <div class="action">
+
+        <div class="action-icon">
+          🥗
+        </div>
+
+        <h3>
+          Nutrition
+        </h3>
+
+        <p>
+          Découvre nos conseils et
+          programmes alimentaires.
+        </p>
+
+        <a href="nutrition.html" class="btn">
+          Voir la nutrition
+        </a>
+
+      </div>
+
+
+    </section>
+
+
+    <!-- DECONNEXION -->
+
+    <div class="logout">
+
+      <button onclick="deconnexion()">
+        Se déconnecter
+      </button>
+
     </div>
+
 
   </main>
 
+
+  <!-- =========================
+       FOOTER
+  ========================= -->
+
+  <footer>
+
+    <div class="logo">
+      ATHLEX<span>.</span>
+    </div>
+
+    <p>
+      © 2026 Athlex — Ton objectif, notre mission.
+    </p>
+
+  </footer>
+
+
+  <!-- =========================
+       JAVASCRIPT
+  ========================= -->
+
   <script>
-    function enregistrer() {
-      const nom = document.getElementById("prenom").value + " " +
-                  document.getElementById("nom").value;
-      const age = document.getElementById("age").value;
-      const objectif = document.getElementById("objectif").value;
 
-      localStorage.setItem("athlexNom", nom);
-      localStorage.setItem("athlexAgeCompte", age);
-      localStorage.setItem("athlexObjectifCompte", objectif);
+    /* =========================
+       RECUPERATION DES INFOS
+    ========================= */
 
-      afficher();
+    const age =
+      localStorage.getItem("athlexAge");
 
-      alert("Informations enregistrées !");
+    const taille =
+      localStorage.getItem("athlexTaille");
+
+    const poidsDepart =
+      localStorage.getItem("athlexPoidsDepart");
+
+    const poidsActuel =
+      localStorage.getItem("athlexPoidsActuel");
+
+    const poidsObjectif =
+      localStorage.getItem("athlexPoidsObjectif");
+
+    const objectif =
+      localStorage.getItem("athlexObjectif");
+
+    const email =
+      localStorage.getItem("athlexEmail");
+
+
+    /* =========================
+       AFFICHAGE
+    ========================= */
+
+    if (age) {
+      document.getElementById("age").textContent =
+        age + " ans";
     }
 
-    function afficher() {
-      const nom = localStorage.getItem("athlexNom");
-      const age = localStorage.getItem("athlexAgeCompte");
-      const objectif = localStorage.getItem("athlexObjectifCompte");
-
-      if (nom) document.getElementById("affNom").textContent = nom;
-      if (age) document.getElementById("affAge").textContent = age + " ans";
-      if (objectif) document.getElementById("affObjectif").textContent = objectif;
+    if (taille) {
+      document.getElementById("taille").textContent =
+        taille + " cm";
     }
 
-    afficher();
+    if (poidsActuel) {
+      document.getElementById("poids").textContent =
+        poidsActuel + " kg";
+    }
+
+    if (objectif) {
+      document.getElementById("objectifTexte").textContent =
+        objectif;
+    }
+
+    if (email) {
+
+      document.getElementById("emailUtilisateur").textContent =
+        email;
+
+      const premiereLettre =
+        email.charAt(0).toUpperCase();
+
+      document.getElementById("avatar").textContent =
+        premiereLettre;
+    }
+
+
+    if (poidsDepart) {
+
+      document.getElementById("progressDepart").textContent =
+        "Départ : " + poidsDepart + " kg";
+
+    }
+
+    if (poidsActuel) {
+
+      document.getElementById("progressActuel").textContent =
+        "Actuel : " + poidsActuel + " kg";
+
+    }
+
+    if (poidsObjectif) {
+
+      document.getElementById("progressObjectif").textContent =
+        "Objectif : " + poidsObjectif + " kg";
+
+    }
+
+
+    /* =========================
+       PROGRESSION
+    ========================= */
+
+    if (
+      poidsDepart &&
+      poidsActuel &&
+      poidsObjectif
+    ) {
+
+      const depart =
+        parseFloat(poidsDepart);
+
+      const actuel =
+        parseFloat(poidsActuel);
+
+      const objectifPoids =
+        parseFloat(poidsObjectif);
+
+
+      if (
+        !isNaN(depart) &&
+        !isNaN(actuel) &&
+        !isNaN(objectifPoids) &&
+        depart !== objectifPoids
+      ) {
+
+        let progression;
+
+        if (depart > objectifPoids) {
+
+          progression =
+            ((depart - actuel) /
+            (depart - objectifPoids)) * 100;
+
+        } else {
+
+          progression =
+            ((actuel - depart) /
+            (objectifPoids - depart)) * 100;
+
+        }
+
+
+        progression =
+          Math.max(0, Math.min(100, progression));
+
+
+        document.getElementById("progressFill").style.width =
+          progression + "%";
+
+      }
+
+    }
+
+
+    /* =========================
+       DECONNEXION
+    ========================= */
+
+    function deconnexion() {
+
+      const confirmation =
+        confirm(
+          "Voulez-vous vraiment vous déconnecter ?"
+        );
+
+      if (confirmation) {
+
+        localStorage.removeItem("athlexEmail");
+        localStorage.removeItem("athlexPassword");
+
+        window.location.href =
+          "connexion.html";
+
+      }
+
+    }
+
   </script>
 
 </body>
 </html>
+```
