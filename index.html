@@ -448,6 +448,86 @@
         font-size: 30px;
       }
     }
+    /* ===== AMÉLIORATIONS VISUELLES ATHLEX ===== */
+
+@keyframes apparition {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes flottement {
+  0%, 100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.hero-content {
+  animation: apparition 0.8s ease-out;
+}
+
+.section-title {
+  animation: apparition 0.7s ease-out;
+}
+
+.card,
+.stat,
+.defi-box {
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.card:hover,
+.stat:hover {
+  transform: translateY(-7px);
+  border-color: #00aaff;
+  box-shadow: 0 12px 35px rgba(0,170,255,0.15);
+}
+
+.btn {
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(0,170,255,0.25);
+}
+
+.btn-secondary:hover {
+  transform: translateY(-4px);
+}
+
+.logo span,
+.hero h1 span {
+  text-shadow: 0 0 18px rgba(0,170,255,0.45);
+}
+
+@media (max-width: 600px) {
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .card:hover,
+  .stat:hover {
+    transform: translateY(-4px);
+  }
+}
   </style>
 </head>
 
