@@ -1,0 +1,551 @@
+```html
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Alimentation | Athlex</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #0b111b;
+      color: white;
+      line-height: 1.6;
+    }
+
+    /* =========================
+       NAVIGATION
+    ========================= */
+
+    nav {
+      width: 100%;
+      padding: 20px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #0b111b;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: 900;
+      color: white;
+      text-decoration: none;
+    }
+
+    .logo span {
+      color: #00e676;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 25px;
+    }
+
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: #00e676;
+    }
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      min-height: 430px;
+      padding: 90px 7%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background:
+        linear-gradient(rgba(11,17,27,0.85), rgba(11,17,27,0.95)),
+        radial-gradient(circle at center, #123c2a, #0b111b 65%);
+    }
+
+    .hero-content {
+      max-width: 800px;
+    }
+
+    .hero small {
+      color: #00e676;
+      font-weight: 800;
+      letter-spacing: 2px;
+    }
+
+    .hero h1 {
+      font-size: 52px;
+      margin: 15px 0;
+    }
+
+    .hero h1 span {
+      color: #00e676;
+    }
+
+    .hero p {
+      color: #c5cbd3;
+      font-size: 18px;
+      max-width: 650px;
+      margin: auto;
+    }
+
+    /* =========================
+       SECTION
+    ========================= */
+
+    .section {
+      padding: 80px 7%;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 45px;
+    }
+
+    .section-title small {
+      color: #00e676;
+      font-weight: 800;
+      letter-spacing: 2px;
+    }
+
+    .section-title h2 {
+      font-size: 36px;
+      margin: 10px 0;
+    }
+
+    .section-title p {
+      color: #aeb6c1;
+      max-width: 650px;
+      margin: auto;
+    }
+
+    /* =========================
+       CARDS
+    ========================= */
+
+    .cards {
+      max-width: 1200px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+    }
+
+    .card {
+      background: #111a27;
+      padding: 30px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.07);
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-7px);
+      border-color: #00e676;
+    }
+
+    .card-icon {
+      font-size: 42px;
+      margin-bottom: 15px;
+    }
+
+    .card h3 {
+      font-size: 23px;
+      margin-bottom: 12px;
+    }
+
+    .card p {
+      color: #aeb6c1;
+      margin-bottom: 20px;
+    }
+
+    /* =========================
+       CONSEILS
+    ========================= */
+
+    .tips {
+      max-width: 1000px;
+      margin: auto;
+      display: grid;
+      gap: 18px;
+    }
+
+    .tip {
+      background: #111a27;
+      padding: 22px 25px;
+      border-radius: 15px;
+      border-left: 4px solid #00e676;
+    }
+
+    .tip h3 {
+      margin-bottom: 5px;
+    }
+
+    .tip p {
+      color: #b8c0ca;
+    }
+
+    /* =========================
+       CTA
+    ========================= */
+
+    .cta {
+      margin: 30px auto 80px;
+      max-width: 1000px;
+      padding: 50px 30px;
+      text-align: center;
+      border-radius: 22px;
+      background: linear-gradient(135deg, #10271d, #111a27);
+      border: 1px solid rgba(0,230,118,0.25);
+    }
+
+    .cta h2 {
+      font-size: 32px;
+      margin-bottom: 12px;
+    }
+
+    .cta p {
+      color: #b8c0ca;
+      margin-bottom: 25px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 28px;
+      border-radius: 30px;
+      background: #00e676;
+      color: #07110b;
+      text-decoration: none;
+      font-weight: 800;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0,230,118,0.25);
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      color: #8993a0;
+    }
+
+    footer strong {
+      color: white;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media (max-width: 850px) {
+      nav {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .hero h1 {
+        font-size: 40px;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .hero {
+        padding: 70px 20px;
+      }
+
+      .hero h1 {
+        font-size: 34px;
+      }
+
+      .section {
+        padding: 60px 20px;
+      }
+
+      nav ul {
+        gap: 12px;
+      }
+
+      nav ul li a {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================
+       NAVIGATION
+  ========================= -->
+
+  <nav>
+    <a href="index.html" class="logo">
+      Ath<span>lex</span>
+    </a>
+
+    <ul>
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="programmes.html">Programmes</a></li>
+      <li><a href="alimentation.html">Alimentation</a></li>
+      <li><a href="index.html#defis">Défis</a></li>
+    </ul>
+  </nav>
+
+
+  <!-- =========================
+       HERO
+  ========================= -->
+
+  <section class="hero">
+
+    <div class="hero-content">
+
+      <small>NUTRITION & PERFORMANCE</small>
+
+      <h1>
+        Mange mieux.<br>
+        <span>Progresse plus.</span>
+      </h1>
+
+      <p>
+        Découvre les bases d'une alimentation équilibrée
+        pour accompagner ton entraînement et atteindre
+        tes objectifs sportifs.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       OBJECTIFS
+  ========================= -->
+
+  <section class="section">
+
+    <div class="section-title">
+      <small>TON OBJECTIF</small>
+
+      <h2>Une alimentation adaptée</h2>
+
+      <p>
+        Ton alimentation peut évoluer selon ton objectif
+        et ton niveau d'activité physique.
+      </p>
+    </div>
+
+
+    <div class="cards">
+
+      <div class="card">
+
+        <div class="card-icon">💪</div>
+
+        <h3>Prise de muscle</h3>
+
+        <p>
+          Mise sur des aliments riches en protéines,
+          des glucides de qualité et suffisamment
+          d'énergie pour accompagner tes entraînements.
+        </p>
+
+      </div>
+
+
+      <div class="card">
+
+        <div class="card-icon">🔥</div>
+
+        <h3>Perte de graisse</h3>
+
+        <p>
+          Privilégie une alimentation équilibrée,
+          riche en protéines, légumes et aliments
+          peu transformés.
+        </p>
+
+      </div>
+
+
+      <div class="card">
+
+        <div class="card-icon">⚡</div>
+
+        <h3>Performance</h3>
+
+        <p>
+          Apporte suffisamment d'énergie et
+          hydrate-toi correctement pour soutenir
+          tes séances et ta récupération.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       CONSEILS
+  ========================= -->
+
+  <section class="section">
+
+    <div class="section-title">
+
+      <small>LES BASES</small>
+
+      <h2>Les bonnes habitudes</h2>
+
+      <p>
+        Quelques principes simples pour améliorer
+        ton alimentation au quotidien.
+      </p>
+
+    </div>
+
+
+    <div class="tips">
+
+      <div class="tip">
+
+        <h3>🥩 Les protéines</h3>
+
+        <p>
+          Œufs, poisson, poulet, viande maigre,
+          laitages, haricots et autres sources de
+          protéines peuvent contribuer au maintien
+          et au développement musculaire.
+        </p>
+
+      </div>
+
+
+      <div class="tip">
+
+        <h3>🍚 Les glucides</h3>
+
+        <p>
+          Riz, mil, pain, pommes de terre, patate douce,
+          maïs et autres féculents peuvent fournir
+          l'énergie nécessaire à l'activité physique.
+        </p>
+
+      </div>
+
+
+      <div class="tip">
+
+        <h3>🥬 Les légumes et fruits</h3>
+
+        <p>
+          Varie les fruits et légumes afin d'apporter
+          des fibres, vitamines, minéraux et autres
+          nutriments importants.
+        </p>
+
+      </div>
+
+
+      <div class="tip">
+
+        <h3>💧 L'hydratation</h3>
+
+        <p>
+          Pense à boire régulièrement de l'eau,
+          particulièrement avant, pendant et après
+          une séance sportive.
+        </p>
+
+      </div>
+
+
+      <div class="tip">
+
+        <h3>🍽️ La régularité</h3>
+
+        <p>
+          Une alimentation équilibrée repose surtout
+          sur des habitudes régulières plutôt que
+          sur un seul repas.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       CTA
+  ========================= -->
+
+  <section class="cta">
+
+    <h2>Prêt à passer à l'action ?</h2>
+
+    <p>
+      Choisis ton programme et commence à progresser
+      avec Athlex.
+    </p>
+
+    <a href="programmes.html" class="btn">
+      Découvrir les programmes →
+    </a>
+
+  </section>
+
+
+  <!-- =========================
+       FOOTER
+  ========================= -->
+
+  <footer>
+
+    <p>
+      © 2026 <strong>Athlex</strong> — Sport, motivation & progression.
+    </p>
+
+  </footer>
+
+</body>
+</html>
+```
