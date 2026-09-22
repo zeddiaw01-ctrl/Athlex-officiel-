@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -24,6 +25,10 @@
       text-decoration: none;
       color: inherit;
     }
+
+    /* =========================
+       HEADER
+    ========================= */
 
     header {
       padding: 22px 6%;
@@ -55,14 +60,21 @@
       background: #00aaff;
     }
 
-    /* HERO */
+    /* =========================
+       HERO
+    ========================= */
 
     .hero {
       text-align: center;
-      padding: 85px 6% 60px;
+      padding: 85px 6% 65px;
+
       background:
-        linear-gradient(rgba(5,10,16,0.88), rgba(5,10,16,0.96)),
+        linear-gradient(
+          rgba(5,10,16,0.88),
+          rgba(5,10,16,0.95)
+        ),
         url("athlex-accueil.png");
+
       background-size: cover;
       background-position: center;
     }
@@ -84,22 +96,45 @@
     }
 
     .hero p {
-      max-width: 700px;
+      max-width: 750px;
       margin: auto;
       color: #c5ccd5;
       font-size: 18px;
     }
 
-    /* ARTICLES */
+    /* =========================
+       BLOG
+    ========================= */
 
-    .articles {
+    .blog {
       max-width: 1200px;
       margin: auto;
       padding: 70px 6%;
+    }
+
+    .blog-intro {
+      text-align: center;
+      margin-bottom: 45px;
+    }
+
+    .blog-intro h2 {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .blog-intro p {
+      color: #9da7b5;
+    }
+
+    .articles {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 25px;
     }
+
+    /* =========================
+       ARTICLE CARD
+    ========================= */
 
     .article {
       background: #111925;
@@ -112,34 +147,39 @@
     .article:hover {
       transform: translateY(-8px);
       border-color: #00aaff;
-      box-shadow: 0 15px 35px rgba(0,170,255,0.12);
     }
 
     .article-image {
-      height: 180px;
+      height: 190px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 65px;
+
       background:
-        linear-gradient(135deg, rgba(0,170,255,0.20), rgba(0,0,0,0.4));
+        linear-gradient(
+          rgba(0,170,255,0.10),
+          rgba(0,170,255,0.02)
+        );
     }
 
     .article-content {
-      padding: 28px;
+      padding: 25px;
     }
 
     .category {
+      display: inline-block;
       color: #00aaff;
       font-size: 13px;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 1px;
+      margin-bottom: 10px;
     }
 
-    .article h2 {
-      font-size: 23px;
-      margin: 10px 0 14px;
+    .article h3 {
+      font-size: 22px;
+      margin-bottom: 12px;
     }
 
     .article p {
@@ -147,41 +187,29 @@
       margin-bottom: 20px;
     }
 
-    .article ul {
-      padding-left: 20px;
-      color: #c5ccd5;
-      margin-bottom: 22px;
-    }
-
-    .article li {
-      margin-bottom: 6px;
-    }
-
-    .btn {
+    .read {
       display: inline-block;
-      padding: 11px 21px;
-      border-radius: 30px;
-      background: #00aaff;
-      color: white;
+      color: #00aaff;
       font-weight: 800;
       transition: 0.3s;
     }
 
-    .btn:hover {
-      background: #008ed6;
-      transform: translateY(-3px);
+    .read:hover {
+      color: white;
     }
 
-    /* CONSEILS */
+    /* =========================
+       CONSEILS
+    ========================= */
 
     .conseils {
-      max-width: 950px;
+      max-width: 900px;
       margin: 0 auto 70px;
       padding: 45px;
+      text-align: center;
       background: #0b111b;
       border-radius: 25px;
-      border: 1px solid rgba(0,170,255,0.20);
-      text-align: center;
+      border: 1px solid rgba(0,170,255,0.2);
     }
 
     .conseils h2 {
@@ -193,7 +221,9 @@
       color: #c5ccd5;
     }
 
-    /* FOOTER */
+    /* =========================
+       FOOTER
+    ========================= */
 
     footer {
       text-align: center;
@@ -207,15 +237,20 @@
       margin-top: 10px;
     }
 
-    /* MOBILE */
+    /* =========================
+       RESPONSIVE
+    ========================= */
 
     @media (max-width: 900px) {
+
       .articles {
         grid-template-columns: 1fr 1fr;
       }
+
     }
 
     @media (max-width: 600px) {
+
       header {
         padding: 18px 5%;
       }
@@ -225,29 +260,36 @@
       }
 
       .hero {
-        padding: 65px 6% 45px;
+        padding: 60px 6% 45px;
+      }
+
+      .blog {
+        padding-top: 50px;
       }
 
       .articles {
         grid-template-columns: 1fr;
-        padding-top: 50px;
       }
 
       .article-content {
-        padding: 24px;
+        padding: 22px;
       }
 
       .conseils {
-        margin: 0 6% 50px;
-        padding: 30px 22px;
+        margin: 0 5% 50px;
+        padding: 30px 20px;
       }
+
     }
+
   </style>
 </head>
 
 <body>
 
-  <!-- HEADER -->
+  <!-- =========================
+       HEADER
+  ========================= -->
 
   <header>
 
@@ -262,291 +304,271 @@
   </header>
 
 
-  <!-- HERO -->
+  <!-- =========================
+       HERO
+  ========================= -->
 
   <section class="hero">
 
     <small>ATHLEX BLOG</small>
 
     <h1>
-      Conseils <span>Sport & Fitness</span>
+      Conseils & <span>Motivation</span>
     </h1>
 
     <p>
-      Découvre nos conseils pour progresser,
-      améliorer tes performances et rester motivé
-      chaque semaine.
+      Découvre nos conseils pour améliorer ton entraînement,
+      ton alimentation, ta condition physique et ta motivation.
     </p>
 
   </section>
 
 
-  <!-- ARTICLES -->
+  <!-- =========================
+       ARTICLES
+  ========================= -->
 
-  <section class="articles">
+  <section class="blog">
+
+    <div class="blog-intro">
+
+      <h2>Nos derniers conseils</h2>
+
+      <p>
+        Des conseils simples et pratiques pour progresser
+        étape par étape.
+      </p>
+
+    </div>
 
 
-    <!-- ARTICLE 1 -->
+    <div class="articles">
 
-    <article class="article">
 
-      <div class="article-image">
-        🔥
-      </div>
+      <!-- ARTICLE 1 -->
 
-      <div class="article-content">
+      <article class="article">
 
-        <div class="category">
-          Motivation
+        <div class="article-image">
+          💪
         </div>
 
-        <h2>
-          Comment rester motivé au sport ?
-        </h2>
+        <div class="article-content">
 
-        <p>
-          La motivation peut diminuer avec le temps.
-          Pour continuer à avancer, il faut surtout
-          créer une bonne routine.
-        </p>
+          <span class="category">
+            Musculation
+          </span>
 
-        <ul>
-          <li>Fixe un objectif précis</li>
-          <li>Commence progressivement</li>
-          <li>Note tes progrès</li>
-          <li>Reste régulier</li>
-        </ul>
+          <h3>
+            Comment progresser en musculation ?
+          </h3>
 
-        <a href="#motivation" class="btn">
-          Lire l'article
-        </a>
+          <p>
+            Découvre les principes essentiels pour
+            progresser régulièrement et construire
+            une meilleure condition physique.
+          </p>
 
-      </div>
+          <a href="#" class="read">
+            Lire l'article →
+          </a>
 
-    </article>
-
-
-    <!-- ARTICLE 2 -->
-
-    <article class="article">
-
-      <div class="article-image">
-        💪
-      </div>
-
-      <div class="article-content">
-
-        <div class="category">
-          Musculation
         </div>
 
-        <h2>
-          Bien débuter la musculation
-        </h2>
-
-        <p>
-          La musculation ne consiste pas seulement
-          à soulever lourd. La technique et la
-          progression sont essentielles.
-        </p>
-
-        <ul>
-          <li>Apprends correctement les mouvements</li>
-          <li>Commence avec une charge adaptée</li>
-          <li>Travaille régulièrement</li>
-          <li>Accorde-toi du repos</li>
-        </ul>
-
-        <a href="#musculation" class="btn">
-          Lire l'article
-        </a>
-
-      </div>
-
-    </article>
+      </article>
 
 
-    <!-- ARTICLE 3 -->
+      <!-- ARTICLE 2 -->
 
-    <article class="article">
+      <article class="article">
 
-      <div class="article-image">
-        🥗
-      </div>
-
-      <div class="article-content">
-
-        <div class="category">
-          Nutrition
+        <div class="article-image">
+          🔥
         </div>
 
-        <h2>
-          Que manger avant le sport ?
-        </h2>
+        <div class="article-content">
 
-        <p>
-          Ton alimentation avant l'entraînement
-          peut influencer ton énergie et tes
-          performances.
-        </p>
+          <span class="category">
+            Motivation
+          </span>
 
-        <ul>
-          <li>Privilégie les glucides</li>
-          <li>Ajoute une source de protéines</li>
-          <li>Évite les repas trop lourds</li>
-          <li>Bois suffisamment d'eau</li>
-        </ul>
+          <h3>
+            Comment rester motivé au sport ?
+          </h3>
 
-        <a href="#nutrition" class="btn">
-          Lire l'article
-        </a>
+          <p>
+            La motivation peut varier. Voici quelques
+            méthodes simples pour rester régulier
+            même lorsque l'envie diminue.
+          </p>
 
-      </div>
+          <a href="#" class="read">
+            Lire l'article →
+          </a>
 
-    </article>
-
-
-    <!-- ARTICLE 4 -->
-
-    <article class="article">
-
-      <div class="article-image">
-        🏃
-      </div>
-
-      <div class="article-content">
-
-        <div class="category">
-          Cardio
         </div>
 
-        <h2>
-          Améliorer son endurance
-        </h2>
-
-        <p>
-          L'endurance se développe progressivement.
-          Il vaut mieux commencer doucement et
-          augmenter progressivement l'intensité.
-        </p>
-
-        <ul>
-          <li>Marche rapide</li>
-          <li>Course légère</li>
-          <li>Intervalles</li>
-          <li>Travail régulier</li>
-        </ul>
-
-        <a href="#cardio" class="btn">
-          Lire l'article
-        </a>
-
-      </div>
-
-    </article>
+      </article>
 
 
-    <!-- ARTICLE 5 -->
+      <!-- ARTICLE 3 -->
 
-    <article class="article">
+      <article class="article">
 
-      <div class="article-image">
-        🏠
-      </div>
-
-      <div class="article-content">
-
-        <div class="category">
-          Maison
+        <div class="article-image">
+          🥗
         </div>
 
-        <h2>
-          S'entraîner à la maison
-        </h2>
+        <div class="article-content">
 
-        <p>
-          Tu n'as pas besoin d'une salle pour
-          commencer. Plusieurs exercices peuvent
-          être réalisés avec le poids du corps.
-        </p>
+          <span class="category">
+            Nutrition
+          </span>
 
-        <ul>
-          <li>Squats</li>
-          <li>Pompes</li>
-          <li>Fentes</li>
-          <li>Gainage</li>
-        </ul>
+          <h3>
+            Bien manger pour mieux progresser
+          </h3>
 
-        <a href="maison.html" class="btn">
-          Voir le programme
-        </a>
+          <p>
+            Découvrez les bases d'une alimentation
+            adaptée au sport et les aliments à privilégier
+            au quotidien.
+          </p>
 
-      </div>
+          <a href="nutrition.html" class="read">
+            Voir la nutrition →
+          </a>
 
-    </article>
-
-
-    <!-- ARTICLE 6 -->
-
-    <article class="article">
-
-      <div class="article-image">
-        😴
-      </div>
-
-      <div class="article-content">
-
-        <div class="category">
-          Récupération
         </div>
 
-        <h2>
-          Pourquoi le repos est important ?
-        </h2>
+      </article>
 
-        <p>
-          Le repos permet au corps de récupérer
-          après les entraînements et contribue à
-          une meilleure progression.
-        </p>
 
-        <ul>
-          <li>Dors suffisamment</li>
-          <li>Prévois des jours de récupération</li>
-          <li>Hydrate-toi</li>
-          <li>Écoute ton corps</li>
-        </ul>
+      <!-- ARTICLE 4 -->
 
-        <a href="#repos" class="btn">
-          Lire l'article
-        </a>
+      <article class="article">
 
-      </div>
+        <div class="article-image">
+          🏃
+        </div>
 
-    </article>
+        <div class="article-content">
+
+          <span class="category">
+            Cardio
+          </span>
+
+          <h3>
+            Pourquoi intégrer le cardio ?
+          </h3>
+
+          <p>
+            Marche, course, vélo ou exercices cardio :
+            découvre comment améliorer progressivement
+            ton endurance.
+          </p>
+
+          <a href="#" class="read">
+            Lire l'article →
+          </a>
+
+        </div>
+
+      </article>
+
+
+      <!-- ARTICLE 5 -->
+
+      <article class="article">
+
+        <div class="article-image">
+          🎯
+        </div>
+
+        <div class="article-content">
+
+          <span class="category">
+            Objectifs
+          </span>
+
+          <h3>
+            Comment atteindre son objectif sportif ?
+          </h3>
+
+          <p>
+            Fixe un objectif réaliste, organise tes séances
+            et suis régulièrement tes progrès.
+          </p>
+
+          <a href="suivi.html" class="read">
+            Suivre ma progression →
+          </a>
+
+        </div>
+
+      </article>
+
+
+      <!-- ARTICLE 6 -->
+
+      <article class="article">
+
+        <div class="article-image">
+          🏆
+        </div>
+
+        <div class="article-content">
+
+          <span class="category">
+            Défis
+          </span>
+
+          <h3>
+            Le pouvoir de la régularité
+          </h3>
+
+          <p>
+            Quelques minutes chaque jour peuvent devenir
+            une véritable habitude. Découvre nos défis
+            Athlex.
+          </p>
+
+          <a href="defis.html" class="read">
+            Voir les défis →
+          </a>
+
+        </div>
+
+      </article>
+
+
+    </div>
 
   </section>
 
 
-  <!-- CONSEILS -->
+  <!-- =========================
+       CONSEIL
+  ========================= -->
 
   <section class="conseils">
 
     <h2>
-      ⚡ Le conseil Athlex
+      🔥 Chaque jour est une nouvelle occasion
     </h2>
 
     <p>
-      Ne cherche pas à tout changer en une seule journée.
-      Commence par une petite habitude, répète-la régulièrement
-      et construis progressivement ton mode de vie sportif.
-      La régularité est plus importante que la perfection.
+      Ne cherche pas la perfection. Sois simplement
+      régulier, progresse à ton rythme et donne le meilleur
+      de toi-même.
     </p>
 
   </section>
 
 
-  <!-- FOOTER -->
+  <!-- =========================
+       FOOTER
+  ========================= -->
 
   <footer>
 
@@ -562,3 +584,4 @@
 
 </body>
 </html>
+```
