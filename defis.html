@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -156,6 +157,40 @@
       margin-bottom: 5px;
     }
 
+    .progress-zone {
+      display: none;
+      margin-top: 20px;
+    }
+
+    .progress-zone.active {
+      display: block;
+    }
+
+    .progress-text {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      color: #c5ccd5;
+      margin-bottom: 8px;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 10px;
+      background: #070b12;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: #00aaff;
+      border-radius: 20px;
+      transition: width 0.4s ease;
+    }
+
     .btn {
       display: inline-block;
       padding: 12px 22px;
@@ -164,11 +199,31 @@
       color: white;
       font-weight: 800;
       transition: 0.3s;
+      border: none;
+      cursor: pointer;
+      font-size: 15px;
     }
 
     .btn:hover {
       background: #008ed6;
       transform: translateY(-3px);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid #00aaff;
+      margin-left: 8px;
+    }
+
+    .btn-secondary:hover {
+      background: #00aaff;
+    }
+
+    .complete {
+      display: none;
+      color: #00aaff;
+      font-weight: 800;
+      margin-top: 12px;
     }
 
     .conseils {
@@ -229,18 +284,18 @@
       .card {
         padding: 25px;
       }
+
+      .btn-secondary {
+        margin-left: 0;
+        margin-top: 8px;
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <!-- =========================
-       HEADER
-  ========================= -->
-
   <header>
-
     <a href="index.html" class="logo">
       ATHLEX<span>.</span>
     </a>
@@ -248,16 +303,9 @@
     <a href="index.html" class="back">
       ← Accueil
     </a>
-
   </header>
 
-
-  <!-- =========================
-       INTRODUCTION
-  ========================= -->
-
   <section class="hero">
-
     <small>ATHLEX CHALLENGE</small>
 
     <h1>
@@ -268,24 +316,14 @@
       Choisis un défi, reste régulier et progresse
       étape par étape. Chaque séance compte.
     </p>
-
   </section>
-
-
-  <!-- =========================
-       LES DÉFIS
-  ========================= -->
 
   <section class="defis">
 
     <!-- DÉFI 7 JOURS -->
-
-    <div class="card">
-
+    <div class="card" data-id="defi7" data-days="7">
       <div class="icon">🔥</div>
-
       <h2>Défi 7 jours</h2>
-
       <p>
         Pendant 7 jours, reste actif et construis
         une nouvelle habitude sportive.
@@ -297,7 +335,6 @@
 
       <div class="exercices">
         <h3>Programme :</h3>
-
         <ul>
           <li>20 squats</li>
           <li>10 pompes</li>
@@ -306,21 +343,41 @@
         </ul>
       </div>
 
-      <a href="suivi.html" class="btn">
-        Commencer
-      </a>
+      <button class="btn start-btn" onclick="commencerDefi(this)">
+        Commencer le défi
+      </button>
 
+      <div class="progress-zone">
+        <div class="progress-text">
+          <span>Progression</span>
+          <span class="progress-number">0 / 7 jours</span>
+        </div>
+
+        <div class="progress-bar">
+          <div class="progress-fill"></div>
+        </div>
+
+        <br>
+
+        <button class="btn validate-btn" onclick="validerJour(this)">
+          ✓ Valider aujourd'hui
+        </button>
+
+        <button class="btn btn-secondary" onclick="resetDefi(this)">
+          Réinitialiser
+        </button>
+
+        <div class="complete">
+          🏆 Défi terminé ! Bravo !
+        </div>
+      </div>
     </div>
 
 
     <!-- DÉFI FORCE -->
-
-    <div class="card">
-
+    <div class="card" data-id="force" data-days="14">
       <div class="icon">💪</div>
-
       <h2>Défi Force</h2>
-
       <p>
         Travaille progressivement ta force avec
         des exercices simples et efficaces.
@@ -332,7 +389,6 @@
 
       <div class="exercices">
         <h3>Programme :</h3>
-
         <ul>
           <li>Squats</li>
           <li>Pompes</li>
@@ -341,21 +397,41 @@
         </ul>
       </div>
 
-      <a href="suivi.html" class="btn">
-        Commencer
-      </a>
+      <button class="btn start-btn" onclick="commencerDefi(this)">
+        Commencer le défi
+      </button>
 
+      <div class="progress-zone">
+        <div class="progress-text">
+          <span>Progression</span>
+          <span class="progress-number">0 / 14 jours</span>
+        </div>
+
+        <div class="progress-bar">
+          <div class="progress-fill"></div>
+        </div>
+
+        <br>
+
+        <button class="btn validate-btn" onclick="validerJour(this)">
+          ✓ Valider aujourd'hui
+        </button>
+
+        <button class="btn btn-secondary" onclick="resetDefi(this)">
+          Réinitialiser
+        </button>
+
+        <div class="complete">
+          🏆 Défi terminé ! Bravo !
+        </div>
+      </div>
     </div>
 
 
     <!-- DÉFI CARDIO -->
-
-    <div class="card">
-
+    <div class="card" data-id="cardio" data-days="14">
       <div class="icon">🏃</div>
-
       <h2>Défi Cardio</h2>
-
       <p>
         Améliore ton endurance et habitue ton corps
         à rester actif plus longtemps.
@@ -367,7 +443,6 @@
 
       <div class="exercices">
         <h3>Programme :</h3>
-
         <ul>
           <li>Marche rapide</li>
           <li>Course légère</li>
@@ -376,21 +451,41 @@
         </ul>
       </div>
 
-      <a href="suivi.html" class="btn">
-        Commencer
-      </a>
+      <button class="btn start-btn" onclick="commencerDefi(this)">
+        Commencer le défi
+      </button>
 
+      <div class="progress-zone">
+        <div class="progress-text">
+          <span>Progression</span>
+          <span class="progress-number">0 / 14 jours</span>
+        </div>
+
+        <div class="progress-bar">
+          <div class="progress-fill"></div>
+        </div>
+
+        <br>
+
+        <button class="btn validate-btn" onclick="validerJour(this)">
+          ✓ Valider aujourd'hui
+        </button>
+
+        <button class="btn btn-secondary" onclick="resetDefi(this)">
+          Réinitialiser
+        </button>
+
+        <div class="complete">
+          🏆 Défi terminé ! Bravo !
+        </div>
+      </div>
     </div>
 
 
     <!-- DÉFI MAISON -->
-
-    <div class="card">
-
+    <div class="card" data-id="maison" data-days="7">
       <div class="icon">🏠</div>
-
       <h2>Défi Maison</h2>
-
       <p>
         Entraîne-toi chez toi sans matériel et
         développe progressivement ta condition physique.
@@ -402,7 +497,6 @@
 
       <div class="exercices">
         <h3>Programme :</h3>
-
         <ul>
           <li>Squats</li>
           <li>Pompes adaptées</li>
@@ -414,18 +508,13 @@
       <a href="maison.html" class="btn">
         Voir le programme
       </a>
-
     </div>
 
 
     <!-- DÉFI ALIMENTATION -->
-
     <div class="card">
-
       <div class="icon">🥗</div>
-
       <h2>Défi Alimentation</h2>
-
       <p>
         Améliore tes habitudes alimentaires pendant
         une semaine.
@@ -437,7 +526,6 @@
 
       <div class="exercices">
         <h3>Objectifs :</h3>
-
         <ul>
           <li>Boire suffisamment d'eau</li>
           <li>Manger plus de légumes</li>
@@ -449,18 +537,13 @@
       <a href="nutrition.html" class="btn">
         Voir la nutrition
       </a>
-
     </div>
 
 
     <!-- DÉFI 30 JOURS -->
-
-    <div class="card">
-
+    <div class="card" data-id="defi30" data-days="30">
       <div class="icon">🏆</div>
-
       <h2>Défi 30 jours</h2>
-
       <p>
         Un challenge complet pour construire une
         vraie régularité sportive.
@@ -472,7 +555,6 @@
 
       <div class="exercices">
         <h3>Objectifs :</h3>
-
         <ul>
           <li>3 à 5 séances par semaine</li>
           <li>Une bonne alimentation</li>
@@ -481,21 +563,40 @@
         </ul>
       </div>
 
-      <a href="suivi.html" class="btn">
-        Commencer
-      </a>
+      <button class="btn start-btn" onclick="commencerDefi(this)">
+        Commencer le défi
+      </button>
 
+      <div class="progress-zone">
+        <div class="progress-text">
+          <span>Progression</span>
+          <span class="progress-number">0 / 30 jours</span>
+        </div>
+
+        <div class="progress-bar">
+          <div class="progress-fill"></div>
+        </div>
+
+        <br>
+
+        <button class="btn validate-btn" onclick="validerJour(this)">
+          ✓ Valider aujourd'hui
+        </button>
+
+        <button class="btn btn-secondary" onclick="resetDefi(this)">
+          Réinitialiser
+        </button>
+
+        <div class="complete">
+          🏆 Défi terminé ! Bravo !
+        </div>
+      </div>
     </div>
 
   </section>
 
 
-  <!-- =========================
-       CONSEILS
-  ========================= -->
-
   <section class="conseils">
-
     <h2>🔥 La régularité avant tout</h2>
 
     <p>
@@ -503,16 +604,10 @@
       Commence progressivement, respecte ton rythme et
       essaie simplement de faire mieux chaque semaine.
     </p>
-
   </section>
 
 
-  <!-- =========================
-       FOOTER
-  ========================= -->
-
   <footer>
-
     <div class="logo">
       ATHLEX<span>.</span>
     </div>
@@ -520,8 +615,149 @@
     <p>
       © 2026 Athlex — Ton objectif, notre mission.
     </p>
-
   </footer>
+
+
+  <script>
+
+    function getData(id) {
+      return JSON.parse(localStorage.getItem("athlexDefi_" + id)) || {
+        jours: 0,
+        commence: false,
+        derniereValidation: ""
+      };
+    }
+
+
+    function saveData(id, data) {
+      localStorage.setItem(
+        "athlexDefi_" + id,
+        JSON.stringify(data)
+      );
+    }
+
+
+    function aujourdHui() {
+      return new Date().toISOString().split("T")[0];
+    }
+
+
+    function commencerDefi(button) {
+
+      const card = button.closest(".card");
+      const id = card.dataset.id;
+
+      let data = getData(id);
+
+      data.commence = true;
+
+      saveData(id, data);
+
+      afficherProgression(card);
+    }
+
+
+    function afficherProgression(card) {
+
+      const id = card.dataset.id;
+      const joursMax = Number(card.dataset.days);
+      const data = getData(id);
+
+      const zone = card.querySelector(".progress-zone");
+      const startButton = card.querySelector(".start-btn");
+      const fill = card.querySelector(".progress-fill");
+      const number = card.querySelector(".progress-number");
+      const complete = card.querySelector(".complete");
+      const validate = card.querySelector(".validate-btn");
+
+      if (!data.commence) {
+        return;
+      }
+
+      zone.classList.add("active");
+      startButton.style.display = "none";
+
+      const pourcentage =
+        (data.jours / joursMax) * 100;
+
+      fill.style.width = pourcentage + "%";
+
+      number.textContent =
+        data.jours + " / " + joursMax + " jours";
+
+
+      if (data.jours >= joursMax) {
+
+        complete.style.display = "block";
+        validate.style.display = "none";
+
+      } else {
+
+        complete.style.display = "none";
+        validate.style.display = "inline-block";
+
+        if (data.derniereValidation === aujourdHui()) {
+          validate.disabled = true;
+          validate.textContent = "✓ Journée validée";
+          validate.style.opacity = "0.5";
+        } else {
+          validate.disabled = false;
+          validate.textContent = "✓ Valider aujourd'hui";
+          validate.style.opacity = "1";
+        }
+      }
+    }
+
+
+    function validerJour(button) {
+
+      const card = button.closest(".card");
+      const id = card.dataset.id;
+      const joursMax = Number(card.dataset.days);
+
+      let data = getData(id);
+
+      if (!data.commence) {
+        return;
+      }
+
+      if (data.derniereValidation === aujourdHui()) {
+        return;
+      }
+
+      if (data.jours < joursMax) {
+        data.jours++;
+      }
+
+      data.derniereValidation = aujourdHui();
+
+      saveData(id, data);
+
+      afficherProgression(card);
+    }
+
+
+    function resetDefi(button) {
+
+      const card = button.closest(".card");
+      const id = card.dataset.id;
+
+      localStorage.removeItem("athlexDefi_" + id);
+
+      const zone = card.querySelector(".progress-zone");
+      const startButton = card.querySelector(".start-btn");
+
+      zone.classList.remove("active");
+      startButton.style.display = "inline-block";
+    }
+
+
+    document.querySelectorAll(".card[data-id]").forEach(function(card) {
+      afficherProgression(card);
+    });
+
+  </script>
 
 </body>
 </html>
+```
