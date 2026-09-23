@@ -1,72 +1,55 @@
-// ========================================
-// ATHLEX IA - CHAT
-// ========================================
-
-const chatForm = document.getElementById("chat-form");
-const userInput = document.getElementById("user-input");
-const chatMessages = document.getElementById("chat-messages");
-
-function addMessage(message, type) {
-  const div = document.createElement("div");
-  div.className = `message ${type}`;
-  div.textContent = message;
-
-  chatMessages.appendChild(div);
-  chatMessages.scrollTop = chatMessages.scrollHeight;
-}
-
-chatForm.addEventListener("submit", async function (event) {
-  event.preventDefault();
-
-  const message = userInput.value.trim();
-
-  if (!message) return;
-
-  // Afficher le message de l'utilisateur
-  addMessage(message, "user");
-
-  // Vider le champ
-  userInput.value = "";
-
-  // Message temporaire
-  addMessage("Athlex IA réfléchit...", "ai");
+export default async function handler(req, res) {
+  if (req.method !== "POST") {
+    return res.status(405).json({
+      error: "Méthode non autorisée"
+    });
+  }
 
   try {
-    const response = await fetch("/api/chat", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        message: message
-      })
-    });
+    const { message } = req.body;
+
+    if (!message || !message.trim()) {
+      return res.status(400).json({
+        error: "Message vide"
+      });
+    }
+
+    const response = await fetch(
+      "https://api.openai.com/v1/responses",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`
+        },
+        body: JSON.stringify({
+          model: "gpt-5-mini",
+          instructions:
+            "Tu es Athlex IA, un assistant spécialisé dans le sport, la musculation, le cardio, la nutrition et la motivation. Réponds en français de manière claire, utile et concise.",
+          input: message
+        })
+      }
+    );
 
     const data = await response.json();
 
-    // Supprimer "Athlex IA réfléchit..."
-    const messages = chatMessages.querySelectorAll(".message.ai");
-    if (messages.length > 0) {
-      messages[messages.length - 1].remove();
-    }
-
     if (!response.ok) {
-      throw new Error(data.error || "Une erreur est survenue.");
+      console.error(data);
+
+      return res.status(response.status).json({
+        error: "Erreur lors de la communication avec OpenAI."
+      });
     }
 
-    addMessage(data.reply, "ai");
+    return res.status(200).json({
+      reply: data.output_text || "Je n'ai pas pu générer une réponse."
+    });
 
   } catch (error) {
     console.error(error);
 
-    const messages = chatMessages.querySelectorAll(".message.ai");
-    if (messages.length > 0) {
-      messages[messages.length - 1].remove();
-    }
-
-    addMessage(
-      "Désolé, Athlex IA n'est pas disponible pour le moment.",
-      "ai"
-    );
+    return res.status(500).json({
+      error: "Erreur serveur."
+    });
   }
-});
+}
