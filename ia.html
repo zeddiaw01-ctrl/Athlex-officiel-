@@ -1,5 +1,5 @@
-```html
 <!DOCTYPE html>
+
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
@@ -20,10 +20,6 @@
       color: white;
       min-height: 100vh;
     }
-
-    /* =========================
-       HEADER
-    ========================= */
 
     header {
       background: #0b111b;
@@ -58,10 +54,6 @@
     nav a:hover {
       color: #00aaff;
     }
-
-    /* =========================
-       HERO
-    ========================= */
 
     .hero {
       min-height: 320px;
@@ -98,10 +90,6 @@
       line-height: 1.6;
     }
 
-    /* =========================
-       SECTION IA
-    ========================= */
-
     .ia-section {
       max-width: 950px;
       margin: 50px auto;
@@ -130,10 +118,6 @@
     .ia-header p {
       color: #aebdca;
     }
-
-    /* =========================
-       CHAT
-    ========================= */
 
     .chat {
       min-height: 330px;
@@ -170,10 +154,6 @@
       display: block;
       margin-bottom: 5px;
     }
-
-    /* =========================
-       FORMULAIRE
-    ========================= */
 
     .chat-form {
       padding: 20px;
@@ -222,10 +202,6 @@
       transform: translateY(-2px);
     }
 
-    /* =========================
-       QUESTIONS RAPIDES
-    ========================= */
-
     .ideas {
       margin-top: 30px;
 
@@ -269,5 +245,241 @@
       line-height: 1.5;
     }
 
-    /
+    @media (max-width: 700px) {
+      header {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      nav {
+        justify-content: center;
+      }
+
+      .hero h1 {
+        font-size: 36px;
+      }
+
+      .ideas {
+        grid-template-columns: 1fr;
+      }
+
+      .chat-form {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .message {
+        max-width: 90%;
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <header>
+    <a href="index.html" class="logo">ATHLEX</a>
+
 ```
+<nav>
+  <a href="index.html">Accueil</a>
+  <a href="programme.html">Programmes</a>
+  <a href="nutrition.html">Nutrition</a>
+  <a href="suivi.html">Suivi</a>
+  <a href="defis.html">Défis</a>
+  <a href="blog.html">Blog</a>
+  <a href="compte.html">Mon compte</a>
+  <a href="connexion.html">Connexion</a>
+  <a href="ia.html">IA</a>
+</nav>
+```
+
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Ton coach <span>Athlex IA</span></h1>
+
+```
+  <p>
+    Pose tes questions sur le sport, la musculation,
+    le cardio, la nutrition et la motivation.
+  </p>
+</div>
+```
+
+  </section>
+
+  <section class="ia-section">
+
+```
+<div class="ia-box">
+
+  <div class="ia-header">
+    <h2>🤖 Athlex IA</h2>
+    <p>Ton assistant sportif personnel.</p>
+  </div>
+
+  <div class="chat" id="chat">
+
+    <div class="message ia-message">
+      <strong>Athlex IA</strong>
+      Bonjour ! 👋 Je suis Athlex IA.
+      Comment puis-je t'aider aujourd'hui ?
+    </div>
+
+  </div>
+
+  <form class="chat-form" id="chatForm">
+
+    <input
+      type="text"
+      id="messageInput"
+      placeholder="Écris ta question..."
+      autocomplete="off"
+      required
+    >
+
+    <button type="submit" class="btn">
+      Envoyer
+    </button>
+
+  </form>
+
+</div>
+
+<div class="ideas">
+
+  <div class="idea" data-question="Donne-moi un programme de musculation pour débuter.">
+    <span>🏋️</span>
+    <h3>Musculation</h3>
+    <p>Obtiens des conseils pour progresser.</p>
+  </div>
+
+  <div class="idea" data-question="Donne-moi une séance cardio pour perdre du gras.">
+    <span>🏃</span>
+    <h3>Cardio</h3>
+    <p>Améliore ton endurance et ta condition physique.</p>
+  </div>
+
+  <div class="idea" data-question="Donne-moi des conseils pour avoir une alimentation équilibrée.">
+    <span>🥗</span>
+    <h3>Nutrition</h3>
+    <p>Découvre des conseils alimentaires.</p>
+  </div>
+
+</div>
+```
+
+  </section>
+
+  <script>
+    const chatForm = document.getElementById("chatForm");
+    const messageInput = document.getElementById("messageInput");
+    const chat = document.getElementById("chat");
+
+    function addMessage(text, type) {
+      const message = document.createElement("div");
+
+      message.className = "message " + type;
+
+      const strong = document.createElement("strong");
+
+      strong.textContent =
+        type === "user-message"
+          ? "Toi"
+          : "Athlex IA";
+
+      message.appendChild(strong);
+
+      const content = document.createElement("div");
+      content.textContent = text;
+
+      message.appendChild(content);
+
+      chat.appendChild(message);
+
+      chat.scrollTop = chat.scrollHeight;
+
+      return message;
+    }
+
+    chatForm.addEventListener("submit", async function(event) {
+      event.preventDefault();
+
+      const message = messageInput.value.trim();
+
+      if (!message) return;
+
+      addMessage(message, "user-message");
+
+      messageInput.value = "";
+
+      const loadingMessage = addMessage(
+        "Je réfléchis...",
+        "ia-message"
+      );
+
+      try {
+
+        const response = await fetch("/api/chat", {
+          method: "POST",
+
+          headers: {
+            "Content-Type": "application/json"
+          },
+
+          body: JSON.stringify({
+            message: message
+          })
+        });
+
+        const data = await response.json();
+
+        loadingMessage.remove();
+
+        if (!response.ok) {
+          addMessage(
+            data.error || "Une erreur est survenue.",
+            "ia-message"
+          );
+          return;
+        }
+
+        addMessage(
+          data.reply || "Je n'ai pas reçu de réponse.",
+          "ia-message"
+        );
+
+      } catch (error) {
+
+        loadingMessage.remove();
+
+        addMessage(
+          "Impossible de contacter Athlex IA pour le moment.",
+          "ia-message"
+        );
+
+        console.error(error);
+      }
+    });
+
+    document.querySelectorAll(".idea").forEach(function(idea) {
+
+      idea.addEventListener("click", function() {
+
+        messageInput.value = idea.dataset.question;
+
+        messageInput.focus();
+
+      });
+
+    });
+  </script>
+
+</body>
+</html>
