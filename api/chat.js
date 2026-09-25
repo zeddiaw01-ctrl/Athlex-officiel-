@@ -31,15 +31,15 @@ export default async function handler(req, res) {
       }
     );
 
-    const data = await response.json();
+   const data = await response.json();
 
-    if (!response.ok) {
-      console.error(data);
+if (!response.ok) {
+  console.error("Erreur OpenAI :", data);
 
-      return res.status(response.status).json({
-        error: "Erreur lors de la communication avec OpenAI."
-      });
-    }
+  return res.status(response.status).json({
+    error: data.error?.message || "Erreur OpenAI inconnue."
+  });
+}
 
     return res.status(200).json({
       reply: data.output_text || "Je n'ai pas pu générer une réponse."
