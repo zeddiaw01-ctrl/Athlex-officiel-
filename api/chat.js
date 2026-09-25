@@ -15,38 +15,58 @@ export default async function handler(req, res) {
     }
 
     const response = await fetch(
-      "https://api.openai.com/v1/responses",
+      "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent",
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`
+          "x-goog-api-key": process.env.GEMINI_API_KEY
         },
         body: JSON.stringify({
-          model: "gpt-5-mini",
-          instructions:
-            "Tu es Athlex IA, un assistant spécialisé dans le sport, la musculation, le cardio, la nutrition et la motivation. Réponds en français de manière claire, utile et concise.",
-          input: message
+          systemInstruction: {
+            parts: [
+              {
+                text:
+                  "Tu es Athlex IA, un assistant spécialisé dans le sport, la musculation, le cardio, la nutrition et la motivation. Réponds en français de manière claire, utile et concise."
+              }
+            ]
+          },
+          contents: [
+            {
+              parts: [
+                {
+                  text: message
+                }
+              ]
+            }
+          ]
         })
       }
     );
 
-   const data = await response.json();
+    const data = await response.json();
 
-if (!response.ok) {
-  console.error("Erreur OpenAI :", data);
+    if (!response.ok) {
+      console.error("Erreur Gemini :", data);
 
-  return res.status(response.status).json({
-    error: data.error?.message || "Erreur OpenAI inconnue."
-  });
-}
+      return res.status(response.status).json({
+        error:
+          data.error?.message ||
+          "Erreur Gemini inconnue."
+      });
+    }
+
+    const reply =
+      data.candidates?.[0]?.content?.parts?.[0]?.text;
 
     return res.status(200).json({
-      reply: data.output_text || "Je n'ai pas pu générer une réponse."
+      reply:
+        reply ||
+        "Je n'ai pas pu générer une réponse."
     });
 
   } catch (error) {
-    console.error(error);
+    console.error("Erreur serveur :", error);
 
     return res.status(500).json({
       error: "Erreur serveur."
