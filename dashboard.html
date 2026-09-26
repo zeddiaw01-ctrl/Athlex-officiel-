@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Athlex — Tableau de bord</title>
+
+  <style>
+    /* =========================
+       ATHLEX V2 — DASHBOARD
+    ========================= */
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #070b12;
+      color: #ffffff;
+      min-height: 100vh;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* =========================
+       HEADER
+    ========================= */
+
+    header {
+      width: 100%;
+      background: #0b111b;
+      border-bottom: 1px solid #182536;
+      padding: 18px 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: 800;
+      color: #00aaff;
+      letter-spacing: 1px;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .nav a {
+      color: #d7e3ee;
+      font-size: 15px;
+      transition: 0.3s;
+    }
+
+    .nav a:hover {
+      color: #00aaff;
+    }
+
+    .logout-btn {
+      background: #00aaff;
+      color: #ffffff !important;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-weight: 600;
+    }
+
+    .logout-btn:hover {
+      background: #008ed6;
+    }
+
+    /* =========================
+       DASHBOARD
+    ========================= */
+
+    .dashboard {
+      max-width: 1250px;
+      margin: auto;
+      padding: 40px 5%;
+    }
+
+    .welcome {
+      margin-bottom: 35px;
+    }
+
+    .welcome h1 {
+      font-size: 34px;
+      margin-bottom: 8px;
+    }
+
+    .welcome h1 span {
+      color: #00aaff;
+    }
+
+    .welcome p {
+      color: #8fa3b8;
+      font-size: 16px;
+    }
+
+    /* =========================
+       PROFIL RAPIDE
+    ========================= */
+
+    .profile-card {
+      background: #0b111b;
+      border: 1px solid #182536;
+      border-radius: 16px;
+      padding: 25px;
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      margin-bottom: 30px;
+    }
+
+    .profile-photo {
+      width: 85px;
+      height: 85px;
+      border-radius: 50%;
+      background: #101b29;
+      border: 3px solid #00aaff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 34px;
+      color: #00aaff;
+      flex-shrink: 0;
+    }
+
+    .profile-info h2 {
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+
+    .profile-info p {
+      color: #8fa3b8;
+      margin-bottom: 10px;
+    }
+
+    .level {
+      display: inline-block;
+      background: rgba(0, 170, 255, 0.12);
+      border: 1px solid #00aaff;
+      color: #00aaff;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .profile-action {
+      margin-left: auto;
+    }
+
+    .profile-action a {
+      display: inline-block;
+      padding: 10px 18px;
+      border: 1px solid #00aaff;
+      border-radius: 8px;
+      color: #00aaff;
+      transition: 0.3s;
+    }
+
+    .profile-action a:hover {
+      background: #00aaff;
+      color: #ffffff;
+    }
+
+    /* =========================
+       STATISTIQUES
+    ========================= */
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .stat-card {
+      background: #0b111b;
+      border: 1px solid #182536;
+      border-radius: 14px;
+      padding: 22px;
+      transition: 0.3s;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-3px);
+      border-color: #00aaff;
+    }
+
+    .stat-icon {
+      font-size: 25px;
+      margin-bottom: 15px;
+    }
+
+    .stat-card h3 {
+      font-size: 28px;
+      color: #00aaff;
+      margin-bottom: 5px;
+    }
+
+    .stat-card p {
+      color: #8fa3b8;
+      font-size: 14px;
+    }
+
+    /* =========================
+       GRID PRINCIPALE
+    ========================= */
+
+    .main-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 25px;
+      margin-bottom: 30px;
+    }
+
+    .card {
+      background: #0b111b;
+      border: 1px solid #182536;
+      border-radius: 16px;
+      padding: 25px;
+    }
+
+    .card-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 22px;
+    }
+
+    .card-title h2 {
+      font-size: 21px;
+    }
+
+    .card-title span {
+      color: #00aaff;
+      font-size: 13px;
+    }
+
+    /* =========================
+       PROGRESSION POIDS
+    ========================= */
+
+    .weight-value {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .weight-value strong {
+      font-size: 36px;
+      color: #00aaff;
+    }
+
+    .weight-value span {
+      color: #8fa3b8;
+    }
+
+    .progress-container {
+      width: 100%;
+      height: 12px;
+      background: #162230;
+      border-radius: 20px;
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+
+    .progress-bar {
+      width: 65%;
+      height: 100%;
+      background: #00aaff;
+      border-radius: 20px;
+    }
+
+    .progress-info {
+      display: flex;
+      justify-content: space-between;
+      color: #8fa3b8;
+      font-size: 13px;
+    }
+
+    /* =========================
+       OBJECTIF SEMAINE
+    ========================= */
+
+    .goal-number {
+      font-size: 40px;
+      color: #00aaff;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .goal-text {
+      color: #8fa3b8;
+      margin-bottom: 18px;
+    }
+
+    .goal-list {
+      list-style: none;
+    }
+
+    .goal-list li {
+      padding: 12px 0;
+      border-bottom: 1px solid #182536;
+      display: flex;
+      justify-content: space-between;
+      color: #d7e3ee;
+    }
+
+    .goal-list li:last-child {
+      border-bottom: none;
+    }
+
+    .check {
+      color: #00aaff;
+      font-weight: bold;
+    }
+
+    /* =========================
+       PROGRAMMES
+    ========================= */
+
+    .program-list {
+      display: grid;
+      gap: 15px;
+    }
+
+    .program-item {
+      background: #101923;
+      border-radius: 10px;
+      padding: 17px;
+      border: 1px solid #182536;
+    }
+
+    .program-item h3 {
+      font-size: 17px;
+      margin-bottom: 7px;
+    }
+
+    .program-item p {
+      color: #8fa3b8;
+      font-size: 13px;
+      margin-bottom: 12px;
+    }
+
+    .small-progress {
+      height: 7px;
+      background: #172331;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .small-progress div {
+      height: 100%;
+      background: #00aaff;
+      border-radius: 10px;
+    }
+
+    .program-item:nth-child(1) .small-progress div {
+      width: 75%;
+    }
+
+    .program-item:nth-child(2) .small-progress div {
+      width: 45%;
+    }
+
+    /* =========================
+       ENTRAINEMENT DU JOUR
+    ========================= */
+
+    .workout {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #101923;
+      border: 1px solid #182536;
+      border-radius: 12px;
+      padding: 18px;
+      margin-bottom: 15px;
+    }
+
+    .workout-info h3 {
+      margin-bottom: 6px;
+    }
+
+    .workout-info p {
+      color: #8fa3b8;
+      font-size: 13px;
+    }
+
+    .start-btn {
+      background: #00aaff;
+      color: #ffffff;
+      padding: 9px 15px;
+      border-radius: 7px;
+      font-size: 13px;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+    }
+
+    .start-btn:hover {
+      background: #008ed6;
+    }
+
+    /* =========================
+       NIVEAU ATHLEX
+    ========================= */
+
+    .level-section {
+      margin-top: 30px;
+    }
+
+    .level-path {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .level-box {
+      padding: 16px 8px;
+      text-align: center;
+      border: 1px solid #182536;
+      background: #101923;
+      border-radius: 10px;
+      color: #71869a;
+      font-size: 13px;
+    }
+
+    .level-box.active {
+      color: #00aaff;
+      border-color: #00aaff;
+      background: rgba(0, 170, 255, 0.08);
+      font-weight: bold;
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      margin-top: 20px;
+      border-top: 1px solid #182536;
+      color: #667b8f;
+      font-size: 13px;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media (max-width: 950px) {
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .main-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav {
+        gap: 12px;
+      }
+
+      .nav a:not(.logout-btn) {
+        display: none;
+      }
+    }
+
+    @media (max-width: 600px) {
+
+      header {
+        padding: 15px 20px;
+      }
+
+      .logo {
+        font-size: 24px;
+      }
+
+      .dashboard {
+        padding: 30px 20px;
+      }
+
+      .welcome h1 {
+        font-size: 27px;
+      }
+
+      .profile-card {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .profile-action {
+        margin-left: 0;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .level-path {
+        grid-template-columns: 1fr;
+      }
+
+      .workout {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================
+       HEADER
+  ========================= -->
+
+  <header>
+
+    <a href="index.html" class="logo">ATHLEX</a>
+
+    <nav class="nav">
+      <a href="index.html">Accueil</a>
+      <a href="programme.html">Programmes</a>
+      <a href="suivi.html">Suivi</a>
+      <a href="defis.html">Défis</a>
+      <a href="ia.html">Athlex IA</a>
+
+      <a href="compte.html" class="logout-btn">Mon compte</a>
+    </nav>
+
+  </header>
+
+
+  <!-- =========================
+       DASHBOARD
+  ========================= -->
+
+  <main class="dashboard">
+
+    <!-- Bienvenue -->
+
+    <section class="welcome">
+
+      <h1>
+        Bonjour, <span>Athlète</span> 👋
+      </h1>
+
+      <p>
+        Voici ton tableau de bord Athlex. Continue tes efforts et progresse chaque jour.
+      </p>
+
+    </section>
+
+
+    <!-- =========================
+         PROFIL RAPIDE
+    ========================= -->
+
+    <section class="profile-card">
+
+      <div class="profile-photo">
+        👤
+      </div>
+
+      <div class="profile-info">
+
+        <h2>Mon profil sportif</h2>
+
+        <p>
+          Objectif : améliorer ma condition physique
+        </p>
+
+        <span class="level">
+          Niveau : Régulier
+        </span>
+
+      </div>
+
+      <div class="profile-action">
+
+        <a href="compte.html">
+          Modifier mon profil
+        </a>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         STATISTIQUES RAPIDES
+    ========================= -->
+
+    <section class="stats-grid">
+
+      <div class="stat-card">
+
+        <div class="stat-icon">⚖️</div>
+
+        <h3>82 kg</h3>
+
+        <p>Poids actuel</p>
+
+      </div>
+
+
+      <div class="stat-card">
+
+        <div class="stat-icon">🏋️</div>
+
+        <h3>12</h3>
+
+        <p>Séances réalisées</p>
+
+      </div>
+
+
+      <div class="stat-card">
+
+        <div class="stat-icon">🔥</div>
+
+        <h3>7</h3>
+
+        <p>Jours actifs</p>
+
+      </div>
+
+
+      <div class="stat-card">
+
+        <div class="stat-icon">🏆</div>
+
+        <h3>320</h3>
+
+        <p>Points Athlex</p>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         PROGRESSION + OBJECTIF
+    ========================= -->
+
+    <section class="main-grid">
+
+
+      <!-- Progression poids -->
+
+      <div class="card">
+
+        <div class="card-title">
+
+          <h2>📊 Progression du poids</h2>
+
+          <span>Cette semaine</span>
+
+        </div>
+
+        <div class="weight-value">
+
+          <strong>82 kg</strong>
+
+          <span>objectif : 78 kg</span>
+
+        </div>
+
+        <div class="progress-container">
+
+          <div class="progress-bar"></div>
+
+        </div>
+
+        <div class="progress-info">
+
+          <span>Départ : 85 kg</span>
+
+          <span>Objectif : 78 kg</span>
+
+        </div>
+
+      </div>
+
+
+      <!-- Objectif -->
+
+      <div class="card">
+
+        <div class="card-title">
+
+          <h2>🎯 Objectif</h2>
+
+          <span>Cette semaine</span>
+
+        </div>
+
+        <div class="goal-number">
+          3/5
+        </div>
+
+        <p class="goal-text">
+          séances terminées
+        </p>
+
+        <ul class="goal-list">
+
+          <li>
+            Lundi
+            <span class="check">✓</span>
+          </li>
+
+          <li>
+            Mardi
+            <span class="check">✓</span>
+          </li>
+
+          <li>
+            Mercredi
+            <span class="check">✓</span>
+          </li>
+
+          <li>
+            Jeudi
+            <span>—</span>
+          </li>
+
+          <li>
+            Vendredi
+            <span>—</span>
+          </li>
+
+        </ul>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         PROGRAMMES EN COURS
+    ========================= -->
+
+    <section class="card">
+
+      <div class="card-title">
+
+        <h2>📚 Mes programmes</h2>
+
+        <a href="programme.html">
+          <span>Voir tous les programmes →</span>
+        </a>
+
+      </div>
+
+
+      <div class="program-list">
+
+
+        <div class="program-item">
+
+          <h3>🔥 Perte de poids</h3>
+
+          <p>
+            Programme actuel — progression : 75 %
+          </p>
+
+          <div class="small-progress">
+
+            <div></div>
+
+          </div>
+
+        </div>
+
+
+        <div class="program-item">
+
+          <h3>💪 Prise de muscle</h3>
+
+          <p>
+            Programme secondaire — progression : 45 %
+          </p>
+
+          <div class="small-progress">
+
+            <div></div>
+
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         ENTRAÎNEMENT DU JOUR
+    ========================= -->
+
+    <section class="card" style="margin-top:30px;">
+
+      <div class="card-title">
+
+        <h2>📅 Entraînement du jour</h2>
+
+        <span>Aujourd'hui</span>
+
+      </div>
+
+
+      <div class="workout">
+
+        <div class="workout-info">
+
+          <h3>🏋️ Séance Full Body</h3>
+
+          <p>
+            45 min · Musculation · Niveau intermédiaire
+          </p>
+
+        </div>
+
+        <button class="start-btn" onclick="startWorkout()">
+          Commencer
+        </button>
+
+      </div>
+
+
+      <div class="workout">
+
+        <div class="workout-info">
+
+          <h3>🔥 Cardio</h3>
+
+          <p>
+            20 min · Intensité modérée
+          </p>
+
+        </div>
+
+        <button class="start-btn" onclick="startCardio()">
+          Commencer
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         NIVEAU ATHLEX
+    ========================= -->
+
+    <section class="card level-section">
+
+      <div class="card-title">
+
+        <h2>🚀 Progression Athlex</h2>
+
+        <span>Ton niveau</span>
+
+      </div>
+
+
+      <p style="color:#8fa3b8;">
+        Continue à réaliser tes séances pour débloquer les prochains niveaux.
+      </p>
+
+
+      <div class="level-path">
+
+        <div class="level-box">
+          Début
+        </div>
+
+        <div class="level-box active">
+          Régulier
+        </div>
+
+        <div class="level-box">
+          Athlète
+        </div>
+
+        <div class="level-box">
+          Performance
+        </div>
+
+        <div class="level-box">
+          Athlex Elite
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =========================
+       FOOTER
+  ========================= -->
+
+  <footer>
+
+    © 2026 Athlex — Ta progression commence aujourd'hui 💙
+
+  </footer>
+
+
+  <!-- =========================
+       JAVASCRIPT
+  ========================= -->
+
+  <script>
+
+    function startWorkout() {
+
+      alert(
+        "🔥 Séance Full Body\n\n" +
+        "La séance va bientôt être disponible."
+      );
+
+    }
+
+
+    function startCardio() {
+
+      alert(
+        "🔥 Cardio\n\n" +
+        "La séance cardio va bientôt être disponible."
+      );
+
+    }
+
+  </script>
+
+</body>
+</html>
