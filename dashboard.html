@@ -881,6 +881,9 @@
 
     const email =
       localStorage.getItem("athlexEmail");
+    
+    document.getElementById("emailProfil").textContent =
+  email || "Ton compte Athlex";
 
     const age =
       localStorage.getItem("athlexAge");
