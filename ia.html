@@ -119,6 +119,23 @@
       color: #aebdca;
     }
 
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin-top: 12px;
+      color: #8fa4b7;
+      font-size: 13px;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background: #00aaff;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #00aaff;
+    }
+
     .chat {
       min-height: 330px;
       max-height: 500px;
@@ -202,9 +219,15 @@
       transform: translateY(-2px);
     }
 
-    .ideas {
-      margin-top: 30px;
+    .ideas-title {
+      margin-top: 35px;
+      margin-bottom: 18px;
+      color: white;
+      text-align: center;
+      font-size: 24px;
+    }
 
+    .ideas {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 18px;
@@ -226,6 +249,7 @@
     .idea:hover {
       border-color: #00aaff;
       transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0, 170, 255, 0.12);
     }
 
     .idea span {
@@ -306,8 +330,8 @@
 
 ```
   <p>
-    Pose tes questions sur le sport, la musculation,
-    le cardio, la nutrition et la motivation.
+    Ton assistant sportif personnel pour t'aider à progresser
+    en musculation, cardio, nutrition, basketball et préparation physique.
   </p>
 </div>
 ```
@@ -321,7 +345,12 @@
 
   <div class="ia-header">
     <h2>🤖 Athlex IA</h2>
-    <p>Ton assistant sportif personnel.</p>
+    <p>Ton coach sportif virtuel personnel.</p>
+
+    <div class="status">
+      <span class="status-dot"></span>
+      Athlex IA est disponible
+    </div>
   </div>
 
   <div class="chat" id="chat">
@@ -329,7 +358,10 @@
     <div class="message ia-message">
       <strong>Athlex IA</strong>
       Bonjour ! 👋 Je suis Athlex IA.
-      Comment puis-je t'aider aujourd'hui ?
+
+      Je peux t'aider avec tes entraînements, ta nutrition, ta perte de poids, ta prise de muscle, le basketball et ta préparation physique.
+
+      Que veux-tu travailler aujourd'hui ?
     </div>
 
   </div>
@@ -352,24 +384,62 @@
 
 </div>
 
+<h2 class="ideas-title">Que veux-tu travailler ?</h2>
+
 <div class="ideas">
 
-  <div class="idea" data-question="Donne-moi un programme de musculation pour débuter.">
+  <div
+    class="idea"
+    data-question="Je veux un programme de musculation adapté à mon niveau. Pose-moi les questions nécessaires pour créer mon programme."
+  >
     <span>🏋️</span>
     <h3>Musculation</h3>
-    <p>Obtiens des conseils pour progresser.</p>
+    <p>Crée ton entraînement et progresse efficacement.</p>
   </div>
 
-  <div class="idea" data-question="Donne-moi une séance cardio pour perdre du gras.">
-    <span>🏃</span>
-    <h3>Cardio</h3>
-    <p>Améliore ton endurance et ta condition physique.</p>
+  <div
+    class="idea"
+    data-question="Je veux perdre du poids et réduire ma graisse corporelle. Aide-moi à construire un programme sportif adapté."
+  >
+    <span>🔥</span>
+    <h3>Perte de poids</h3>
+    <p>Travaille ta condition physique et ton objectif de perte de poids.</p>
   </div>
 
-  <div class="idea" data-question="Donne-moi des conseils pour avoir une alimentation équilibrée.">
+  <div
+    class="idea"
+    data-question="Je veux améliorer mon niveau au basketball. Aide-moi avec un programme comprenant tir, dribble, vitesse, explosivité et condition physique."
+  >
+    <span>🏀</span>
+    <h3>Basketball</h3>
+    <p>Améliore ton tir, ton dribble, ta vitesse et ton explosivité.</p>
+  </div>
+
+  <div
+    class="idea"
+    data-question="Je veux améliorer mon alimentation pour accompagner mes entraînements. Propose-moi des conseils simples et adaptés au contexte sénégalais."
+  >
     <span>🥗</span>
     <h3>Nutrition</h3>
-    <p>Découvre des conseils alimentaires.</p>
+    <p>Apprends à mieux manger pour accompagner tes objectifs.</p>
+  </div>
+
+  <div
+    class="idea"
+    data-question="Je veux créer un programme sportif personnalisé. Commence par me poser les questions importantes : âge, taille, poids, niveau, objectif, nombre de séances par semaine et matériel disponible."
+  >
+    <span>📅</span>
+    <h3>Mon programme</h3>
+    <p>Construis un programme adapté à ton profil.</p>
+  </div>
+
+  <div
+    class="idea"
+    data-question="Je manque de motivation pour m'entraîner. Donne-moi des conseils pratiques pour rester régulier et progresser."
+  >
+    <span>🧠</span>
+    <h3>Motivation</h3>
+    <p>Retrouve ta motivation et garde le rythme.</p>
   </div>
 
 </div>
@@ -408,25 +478,22 @@
       return message;
     }
 
-    chatForm.addEventListener("submit", async function(event) {
-      event.preventDefault();
+    async function sendMessage(message) {
 
-      const message = messageInput.value.trim();
-
-      if (!message) return;
+      if (!message || !message.trim()) return;
 
       addMessage(message, "user-message");
 
       messageInput.value = "";
 
       const loadingMessage = addMessage(
-        "Je réfléchis...",
+        "Athlex IA réfléchit...",
         "ia-message"
       );
 
       try {
 
-        const response = await fetch("/api/chat", {
+        const response = await fetch("/api/chat-gemini", {
           method: "POST",
 
           headers: {
@@ -466,15 +533,26 @@
 
         console.error(error);
       }
+    }
+
+    chatForm.addEventListener("submit", async function(event) {
+
+      event.preventDefault();
+
+      const message = messageInput.value.trim();
+
+      if (!message) return;
+
+      await sendMessage(message);
     });
 
     document.querySelectorAll(".idea").forEach(function(idea) {
 
-      idea.addEventListener("click", function() {
+      idea.addEventListener("click", async function() {
 
-        messageInput.value = idea.dataset.question;
+        const question = idea.dataset.question;
 
-        messageInput.focus();
+        await sendMessage(question);
 
       });
 
