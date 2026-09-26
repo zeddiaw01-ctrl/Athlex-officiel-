@@ -912,22 +912,30 @@
        On utilise donc l'email pour le moment.
     ===================================== */
 
-    let nomUtilisateur = "Athlète";
+   const nom =
+  localStorage.getItem("athlexNom");
 
-    if (email) {
+const prenom =
+  localStorage.getItem("athlexPrenom");
 
-      const partieNom =
-        email.split("@")[0];
+let nomUtilisateur = "Athlète";
 
-      if (partieNom) {
+if (prenom && nom) {
 
-        nomUtilisateur =
-          partieNom.charAt(0).toUpperCase() +
-          partieNom.slice(1);
+  nomUtilisateur =
+    prenom + " " + nom;
 
-      }
+} else if (prenom) {
 
-    }
+  nomUtilisateur =
+    prenom;
+
+} else if (nom) {
+
+  nomUtilisateur =
+    nom;
+
+}
 
 
     /* =====================================
