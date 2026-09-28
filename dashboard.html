@@ -611,22 +611,38 @@
       </div>
 
 
-      <div class="stat">
+ <div class="stat">
 
-        <div class="stat-icon">
-          🔥
-        </div>
+  <div class="stat-icon">
+    🔥
+  </div>
 
-        <strong id="statProgression">
-          0%
-        </strong>
+  <strong id="statProgression">
+    0%
+  </strong>
 
-        <span>
-          Progression
-        </span>
+  <span>
+    Progression
+  </span>
 
-      </div>
+</div>
 
+
+<div class="stat">
+
+  <div class="stat-icon">
+    🏋️
+  </div>
+
+  <strong id="statSeances">
+    0
+  </strong>
+
+  <span>
+    Séances réalisées
+  </span>
+
+</div>
     </section>
 
 
@@ -1161,14 +1177,27 @@ if (prenom && nom) {
        BOUTONS
     ===================================== */
 
-    function demarrerSeance() {
+   function demarrerSeance() {
 
-      alert(
-        "🏋️ Ta séance sportive sera bientôt disponible dans Athlex."
-      );
+  let seances =
+    parseInt(localStorage.getItem("athlexSeances")) || 0;
+
+  seances++;
+
+  localStorage.setItem("athlexSeances", seances);
+
+  document.getElementById("statSeances").textContent =
+    seances;
+
+  alert("🏋️ Séance enregistrée !");
 
     }
+    
+const seances =
+  localStorage.getItem("athlexSeances") || 0;
 
+document.getElementById("statSeances").textContent =
+  seances;
 
     function demarrerCardio() {
 
