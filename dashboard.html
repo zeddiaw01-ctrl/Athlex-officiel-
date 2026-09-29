@@ -1,7 +1,7 @@
 ```html
 <!DOCTYPE html>
 <html lang="fr">
-<head>33eed
+<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -294,7 +294,40 @@
       border-radius: 12px;
       color: #9da7b5;
     }
+      .weekly-goal {
+  margin-top: 18px;
+  background: #0b111b;
+  padding: 18px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.06);
+}
 
+.weekly-goal-title {
+  color: white;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+.weekly-goal-progress {
+  color: #00aaff;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.weekly-progress-container {
+  height: 10px;
+  background: #070b12;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.weekly-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: #00aaff;
+  border-radius: 20px;
+  transition: width 0.5s ease;
+}
     /* =========================
        PROGRAMMES
     ========================= */
@@ -712,7 +745,24 @@
         <div class="goal-status">
           Continue tes entraînements pour progresser.
         </div>
+<div class="weekly-goal">
 
+  <div class="weekly-goal-title">
+    🎯 Objectif de la semaine
+  </div>
+
+  <div class="weekly-goal-progress" id="weeklyProgressText">
+    0 / 3 séances
+  </div>
+
+  <div class="weekly-progress-container">
+    <div
+      class="weekly-progress-fill"
+      id="weeklyProgressFill">
+    </div>
+  </div>
+
+</div>
       </div>
 
 
@@ -1179,6 +1229,10 @@ if (prenom && nom) {
 
    function demarrerSeance() {
 
+  /* =========================
+     COMPTEUR TOTAL EXISTANT
+  ========================= */
+
   let seances =
     parseInt(localStorage.getItem("athlexSeances")) || 0;
 
@@ -1189,9 +1243,53 @@ if (prenom && nom) {
   document.getElementById("statSeances").textContent =
     seances;
 
+
+  /* =========================
+     OBJECTIF DE LA SEMAINE
+  ========================= */
+
+  let semaineActuelle =
+    obtenirSemaineActuelle();
+
+  let semaineSauvegardee =
+    localStorage.getItem("athlexSemaine");
+
+  let seancesSemaine =
+    parseInt(
+      localStorage.getItem("athlexSeancesSemaine")
+    ) || 0;
+
+
+  /* Nouvelle semaine */
+
+  if (semaineSauvegardee !== semaineActuelle) {
+
+    seancesSemaine = 0;
+
+    localStorage.setItem(
+      "athlexSemaine",
+      semaineActuelle
+    );
+
+  }
+
+
+  seancesSemaine++;
+
+  localStorage.setItem(
+    "athlexSeancesSemaine",
+    seancesSemaine
+  );
+
+
+  /* Mettre à jour la barre */
+
+  afficherObjectifSemaine();
+
+
   alert("🏋️ Séance enregistrée !");
 
-    }
+}
     
 const seances =
   localStorage.getItem("athlexSeances") || 0;
@@ -1206,8 +1304,85 @@ document.getElementById("statSeances").textContent =
       );
 
     }
+function obtenirSemaineActuelle() {
 
+  const date = new Date();
+
+  const debutAnnee =
+    new Date(date.getFullYear(), 0, 1);
+
+  const nombreJours =
+    Math.floor(
+      (date - debutAnnee) / 86400000
+    );
+
+  const semaine =
+    Math.ceil(
+      (nombreJours + debutAnnee.getDay() + 1) / 7
+    );
+
+  return date.getFullYear() + "-S" + semaine;
+
+}
+
+
+function afficherObjectifSemaine() {
+
+  const objectif = 3;
+
+  let semaineActuelle =
+    obtenirSemaineActuelle();
+
+  let semaineSauvegardee =
+    localStorage.getItem("athlexSemaine");
+
+  let seancesSemaine =
+    parseInt(
+      localStorage.getItem("athlexSeancesSemaine")
+    ) || 0;
+
+
+  if (semaineSauvegardee !== semaineActuelle) {
+
+    seancesSemaine = 0;
+
+    localStorage.setItem(
+      "athlexSemaine",
+      semaineActuelle
+    );
+
+    localStorage.setItem(
+      "athlexSeancesSemaine",
+      0
+    );
+
+  }
+
+
+  const progression =
+    Math.min(
+      (seancesSemaine / objectif) * 100,
+      100
+    );
+
+
+  document.getElementById(
+    "weeklyProgressText"
+  ).textContent =
+    seancesSemaine + " / " + objectif + " séances";
+
+
+  document.getElementById(
+    "weeklyProgressFill"
+  ).style.width =
+    progression + "%";
+
+}
+    
+    afficherObjectifSemaine();
+    
   </script>
+
 
 </body>
 </html>
